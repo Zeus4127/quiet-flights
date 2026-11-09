@@ -1,0 +1,16 @@
+{
+ "rulesChecked": "2026-11-09",
+ "tips": [
+  "Check the Updates screen in Tools each month for re-checked state rules."
+ ],
+ "qa": [
+  [
+   "How often are the rules re-checked?",
+   "Every month, and weekly during duck seasons. Press Get updates in Tools to download the newest checks.",
+   "Using the app"
+  ]
+ ],
+ "format": 1,
+ "pack": 1,
+ "date": "2026-11-09"
+}
