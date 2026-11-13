@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Quiet Flights preview</title>
+<meta name="description" content="Try the Quiet Flights preview: open the web app, install the Android preview, share it and send feedback.">
+<meta name="theme-color" content="#0057FF">
+<link rel="icon" href="icons/icon-192.png">
+<link rel="manifest" href="manifest.webmanifest">
+<style>
+:root{--ink:#06121F;--ink-2:#2E4257;--ink-3:#5A6E83;--bg:#F4F7FA;--card:#fff;--line:#DCE4EC;--volt:#0057FF;--volt-2:#0046CC;--mint:#0B8F6E;--amber:#8A5A00;--amber-bg:#FFF4DF}
+@media (prefers-color-scheme:dark){:root{--ink:#E8F1F8;--ink-2:#C2D3E3;--ink-3:#9FB6CB;--bg:#050D18;--card:#0C1828;--line:#22344A;--volt:#4D8DFF;--volt-2:#2F74F0;--mint:#3CF0C5;--amber:#FFB547;--amber-bg:#2A1F0B}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 17px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;-webkit-font-smoothing:antialiased}
+.wrap{max-width:860px;margin:0 auto;padding:0 16px}
+header{padding:calc(env(safe-area-inset-top) + 28px) 0 8px}
+.top{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.top a.home{color:var(--ink-3);text-decoration:none;font-size:15px}
+.tag{display:inline-block;background:var(--amber-bg);color:var(--amber);border:1px solid currentColor;border-radius:999px;padding:2px 12px;font-size:14px;font-weight:600}
+h1{font-size:clamp(30px,6vw,44px);line-height:1.15;margin:14px 0 8px;letter-spacing:-.02em}
+h2{font-size:22px;margin:0 0 10px}
+h3{font-size:17px;margin:16px 0 6px}
+p{margin:0 0 12px;color:var(--ink-2)}
+.lead{font-size:18px}
+section{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:22px;margin:18px 0}
+.btns{display:flex;flex-wrap:wrap;gap:10px;margin:12px 0 4px}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:0 20px;border-radius:999px;font:600 16px/1 inherit;font-family:inherit;text-decoration:none;cursor:pointer;border:1px solid var(--line);background:var(--card);color:var(--ink)}
+.btn.solid{background:var(--volt);border-color:var(--volt);color:#fff}
+.btn.solid:hover{background:var(--volt-2)}
+.btn:focus-visible,textarea:focus-visible{outline:3px solid var(--volt);outline-offset:2px}
+ol,ul{margin:0 0 12px;padding-left:22px;color:var(--ink-2)}
+li{margin:4px 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px}
+.box{border:1px solid var(--line);border-radius:14px;padding:14px 16px}
+.share{display:flex;gap:22px;align-items:center;flex-wrap:wrap}
+.qr{background:#fff;border-radius:14px;padding:8px;width:180px;height:180px;flex:none}
+.qr img{width:100%;height:100%;display:block}
+code.url{display:block;word-break:break-all;background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:8px 10px;font-size:14px;color:var(--ink)}
+textarea{width:100%;min-height:150px;border:1px solid var(--line);border-radius:12px;padding:12px;font:inherit;font-size:16px;background:var(--bg);color:var(--ink)}
+.msg{min-height:24px;font-size:15px;color:var(--mint);margin-top:6px}
+.small{font-size:15px;color:var(--ink-3)}
+footer{padding:10px 0 40px;font-size:14px;color:var(--ink-3)}
+footer a{color:var(--ink-3)}
+</style>
+</head>
+<body>
+<header class="wrap">
+  <div class="top"><a class="home" href="./">&larr; Quiet Flights home</a><span class="tag">Preview build &middot; 13 Nov 2026</span></div>
+  <h1>Try the Quiet Flights preview</h1>
+  <p class="lead">Quiet Flights shows the months when planes on your route are usually emptiest, so business class is more likely to have spare seats and upgrade bids have a better chance. This is an early preview: please try it and tell us what works and what doesn't.</p>
+</header>
+<main class="wrap">
+  <section aria-labelledby="open">
+    <h2 id="open">Open it</h2>
+    <p>The web app works on any phone, tablet or computer. Android users can also install the app.</p>
+    <div class="btns">
+      <a class="btn solid" href="app/">Open the web app</a>
+      <a class="btn" href="QuietFlights.apk" download>Android app (APK, 0.9 MB)</a>
+    </div>
+    <p class="small">In this preview: about 2,900 routes in Australia, the USA, Europe, Japan and Brazil, with data up to September 2026. Europe now shows its quiet months too. These are monthly averages from official airline statistics, not live seat counts.</p>
+  </section>
+
+  <section aria-labelledby="install">
+    <h2 id="install">Install guide</h2>
+    <div class="grid">
+      <div class="box">
+        <h3>Android app (APK)</h3>
+        <ol>
+          <li>Tap <b>Android app (APK)</b> above.</li>
+          <li>Open the downloaded file. If asked, allow your browser to <b>install unknown apps</b>.</li>
+          <li>If Play Protect warns you, tap <b>More details</b>, then <b>Install anyway</b>. The preview isn't on the Play Store yet, so this is expected.</li>
+          <li>Open <b>Quiet Flights</b> from your home screen.</li>
+        </ol>
+        <p class="small">The store version will use a different signing key, so remove this preview before installing it.</p>
+      </div>
+      <div class="box">
+        <h3>iPhone or iPad</h3>
+        <ol>
+          <li>Open the web app in <b>Safari</b>.</li>
+          <li>Tap the <b>Share</b> button.</li>
+          <li>Tap <b>Add to Home Screen</b>, then <b>Add</b>.</li>
+        </ol>
+      </div>
+      <div class="box">
+        <h3>Android web app or computer</h3>
+        <ol>
+          <li>Open the web app in Chrome or Edge.</li>
+          <li>Phone: tap <b>&#8942;</b> then <b>Install app</b> (or <b>Add to Home screen</b>).</li>
+          <li>Computer: click the install icon at the right of the address bar.</li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <section aria-labelledby="share">
+    <h2 id="share">Share the preview</h2>
+    <div class="share">
+      <div class="qr"><img src="media/qr-preview.svg" alt="QR code that opens this preview page" width="180" height="180"></div>
+      <div style="flex:1;min-width:220px">
+        <p>Scan the code with a phone camera, or send the link:</p>
+        <code class="url" id="link">https://zeus4127.github.io/quiet-flights/preview.html</code>
+        <div class="btns">
+          <button class="btn solid" type="button" id="shareBtn">Share link</button>
+          <button class="btn" type="button" id="copyBtn">Copy link</button>
+        </div>
+        <div class="msg" id="shareMsg" role="status" aria-live="polite"></div>
+      </div>
+    </div>
+  </section>
+
+  <section aria-labelledby="feedback">
+    <h2 id="feedback">Send feedback</h2>
+    <p>Most useful to us: anything confusing, anything that looks broken, a route that seems wrong, and whether you would use it before booking.</p>
+    <label for="fb" class="small">Your feedback (stays on this page until you send or copy it)</label>
+    <textarea id="fb">Device and browser:
+What I tried:
+What worked:
+What was confusing or broken:
+Would I use it before booking? </textarea>
+    <div class="btns">
+      <button class="btn solid" type="button" id="ghBtn">Send on GitHub</button>
+      <button class="btn" type="button" id="copyFb">Copy feedback</button>
+    </div>
+    <div class="msg" id="fbMsg" role="status" aria-live="polite"></div>
+    <p class="small">Sending on GitHub needs a free GitHub account and makes your feedback public. No account? Copy it and send it to whoever shared this link with you.</p>
+  </section>
+
+  <section aria-labelledby="limits">
+    <h2 id="limits">Good to know</h2>
+    <ul>
+      <li>Forecasts are averages from past years, refreshed monthly. They aren't live seat counts or prices.</li>
+      <li>Some routes have no forecast yet, mostly routes with no recent data. Japan's data runs to March 2024.</li>
+      <li>Upgrade-bid hints come from a small number of reports. Your own bid log stays on your device.</li>
+    </ul>
+  </section>
+</main>
+<footer class="wrap"><a href="./">Home</a> &middot; <a href="app/">Web app</a> &middot; <a href="privacy.html">Privacy</a> &middot; <a href="terms.html">Terms</a></footer>
+<script>
+(function(){
+var URL_='https://zeus4127.github.io/quiet-flights/preview.html';
+function say(id,t){var m=document.getElementById(id);m.textContent=t;setTimeout(function(){m.textContent='';},4000);}
+function copy(t,id,ok){
+  if(navigator.clipboard&&window.isSecureContext){navigator.clipboard.writeText(t).then(function(){say(id,ok);},function(){say(id,'Could not copy. Select the text and copy it yourself.');});}
+  else{say(id,'Could not copy. Select the text and copy it yourself.');}
+}
+document.getElementById('copyBtn').onclick=function(){copy(URL_,'shareMsg','Link copied.');};
+var sb=document.getElementById('shareBtn');
+if(navigator.share){sb.onclick=function(){navigator.share({title:'Quiet Flights preview',text:'Find the months when planes are emptiest',url:URL_}).catch(function(){});};}
+else{sb.style.display='none';}
+var fb=document.getElementById('fb');
+try{var d=localStorage.getItem('qf_fb_draft');if(d)fb.value=d;}catch(e){}
+fb.addEventListener('input',function(){try{localStorage.setItem('qf_fb_draft',fb.value);}catch(e){}});
+document.getElementById('copyFb').onclick=function(){copy(fb.value,'fbMsg','Feedback copied.');};
+document.getElementById('ghBtn').onclick=function(){
+  var body=fb.value+'\n\n---\nPage: preview 13 Nov 2026 | Screen: '+screen.width+'x'+screen.height;
+  window.open('https://github.com/Zeus4127/quiet-flights/issues/new?title='+encodeURIComponent('Preview feedback')+'&body='+encodeURIComponent(body.slice(0,6000)),'_blank','noopener');
+};
+})();
+</script>
+</body>
+</html>
