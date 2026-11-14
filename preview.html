@@ -46,7 +46,7 @@ footer a{color:var(--ink-3)}
 </head>
 <body>
 <header class="wrap">
-  <div class="top"><a class="home" href="./">&larr; Quiet Flights home</a><span class="tag">Preview build &middot; 13 Nov 2026</span></div>
+  <div class="top"><a class="home" href="./">&larr; Quiet Flights home</a><span class="tag">Preview build &middot; 14 Nov 2026</span></div>
   <h1>Try the Quiet Flights preview</h1>
   <p class="lead">Quiet Flights shows the months when planes on your route are usually emptiest, so business class is more likely to have spare seats and upgrade bids have a better chance. This is an early preview: please try it and tell us what works and what doesn't.</p>
 </header>
@@ -59,6 +59,7 @@ footer a{color:var(--ink-3)}
       <a class="btn" href="QuietFlights.apk" download>Android app (APK, 0.9 MB)</a>
     </div>
     <p class="small">In this preview: about 2,900 routes in Australia, the USA, Europe, Japan and Brazil, with data up to September 2026. Europe now shows its quiet months too. These are monthly averages from official airline statistics, not live seat counts.</p>
+    <p class="small"><b>New: Business | Economy switch.</b> The switch at the top of the app opens <b>Economy</b>: cheap fares from Brisbane, Sydney, Melbourne, Perth and Adelaide that are well below other dates on the same route, including possible mistake fares. In this preview the economy fares are <b>SAMPLE (made up)</b> until live prices are switched on, and they can't be booked. <a href="app/#economy">Open Economy</a>.</p>
   </section>
 
   <section aria-labelledby="install">
@@ -132,6 +133,7 @@ Would I use it before booking? </textarea>
       <li>Forecasts are averages from past years, refreshed monthly. They aren't live seat counts or prices.</li>
       <li>Some routes have no forecast yet, mostly routes with no recent data. Japan's data runs to March 2024.</li>
       <li>Upgrade-bid hints come from a small number of reports. Your own bid log stays on your device.</li>
+      <li>Economy deals are SAMPLE data in this preview. Once live, they are cached fares that can change quickly: check the price before you pay. We may earn a commission on bookings made through a link.</li>
     </ul>
   </section>
 </main>
@@ -153,7 +155,7 @@ try{var d=localStorage.getItem('qf_fb_draft');if(d)fb.value=d;}catch(e){}
 fb.addEventListener('input',function(){try{localStorage.setItem('qf_fb_draft',fb.value);}catch(e){}});
 document.getElementById('copyFb').onclick=function(){copy(fb.value,'fbMsg','Feedback copied.');};
 document.getElementById('ghBtn').onclick=function(){
-  var body=fb.value+'\n\n---\nPage: preview 13 Nov 2026 | Screen: '+screen.width+'x'+screen.height;
+  var body=fb.value+'\n\n---\nPage: preview 14 Nov 2026 | Screen: '+screen.width+'x'+screen.height;
   window.open('https://github.com/Zeus4127/quiet-flights/issues/new?title='+encodeURIComponent('Preview feedback')+'&body='+encodeURIComponent(body.slice(0,6000)),'_blank','noopener');
 };
 })();
