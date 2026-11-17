@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Quiet Flights preview</title>
-<meta name="description" content="Try the Quiet Flights preview: open the web app, install the Android preview, share it and send feedback.">
+<title>Get Quiet Flights</title>
+<meta name="description" content="Get Quiet Flights: open the web app, install the Android app, share it and send feedback.">
 <meta name="theme-color" content="#0057FF">
 <link rel="icon" href="icons/icon-192.png">
 <link rel="manifest" href="manifest.webmanifest">
@@ -46,9 +46,9 @@ footer a{color:var(--ink-3)}
 </head>
 <body>
 <header class="wrap">
-  <div class="top"><a class="home" href="./">&larr; Quiet Flights home</a><span class="tag">Preview build &middot; 14 Nov 2026</span></div>
-  <h1>Try the Quiet Flights preview</h1>
-  <p class="lead">Quiet Flights shows the months when planes on your route are usually emptiest, so business class is more likely to have spare seats and upgrade bids have a better chance. This is an early preview: please try it and tell us what works and what doesn't.</p>
+  <div class="top"><a class="home" href="./">&larr; Quiet Flights home</a></div>
+  <h1>Get Quiet Flights</h1>
+  <p class="lead">Quiet Flights shows the months when planes on your route are usually emptiest, so business class is more likely to have spare seats and upgrade bids have a better chance. Please try it and tell us what works and what doesn't.</p>
 </header>
 <main class="wrap">
   <section aria-labelledby="open">
@@ -56,10 +56,10 @@ footer a{color:var(--ink-3)}
     <p>The web app works on any phone, tablet or computer. Android users can also install the app.</p>
     <div class="btns">
       <a class="btn solid" href="app/">Open the web app</a>
-      <a class="btn" href="QuietFlights.apk" download>Android app (APK, 0.9 MB)</a>
+      <a class="btn" href="QuietFlights.apk" download>Android app (APK, 31 MB)</a>
     </div>
-    <p class="small">In this preview: about 2,900 routes in Australia, the USA, Europe, Japan and Brazil, with data up to September 2026. Europe now shows its quiet months too. These are monthly averages from official airline statistics, not live seat counts.</p>
-    <p class="small"><b>New: one deals list.</b> The app opens on <b>Deals</b>: business and economy fares from Brisbane, Sydney, Melbourne, Perth and Adelaide that are well below other dates on the same route and cabin, in one list with a BUSINESS or ECONOMY badge, both cabins side by side where they overlap, and an All &middot; Business &middot; Economy filter. <b>Quiet seats</b> (the seat forecasts) is the other tab. In this preview the fares are <b>SAMPLE (made up)</b> until live prices are switched on, and they can't be booked. <a href="app/#deals">Open Deals</a>.</p>
+    <p class="small">About 2,900 routes in Australia, the USA, Europe, Japan and Brazil, with data up to September 2026. Europe now shows its quiet months too. These are monthly averages from official airline statistics, not live seat counts.</p>
+    <p class="small"><b>New: one deals list.</b> The app opens on <b>Deals</b>: business and economy fares from Brisbane, Sydney, Melbourne, Perth and Adelaide that are well below other dates on the same route and cabin, in one list with a BUSINESS or ECONOMY badge, both cabins side by side where they overlap, and an All &middot; Business &middot; Economy filter. <b>Quiet seats</b> (the seat forecasts) is the other tab. For now the fares are <b>SAMPLE (made up)</b> until live prices are switched on, and they can't be booked. <a href="app/#deals">Open Deals</a>.</p>
   </section>
 
   <section aria-labelledby="install">
@@ -70,10 +70,10 @@ footer a{color:var(--ink-3)}
         <ol>
           <li>Tap <b>Android app (APK)</b> above.</li>
           <li>Open the downloaded file. If asked, allow your browser to <b>install unknown apps</b>.</li>
-          <li>If Play Protect warns you, tap <b>More details</b>, then <b>Install anyway</b>. The preview isn't on the Play Store yet, so this is expected.</li>
+          <li>If Play Protect warns you, tap <b>More details</b>, then <b>Install anyway</b>. The app isn't on the Play Store yet, so this is expected.</li>
           <li>Open <b>Quiet Flights</b> from your home screen.</li>
         </ol>
-        <p class="small">The store version will use a different signing key, so remove this preview before installing it.</p>
+        <p class="small">The store version will use a different signing key, so remove this version before installing it.</p>
       </div>
       <div class="box">
         <h3>iPhone or iPad</h3>
@@ -95,9 +95,9 @@ footer a{color:var(--ink-3)}
   </section>
 
   <section aria-labelledby="share">
-    <h2 id="share">Share the preview</h2>
+    <h2 id="share">Share Quiet Flights</h2>
     <div class="share">
-      <div class="qr"><img src="media/qr-preview.svg" alt="QR code that opens this preview page" width="180" height="180"></div>
+      <div class="qr"><img src="media/qr-preview.svg" alt="QR code that opens this page" width="180" height="180"></div>
       <div style="flex:1;min-width:220px">
         <p>Scan the code with a phone camera, or send the link:</p>
         <code class="url" id="link">https://zeus4127.github.io/quiet-flights/preview.html</code>
@@ -133,7 +133,7 @@ Would I use it before booking? </textarea>
       <li>Forecasts are averages from past years, refreshed monthly. They aren't live seat counts or prices.</li>
       <li>Some routes have no forecast yet, mostly routes with no recent data. Japan's data runs to March 2024.</li>
       <li>Upgrade-bid hints come from a small number of reports. Your own bid log stays on your device.</li>
-      <li>Deals (business and economy) are SAMPLE data in this preview. Once live, they are cached fares that can change quickly: check the price before you pay. We may earn a commission on bookings made through a link.</li>
+      <li>Deals (business and economy) are SAMPLE data for now. Once live, they are cached fares that can change quickly: check the price before you pay. We may earn a commission on bookings made through a link.</li>
     </ul>
   </section>
 </main>
@@ -148,7 +148,7 @@ function copy(t,id,ok){
 }
 document.getElementById('copyBtn').onclick=function(){copy(URL_,'shareMsg','Link copied.');};
 var sb=document.getElementById('shareBtn');
-if(navigator.share){sb.onclick=function(){navigator.share({title:'Quiet Flights preview',text:'Find the months when planes are emptiest',url:URL_}).catch(function(){});};}
+if(navigator.share){sb.onclick=function(){navigator.share({title:'Quiet Flights',text:'Find the months when planes are emptiest',url:URL_}).catch(function(){});};}
 else{sb.style.display='none';}
 var fb=document.getElementById('fb');
 try{var d=localStorage.getItem('qf_fb_draft');if(d)fb.value=d;}catch(e){}
@@ -156,7 +156,7 @@ fb.addEventListener('input',function(){try{localStorage.setItem('qf_fb_draft',fb
 document.getElementById('copyFb').onclick=function(){copy(fb.value,'fbMsg','Feedback copied.');};
 document.getElementById('ghBtn').onclick=function(){
   var body=fb.value+'\n\n---\nPage: preview 14 Nov 2026 | Screen: '+screen.width+'x'+screen.height;
-  window.open('https://github.com/Zeus4127/quiet-flights/issues/new?title='+encodeURIComponent('Preview feedback')+'&body='+encodeURIComponent(body.slice(0,6000)),'_blank','noopener');
+  window.open('https://github.com/Zeus4127/quiet-flights/issues/new?title='+encodeURIComponent('Feedback')+'&body='+encodeURIComponent(body.slice(0,6000)),'_blank','noopener');
 };
 })();
 </script>
