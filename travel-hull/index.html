@@ -447,7 +447,7 @@ footer p{margin:10px 0 0;max-width:420px}
 <div class="util"><div class="wrap"><span><i class="dot"></i><b>Free</b> · works with no signal · no account</span><nav aria-label="Quick links"><a href="#faq">Questions</a><a href="#deals">Deals</a><a href="#get">Get the app</a></nav></div></div>
 <header class="top"><div class="wrap">
   <a class="logo" href="#top" aria-label="Travel Hull home"><span class="mark"><svg class="ico" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M15.5 8.5l-2 5-5 2 2-5z"/></svg></span><span>Travel Hull<small>EVERY TRIP · STEP BY STEP</small></span></a>
-  <nav class="nav" aria-label="Sections"><a class="on" href="#plan">Your plan</a><a href="#ways">Every way</a><a href="#deals">Deals</a><a href="../app/#seats">Flights</a><a href="weather.html">Weather</a><a href="money.html">Money</a><a href="#faq">Questions</a></nav>
+  <nav class="nav" aria-label="Sections"><a class="on" href="#plan">Steps</a><a href="trip.html">My plan</a><a href="#deals">Deals</a><a href="../app/#seats">Flights</a><a href="weather.html">Weather</a><a href="money.html">Money</a><a href="#ways">Every way</a></nav>
   <a class="btn gold" href="#get">Get the app</a>
 </div></header>
 <div class="wayrow"><div class="wrap"><span class="lab">Your way</span><div class="wchips" id="wayChips" role="group" aria-label="Your way to travel"></div></div></div>
@@ -489,6 +489,7 @@ footer p{margin:10px 0 0;max-width:420px}
       <h2 id="planTitle">Your trip in <em>6 steps</em></h2>
       <p class="summary" id="summary"></p>
       <div class="chosen"><span class="chip-ico" id="planIcon"></span><button type="button" class="save" id="saveWay" aria-pressed="false"></button><button type="button" class="save" data-open-all>Change how you travel</button></div>
+      <a class="save rembtn" href="trip.html" style="text-decoration:none">📅 My day-by-day plan</a>
       <button type="button" class="save rembtn" data-guide="8">🔔 Set reminders</button>
       <button type="button" class="btn gold runbtn" data-guide="1">Run through my trip, step by step <svg class="ico" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
     </div>
@@ -1482,7 +1483,7 @@ function drawGuide(){
     $("gdProg").textContent="All done";
     $("gdBody").innerHTML='<div class="ready"><div class="big">'+done+" / "+all+"</div><h2>"+(done===all?"You're ready to go.":"Nearly ready.")+"</h2><p>Your "+E(QFJ.tripName(w.name))+" to "+E(city)+(S.leave?", leaving "+E(when[2].when):"")+".</p>"+
       (miss.length?"<b>Still to do:</b><ul>"+miss.slice(0,8).map(function(m){return "<li>"+E(m)+"</li>";}).join("")+"</ul>":"<p>Every step is ticked. Have a great trip.</p>")+"</div>";
-    $("gdFoot").innerHTML='<button type="button" data-gstep="6">Back</button><button type="button" data-gstep="8">Set reminders</button><button type="button" class="main" data-gclose>Finish</button>';
+    $("gdFoot").innerHTML='<button type="button" data-gstep="6">Back</button><button type="button" data-gstep="8">Set reminders</button><button type="button" class="main" data-goplan>Build my day-by-day plan →</button>';
     return;
   }
   var s=j.steps[G.n-1],wn=when[G.n-1];
@@ -1610,6 +1611,14 @@ function buildDeals(d){
     saveLab:"How you save",save:"Compare every stay on one page",score:70,links:[["See stays ↗","https://www.booking.com/searchresults.html?ss="+encodeURIComponent(place)+dates]]});
   out.push({type:"book",tag:"Tours and tickets",title:"Tours and tickets in "+city,where:"Opens GetYourGuide",what:"Every bookable tour, pass and ticket for "+city+", with prices and reviews. Many are cheaper booked ahead than at the gate.",
     saveLab:"How you save",save:"Book ahead, skip gate prices",score:64,links:[["See tours ↗","https://www.getyourguide.com/s/?q="+encodeURIComponent(city)]]});
+  var FT={sydney:"com.au/sydney",melbourne:"com.au/melbourne",brisbane:"com.au/brisbane",goldcoast:"com.au/gold-coast",perth:"com.au/perth",adelaide:"com.au/adelaide",cairns:"com.au/cairns",hobart:"com.au/hobart",darwin:"com.au/darwin",auckland:"co.nz/auckland",queenstown:"co.nz/queenstown",london:"co.uk/london"};
+  var GR={sydney:"sydney",melbourne:"melbourne",brisbane:"brisbane",goldcoast:"gold-coast",perth:"perth",adelaide:"adelaide",cairns:"cairns",hobart:"hobart",darwin:"darwin"};
+  if(FT[d[0]])out.push({type:"eat",tag:"Dinner deal",title:"50% off dinner in "+city,where:"Opens First Table for "+city,what:"Book the first table of the night at a listed restaurant and the food bill is half price. You pay First Table a small booking fee.",
+    saveLab:"What you save",save:"50% off the food bill",score:92,km:0,links:[["See tables ↗","https://www.firsttable."+FT[d[0]]]]});
+  if(GR[d[0]])out.push({type:"do",tag:"Local vouchers",title:"Vouchers for "+city+": food, activities, cinema",where:"Opens Groupon for "+city,what:"Hundreds of local vouchers you buy ahead and show at the door: restaurants, bowling, cinema, spas and tours.",
+    saveLab:"What you save",save:"Often 20% to 70% off, shown on each voucher",score:88,km:0,links:[["See vouchers ↗","https://www.groupon.com.au/local/"+GR[d[0]]]]});
+  if(d[7])out.push({type:"do",tag:"Show tickets",title:"Discount show and event tickets",where:"Opens Lasttix",what:"Last-minute and discounted tickets to shows, comedy and events around Australia.",
+    saveLab:"What you save",save:"Discounted tickets, shown on each event",score:74,links:[["See tickets ↗","https://www.lasttix.com.au/"]]});
   out.push({type:"book",tag:"Car hire",title:"Car hire in "+city,where:"Opens a Google search",what:"Compares car hire for "+city+". Check the fuel policy and the excess before you pay.",
     saveLab:"How you save",save:"Compare before you book",score:56,links:[["See car hire ↗","https://www.google.com/search?q="+encodeURIComponent("car hire "+place)]]});
   return out;
@@ -1790,6 +1799,7 @@ document.addEventListener("click",function(e){
   else if(b.hasAttribute("data-guide"))openGuide(+b.getAttribute("data-guide"));
   else if(b.hasAttribute("data-gstep")){G.n=+b.getAttribute("data-gstep");drawGuide();$("guide").scrollTop=0;}
   else if(b.hasAttribute("data-gclose"))$("guide").close();
+  else if(b.hasAttribute("data-goplan"))location.href="trip.html";
   else if(b.hasAttribute("data-tick")){var tk=ticks(),k=b.getAttribute("data-tick");if(tk[k])delete tk[k];else tk[k]=1;saveTicks(tk);drawGuide();}
   else if(b.hasAttribute("data-gjump")){$("guide").close();var el=document.querySelector(b.getAttribute("data-gjump"));if(el)el.scrollIntoView({behavior:"smooth"});}
   else if(b.hasAttribute("data-rem")){var rn=+b.getAttribute("data-rem"),ri=S.rem.steps.indexOf(rn);if(ri>=0)S.rem.steps.splice(ri,1);else S.rem.steps.push(rn);save();drawGuide();}
@@ -1822,6 +1832,7 @@ $("faqSearch").addEventListener("input",function(){
   $("nReady").textContent=Object.keys(all).length;$("nWays").textContent=WAYS.length;
   $("heroFacts").textContent=WAYS.length+" ways to travel · 6 steps · works offline";$("shortWays").textContent="All "+WAYS.length+" ways to travel";})();
 drawAll();drawInside();drawDeals();
+if("serviceWorker" in navigator)navigator.serviceWorker.register("sw.js").catch(function(){});
 if(window.IntersectionObserver){var io=new IntersectionObserver(function(en){if(en[0].isIntersecting){io.disconnect();scan(false);}},{rootMargin:"200px"});io.observe($("deals"));}else scan(false);
 if(window.fetch)fetch("media/media-manifest.json").then(function(r){return r.ok?r.text():"";}).then(function(t){
   MEDIA=t||"";try{PH=JSON.parse(MEDIA).photos||{};}catch(e){PH={};}drawAll();drawInside();
