@@ -1,0 +1,518 @@
+{
+ "updated": "2026-11-18",
+ "licence": "Pexels licence: free for commercial use, no credit needed",
+ "hero_types": [
+  "plane",
+  "road",
+  "train",
+  "cruise",
+  "caravan",
+  "mixed"
+ ],
+ "missing_hero_types": [],
+ "types": {
+  "balloons": {
+   "source": "Pexels 27436406",
+   "hero": false,
+   "video": {
+    "file": "trip-balloons.mp4",
+    "bytes": 478427
+   },
+   "video_square": {
+    "file": "trip-balloons-square.mp4",
+    "bytes": 270402
+   },
+   "poster": {
+    "file": "trip-balloons-poster.jpg",
+    "bytes": 42399
+   },
+   "poster_square": {
+    "file": "trip-balloons-square-poster.jpg",
+    "bytes": 26368
+   }
+  },
+  "beach": {
+   "source": "Pexels 6200887",
+   "hero": false,
+   "video": {
+    "file": "trip-beach.mp4",
+    "bytes": 1060593
+   },
+   "video_square": {
+    "file": "trip-beach-square.mp4",
+    "bytes": 662743
+   },
+   "poster": {
+    "file": "trip-beach-poster.jpg",
+    "bytes": 63750
+   },
+   "poster_square": {
+    "file": "trip-beach-square-poster.jpg",
+    "bytes": 35824
+   }
+  },
+  "bike": {
+   "source": "Pexels 37975744",
+   "hero": false,
+   "video": {
+    "file": "trip-bike.mp4",
+    "bytes": 892303
+   },
+   "video_square": {
+    "file": "trip-bike-square.mp4",
+    "bytes": 556030
+   },
+   "poster": {
+    "file": "trip-bike-poster.jpg",
+    "bytes": 152826
+   },
+   "poster_square": {
+    "file": "trip-bike-square-poster.jpg",
+    "bytes": 91767
+   }
+  },
+  "boats": {
+   "source": "Pexels 33078032",
+   "hero": false,
+   "video": {
+    "file": "trip-boats.mp4",
+    "bytes": 584327
+   },
+   "video_square": {
+    "file": "trip-boats-square.mp4",
+    "bytes": 371024
+   },
+   "poster": {
+    "file": "trip-boats-poster.jpg",
+    "bytes": 84754
+   },
+   "poster_square": {
+    "file": "trip-boats-square-poster.jpg",
+    "bytes": 52367
+   }
+  },
+  "city": {
+   "source": "Pexels 33637800",
+   "hero": false,
+   "video": {
+    "file": "trip-city.mp4",
+    "bytes": 1022844
+   },
+   "video_square": {
+    "file": "trip-city-square.mp4",
+    "bytes": 637900
+   },
+   "poster": {
+    "file": "trip-city-poster.jpg",
+    "bytes": 157316
+   },
+   "poster_square": {
+    "file": "trip-city-square-poster.jpg",
+    "bytes": 97063
+   }
+  },
+  "cruise": {
+   "source": "Pexels 34917340 cruise ship at sea",
+   "hero": true,
+   "video": {
+    "file": "trip-cruise.mp4",
+    "bytes": 954949
+   },
+   "video_square": {
+    "file": "trip-cruise-square.mp4",
+    "bytes": 565931
+   },
+   "poster": {
+    "file": "trip-cruise-poster.jpg",
+    "bytes": 91709
+   },
+   "poster_square": {
+    "file": "trip-cruise-square-poster.jpg",
+    "bytes": 57413
+   }
+  },
+  "ferry": {
+   "source": "Pexels 31831582",
+   "hero": false,
+   "video": {
+    "file": "trip-ferry.mp4",
+    "bytes": 628669
+   },
+   "video_square": {
+    "file": "trip-ferry-square.mp4",
+    "bytes": 373521
+   },
+   "poster": {
+    "file": "trip-ferry-poster.jpg",
+    "bytes": 90461
+   },
+   "poster_square": {
+    "file": "trip-ferry-square-poster.jpg",
+    "bytes": 53890
+   }
+  },
+  "islands": {
+   "source": "Pexels 28615718",
+   "hero": false,
+   "video": {
+    "file": "trip-islands.mp4",
+    "bytes": 992119
+   },
+   "video_square": {
+    "file": "trip-islands-square.mp4",
+    "bytes": 613458
+   },
+   "poster": {
+    "file": "trip-islands-poster.jpg",
+    "bytes": 72599
+   },
+   "poster_square": {
+    "file": "trip-islands-square-poster.jpg",
+    "bytes": 41523
+   }
+  },
+  "lake": {
+   "source": "Pexels 33324261",
+   "hero": false,
+   "video": {
+    "file": "trip-lake.mp4",
+    "bytes": 999214
+   },
+   "video_square": {
+    "file": "trip-lake-square.mp4",
+    "bytes": 610091
+   },
+   "poster": {
+    "file": "trip-lake-poster.jpg",
+    "bytes": 94242
+   },
+   "poster_square": {
+    "file": "trip-lake-square-poster.jpg",
+    "bytes": 57644
+   }
+  },
+  "mixed": {
+   "source": "montage of plane, road, train, cruise",
+   "hero": true,
+   "video": {
+    "file": "trip-mixed.mp4",
+    "bytes": 1056426
+   },
+   "video_square": {
+    "file": "trip-mixed-square.mp4",
+    "bytes": 699821
+   },
+   "poster": {
+    "file": "trip-mixed-poster.jpg",
+    "bytes": 26297
+   },
+   "poster_square": {
+    "file": "trip-mixed-square-poster.jpg",
+    "bytes": 14618
+   }
+  },
+  "mountains": {
+   "source": "Pexels 11880215",
+   "hero": false,
+   "video": {
+    "file": "trip-mountains.mp4",
+    "bytes": 1026252
+   },
+   "video_square": {
+    "file": "trip-mountains-square.mp4",
+    "bytes": 610420
+   },
+   "poster": {
+    "file": "trip-mountains-poster.jpg",
+    "bytes": 63724
+   },
+   "poster_square": {
+    "file": "trip-mountains-square-poster.jpg",
+    "bytes": 37668
+   }
+  },
+  "paddle": {
+   "source": "Pexels 10070233",
+   "hero": false,
+   "video": {
+    "file": "trip-paddle.mp4",
+    "bytes": 581761
+   },
+   "video_square": {
+    "file": "trip-paddle-square.mp4",
+    "bytes": 345238
+   },
+   "poster": {
+    "file": "trip-paddle-poster.jpg",
+    "bytes": 50959
+   },
+   "poster_square": {
+    "file": "trip-paddle-square-poster.jpg",
+    "bytes": 28572
+   }
+  },
+  "plane": {
+   "source": "Pexels 4070515 flying above the clouds",
+   "hero": true,
+   "video": {
+    "file": "trip-plane.mp4",
+    "bytes": 969287
+   },
+   "video_square": {
+    "file": "trip-plane-square.mp4",
+    "bytes": 581525
+   },
+   "poster": {
+    "file": "trip-plane-poster.jpg",
+    "bytes": 26753
+   },
+   "poster_square": {
+    "file": "trip-plane-square-poster.jpg",
+    "bytes": 14813
+   }
+  },
+  "rainforest": {
+   "source": "Pexels 12999511",
+   "hero": false,
+   "video": {
+    "file": "trip-rainforest.mp4",
+    "bytes": 949583
+   },
+   "video_square": {
+    "file": "trip-rainforest-square.mp4",
+    "bytes": 495328
+   },
+   "poster": {
+    "file": "trip-rainforest-poster.jpg",
+    "bytes": 67040
+   },
+   "poster_square": {
+    "file": "trip-rainforest-square-poster.jpg",
+    "bytes": 35589
+   }
+  },
+  "road": {
+   "source": "Pexels 10391047 motorbikes on a mountain road",
+   "hero": true,
+   "video": {
+    "file": "trip-road.mp4",
+    "bytes": 911292
+   },
+   "video_square": {
+    "file": "trip-road-square.mp4",
+    "bytes": 565326
+   },
+   "poster": {
+    "file": "trip-road-poster.jpg",
+    "bytes": 135350
+   },
+   "poster_square": {
+    "file": "trip-road-square-poster.jpg",
+    "bytes": 79936
+   }
+  },
+  "sailing": {
+   "source": "Pexels 30841894",
+   "hero": false,
+   "video": {
+    "file": "trip-sailing.mp4",
+    "bytes": 1074669
+   },
+   "video_square": {
+    "file": "trip-sailing-square.mp4",
+    "bytes": 664126
+   },
+   "poster": {
+    "file": "trip-sailing-poster.jpg",
+    "bytes": 121459
+   },
+   "poster_square": {
+    "file": "trip-sailing-square-poster.jpg",
+    "bytes": 61406
+   }
+  },
+  "snorkel": {
+   "source": "Pexels 39258875",
+   "hero": false,
+   "video": {
+    "file": "trip-snorkel.mp4",
+    "bytes": 992172
+   },
+   "video_square": {
+    "file": "trip-snorkel-square.mp4",
+    "bytes": 639249
+   },
+   "poster": {
+    "file": "trip-snorkel-poster.jpg",
+    "bytes": 49215
+   },
+   "poster_square": {
+    "file": "trip-snorkel-square-poster.jpg",
+    "bytes": 28183
+   }
+  },
+  "snow": {
+   "source": "Pexels 36525752",
+   "hero": false,
+   "video": {
+    "file": "trip-snow.mp4",
+    "bytes": 671304
+   },
+   "video_square": {
+    "file": "trip-snow-square.mp4",
+    "bytes": 404784
+   },
+   "poster": {
+    "file": "trip-snow-poster.jpg",
+    "bytes": 59632
+   },
+   "poster_square": {
+    "file": "trip-snow-square-poster.jpg",
+    "bytes": 33964
+   }
+  },
+  "train": {
+   "source": "Pexels 33946134 Swiss alpine train",
+   "hero": true,
+   "video": {
+    "file": "trip-train.mp4",
+    "bytes": 790656
+   },
+   "video_square": {
+    "file": "trip-train-square.mp4",
+    "bytes": 453421
+   },
+   "poster": {
+    "file": "trip-train-poster.jpg",
+    "bytes": 60276
+   },
+   "poster_square": {
+    "file": "trip-train-square-poster.jpg",
+    "bytes": 32708
+   }
+  },
+  "waterfall": {
+   "source": "Pexels 39842568",
+   "hero": false,
+   "video": {
+    "file": "trip-waterfall.mp4",
+    "bytes": 971457
+   },
+   "video_square": {
+    "file": "trip-waterfall-square.mp4",
+    "bytes": 605176
+   },
+   "poster": {
+    "file": "trip-waterfall-poster.jpg",
+    "bytes": 110553
+   },
+   "poster_square": {
+    "file": "trip-waterfall-square-poster.jpg",
+    "bytes": 55594
+   }
+  },
+  "caravan": {
+   "source": "https://www.pexels.com/video/scenic-van-journey-along-nordic-lake-road-39759831/",
+   "hero": true,
+   "video": {
+    "file": "trip-caravan.mp4",
+    "bytes": 982919
+   },
+   "video_square": {
+    "file": "trip-caravan-square.mp4",
+    "bytes": 669007
+   },
+   "poster": {
+    "file": "trip-caravan-poster.jpg",
+    "bytes": 75438
+   },
+   "poster_square": {
+    "file": "trip-caravan-square-poster.jpg",
+    "bytes": 48944
+   }
+  }
+ },
+ "photos": {
+  "step-1-before": {
+   "file": "step-1-before.webp",
+   "bytes": 80772,
+   "small": {
+    "file": "step-1-before-800.webp",
+    "bytes": 35256
+   }
+  },
+  "step-2-book": {
+   "file": "step-2-book.webp",
+   "bytes": 68990,
+   "small": {
+    "file": "step-2-book-800.webp",
+    "bytes": 27982
+   }
+  },
+  "step-3-getting-there": {
+   "file": "step-3-getting-there.webp",
+   "bytes": 199194,
+   "small": {
+    "file": "step-3-getting-there-800.webp",
+    "bytes": 98654
+   }
+  },
+  "step-5-there": {
+   "file": "step-5-there.webp",
+   "bytes": 315440,
+   "small": {
+    "file": "step-5-there-800.webp",
+    "bytes": 45422
+   }
+  },
+  "step-6-trouble": {
+   "file": "step-6-trouble.webp",
+   "bytes": 112488,
+   "small": {
+    "file": "step-6-trouble-800.webp",
+    "bytes": 48036
+   }
+  },
+  "section-explore": {
+   "file": "section-explore.webp",
+   "bytes": 393902
+  },
+  "section-flights": {
+   "file": "section-flights.webp",
+   "bytes": 69830
+  },
+  "step-4-arrive": {
+   "file": "step-4-arrive.webp",
+   "bytes": 102144,
+   "small": {
+    "file": "step-4-arrive-800.webp",
+    "bytes": 40224
+   }
+  },
+  "section-mytrip": {
+   "file": "section-mytrip.webp",
+   "bytes": 43574,
+   "small": {
+    "file": "section-mytrip-800.webp",
+    "bytes": 15372
+   }
+  },
+  "section-tools": {
+   "file": "section-tools.webp",
+   "bytes": 176972,
+   "small": {
+    "file": "section-tools-800.webp",
+    "bytes": 64516
+   }
+  },
+  "section-deals": {
+   "file": "section-deals.webp",
+   "bytes": 104962,
+   "small": {
+    "file": "section-deals-800.webp",
+    "bytes": 34990
+   }
+  }
+ },
+ "missing_photos": []
+}

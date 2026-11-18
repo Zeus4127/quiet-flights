@@ -1,0 +1,942 @@
+<!doctype html>
+<html lang="en-AU">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Travel Hull: every trip, step by step</title>
+<meta name="description" content="A free travel app that turns any trip into 6 clear steps, with a date on each one and offline tools for every step. Plane, road, rail, sea or trail.">
+<meta name="theme-color" content="#062F3A">
+<style>
+@font-face{font-family:Sora;src:url(fonts/sora.woff2) format("woff2");font-weight:100 800;font-display:swap}
+@font-face{font-family:Inter;src:url(fonts/inter.woff2) format("woff2");font-weight:100 900;font-display:swap}
+:root{
+  --deep:#062F3A;--deep2:#041F27;--sea:#0B5566;--sea2:#137A8A;--sea3:#2BA3B0;--foam:#E2F1F0;
+  --sand:#F6F3EC;--card:#fff;--sun:#F4B740;--sun2:#FFD27A;--sunink:#2B1D00;--sunText:#8A5F00;
+  --ink:#0F2A31;--mut:#56696F;--line:#DCE4E1;
+  --hf:Sora,"Segoe UI",system-ui,sans-serif;--bf:Inter,"Segoe UI",system-ui,sans-serif;
+  --r:18px;--shadow:0 1px 2px rgba(6,47,58,.05),0 14px 34px -18px rgba(6,47,58,.32)}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:84px}
+body{margin:0;font:400 16.5px/1.6 var(--bf);color:var(--ink);background:var(--sand);-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}
+h1,h2,h3,h4{font-family:var(--hf);margin:0;line-height:1.08;letter-spacing:-.025em}
+button,input,select{font:inherit;color:inherit}button{cursor:pointer}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--sun);outline-offset:2px;border-radius:8px}
+.wrap{max-width:1216px;margin:0 auto;padding:0 24px}
+@media(max-width:560px){.wrap{padding:0 18px}}
+.kick{display:flex;align-items:center;gap:12px;font:700 12px var(--hf);letter-spacing:.16em;text-transform:uppercase;color:var(--sea2)}
+.kick:before{content:"";width:28px;height:2px;background:var(--sun)}
+.on-dark .kick{color:var(--sun)}
+.sec{padding:88px 0}
+@media(max-width:760px){.sec{padding:58px 0}}
+.sec-h{max-width:720px;margin-bottom:36px}
+.sec-h h2{font-size:clamp(30px,4vw,46px);font-weight:700;margin-top:14px}
+.sec-h h2 em{font-style:normal;color:var(--sea2)}
+.on-dark .sec-h h2 em{color:var(--sun)}
+.sec-h p{font-size:18px;color:var(--mut);margin:14px 0 0}
+.on-dark{color:#fff}.on-dark .sec-h p{color:rgba(255,255,255,.82)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:50px;padding:0 24px;border-radius:999px;font:600 15.5px var(--hf);text-decoration:none;border:2px solid transparent;transition:transform .15s,background .15s;white-space:nowrap}
+.btn:hover{transform:translateY(-1px)}
+.btn.gold{background:var(--sun);color:var(--sunink)}.btn.gold:hover{background:var(--sun2)}
+.ico{width:22px;height:22px;flex:none;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.util{background:var(--deep2);color:rgba(255,255,255,.82);font-size:13px}
+.util .wrap{display:flex;justify-content:space-between;align-items:center;gap:16px;min-height:36px}
+.util b{color:#fff;font-weight:600}
+.util .dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--sun);margin-right:8px;vertical-align:1px}
+.util nav{display:flex;gap:18px}.util nav a{text-decoration:none;padding:6px 0}.util nav a:hover{color:#fff}
+@media(max-width:1100px){.util{display:none}}
+.top{position:sticky;top:0;z-index:40;background:var(--deep);color:#fff}
+.top .wrap{display:flex;align-items:center;gap:24px;height:70px}
+.logo{display:flex;align-items:center;gap:11px;font:700 21px var(--hf);letter-spacing:-.02em;text-decoration:none;color:#fff}
+.logo .mark{width:36px;height:36px;border-radius:50%;background:var(--sun);color:var(--deep);display:grid;place-items:center}
+.logo .mark svg{width:22px;height:22px;stroke-width:2.2}
+.logo small{display:block;font:600 11.5px/1 var(--bf);letter-spacing:.14em;color:var(--sun);margin-top:3px}
+.nav{display:flex;gap:4px;margin-left:auto}
+.nav a{color:rgba(255,255,255,.86);text-decoration:none;font-weight:600;font-size:15px;padding:8px 14px;border-radius:999px}
+.nav a:hover{color:#fff;background:rgba(255,255,255,.08)}
+.nav a.on{background:rgba(244,183,64,.16);color:var(--sun);box-shadow:inset 0 0 0 1px rgba(244,183,64,.45)}
+.top .btn{min-height:44px;padding:0 20px;font-size:15px}
+@media(max-width:960px){.nav{display:none}.top .btn{margin-left:auto}}
+@media(max-width:400px){.logo{font-size:18px}.logo small{display:none}.top .btn{padding:0 16px}}
+.wayrow{background:#0A3B47;color:#fff;border-bottom:3px solid var(--sun)}
+.wayrow .wrap{display:flex;align-items:center;gap:14px;min-height:58px}
+.wayrow .lab{flex:none;font:700 11.5px var(--hf);letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.7)}
+.wchips{display:flex;gap:8px;overflow-x:auto;padding:8px 2px;scrollbar-width:none}
+.wchips::-webkit-scrollbar{display:none}
+.wchip{flex:none;display:inline-flex;align-items:center;gap:7px;min-height:40px;padding:0 15px 0 11px;border-radius:999px;border:1px solid rgba(255,255,255,.22);background:rgba(255,255,255,.07);color:#fff;font-weight:600;font-size:14px;white-space:nowrap}
+.wchip .ico{width:19px;height:19px}
+.wchip:hover{background:rgba(255,255,255,.14)}
+.wchip[aria-pressed=true]{background:var(--sun);border-color:var(--sun);color:var(--sunink)}
+.wchip .star{color:var(--sun);font-size:12px}.wchip[aria-pressed=true] .star{color:var(--sunink)}
+.wchip.more{border-style:dashed;border-color:rgba(244,183,64,.75);color:var(--sun);padding:0 16px}
+@media(max-width:560px){.wayrow .lab{display:none}}
+.hero{position:relative;color:#fff;background:var(--deep) center/cover no-repeat;overflow:hidden}
+.hero video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity 1s}
+.hero video.on{opacity:1}
+.hero:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(4,24,30,.62),rgba(4,24,30,.42) 34%,rgba(6,47,58,.86) 78%,var(--deep)),linear-gradient(90deg,rgba(4,24,30,.55),transparent 65%)}
+.hero .wrap{position:relative;z-index:1;padding-top:76px;padding-bottom:40px}
+@media(min-width:1001px){.hero .wrap{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,.75fr);gap:44px;align-items:center}}
+.hero-l{min-width:0}
+.hero-phone{display:none}
+@media(min-width:1001px){.hero-phone{display:block;justify-self:end}}
+.hp{width:300px;border-radius:40px;border:9px solid #041F27;background:var(--sand);color:var(--ink);box-shadow:0 50px 90px -30px rgba(0,0,0,.8),0 0 0 1px rgba(255,255,255,.18);overflow:hidden}
+.hp-top{padding:20px 16px 14px;background:var(--deep);color:#fff}
+.hp-top .r{display:flex;align-items:center;gap:10px;font:700 16px var(--hf)}
+.hp-top .r i{width:34px;height:34px;border-radius:10px;background:var(--sun);color:var(--deep);display:grid;place-items:center;font-style:normal}
+.hp-top small{display:block;margin-top:8px;font:500 12px var(--bf);color:rgba(255,255,255,.8)}
+.hp ol{list-style:none;margin:0;padding:10px 10px 4px}
+.hp li{display:flex;gap:10px;align-items:center;padding:9px 10px;border-radius:13px;background:#fff;border:1px solid var(--line);margin-bottom:7px}
+.hp li.here{border-color:var(--sun);box-shadow:inset 0 0 0 1px var(--sun)}
+.hp li b{width:28px;height:28px;border-radius:8px;background:var(--deep);color:#fff;display:grid;place-items:center;font:800 13px var(--hf);flex:none}
+.hp li.here b{background:var(--sun);color:var(--deep)}
+.hp li span{font:600 13.5px/1.25 var(--hf);min-width:0}.hp li small{display:block;font:500 11.5px var(--bf);color:var(--mut);margin-top:2px}
+.hp-tab{display:flex;justify-content:space-around;padding:11px 6px 15px;border-top:1px solid var(--line);font:600 11.5px var(--bf);color:var(--mut);background:#fff}
+.hp-tab .on{color:var(--sea)}
+.facts{font:700 12.5px var(--hf);letter-spacing:.16em;text-transform:uppercase;color:var(--sun)}
+.hero h1{font-size:clamp(46px,7.6vw,104px);font-weight:800;max-width:980px;margin:18px 0 20px;letter-spacing:-.035em;line-height:.98}
+.hero h1 em{font-style:normal;color:var(--sun)}
+.hero .lead{font-size:clamp(17px,1.6vw,20px);color:rgba(255,255,255,.9);max-width:620px;margin:0}
+.tripbar{display:grid;grid-template-columns:1.35fr 1fr .7fr auto;gap:8px;margin-top:36px;max-width:980px;padding:8px;border-radius:20px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.28);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+.field{display:flex;flex-direction:column;justify-content:center;gap:2px;padding:8px 14px;border-radius:14px;background:rgba(4,24,30,.42);min-height:62px}
+.field span{font:700 11.5px var(--hf);letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.72)}
+.field select,.field input{width:100%;border:0;background:transparent;color:#fff;font-weight:600;font-size:16px;padding:2px 0;outline:0;color-scheme:dark}
+.field select option,.field select optgroup{color:var(--ink);background:#fff}
+.field:focus-within{box-shadow:inset 0 0 0 2px var(--sun)}
+.tripbar .btn{min-height:62px;border-radius:14px;padding:0 26px}
+@media(max-width:820px){.tripbar{grid-template-columns:1fr 1fr}.tripbar .wide{grid-column:1/-1}.tripbar .btn{grid-column:1/-1}}
+.hero-foot{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:30px;font:600 11.5px var(--hf);letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.7)}
+.pause{display:inline-flex;align-items:center;gap:8px;min-height:36px;padding:0 14px;border-radius:999px;border:1px solid rgba(255,255,255,.3);background:rgba(4,24,30,.4);color:#fff;font:600 12px var(--hf);letter-spacing:.08em;text-transform:uppercase}
+@media(max-width:560px){.hero .wrap{padding-top:48px}}
+.trust{background:var(--deep);color:rgba(255,255,255,.86);border-top:1px solid rgba(255,255,255,.08)}
+.trust .wrap{display:flex;align-items:center;flex-wrap:wrap;gap:10px 30px;padding-top:18px;padding-bottom:18px;font-weight:600;font-size:14.5px}
+.trust .lab{font:700 11.5px var(--hf);letter-spacing:.16em;text-transform:uppercase;color:var(--sun)}
+.shorts{background:var(--deep);padding-bottom:26px}
+.shorts .wrap{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.short{display:grid;grid-template-columns:44px 1fr auto;gap:14px;align-items:center;padding:14px 16px;border-radius:16px;background:#fff;color:var(--ink);text-decoration:none;border:0;text-align:left;box-shadow:var(--shadow)}
+.short:hover{background:var(--foam)}
+.short .si{width:44px;height:44px;border-radius:12px;background:var(--foam);color:var(--sea);display:grid;place-items:center}
+.short b{display:block;font:600 15.5px var(--hf)}.short span{display:block;font-size:13.5px;color:var(--mut)}
+.short .arrow{color:var(--sea2);font-size:20px}
+@media(max-width:820px){.shorts .wrap{grid-template-columns:1fr}}
+.band{background:linear-gradient(135deg,var(--deep) 0,var(--sea) 55%,var(--sea3) 130%);color:#fff;position:relative}
+.band:before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.045) 1px,transparent 1px);background-size:48px 48px;pointer-events:none}
+.band .wrap{position:relative;display:grid;grid-template-columns:repeat(5,1fr)}
+.stat{padding:32px 22px;border-left:1px solid rgba(255,255,255,.16)}
+.stat:first-child{border-left:0;padding-left:0}
+.stat b{display:block;font:800 clamp(32px,3.6vw,46px)/1 var(--hf);letter-spacing:-.03em}
+.stat b u{text-decoration:none;color:var(--sun);font-size:.5em;margin-left:5px;letter-spacing:0}
+.stat b i{font-style:normal}
+.stat span{display:block;margin-top:10px;font:600 12px var(--hf);letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.8)}
+@media(max-width:900px){.band .wrap{grid-template-columns:1fr 1fr}.stat{padding:22px 14px}.stat:nth-child(odd){border-left:0;padding-left:0}.stat:nth-child(n+3){border-top:1px solid rgba(255,255,255,.16)}.stat:last-child{grid-column:1/-1}}
+.plan-head{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap;margin-bottom:26px}
+.plan-head .sec-h{margin-bottom:0}
+.summary{margin-top:14px;font-size:16px;color:var(--mut)}
+.summary b{color:var(--ink)}
+.chosen{display:flex;align-items:center;gap:10px;margin-top:16px;flex-wrap:wrap}
+.chip-ico{width:44px;height:44px;border-radius:14px;background:var(--deep);color:var(--sun);display:grid;place-items:center}
+.save{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 16px;border-radius:999px;border:1.5px solid var(--sea);background:#fff;color:var(--sea);font-weight:600;font-size:14px}
+.save[aria-pressed=true]{background:var(--sea);color:#fff}
+.save .s{color:var(--sea)}.save[aria-pressed=true] .s{color:var(--sun)}
+.filters{display:flex;gap:6px;flex-wrap:wrap;background:#fff;border:1px solid var(--line);border-radius:999px;padding:5px}
+.filter{min-height:40px;padding:0 16px;border-radius:999px;border:0;background:none;font-weight:600;font-size:14px;color:var(--mut)}
+.filter[aria-pressed=true]{background:var(--deep);color:#fff}
+@media(max-width:560px){.filters{flex-wrap:nowrap;overflow-x:auto;max-width:100%;scrollbar-width:none}.filter{white-space:nowrap}}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+@media(max-width:1000px){.steps{grid-template-columns:1fr 1fr}}
+@media(max-width:640px){.steps{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:14px;margin:0 -18px;padding:4px 18px 16px;scroll-padding-left:18px;scrollbar-width:none}.steps::-webkit-scrollbar{display:none}.step{flex:0 0 82vw;scroll-snap-align:start}}
+.swipe{display:none;font-size:13.5px;color:var(--mut);margin:-12px 0 12px}
+@media(max-width:640px){.swipe{display:block}}
+.step{background:var(--card);border-radius:var(--r);overflow:hidden;box-shadow:var(--shadow);display:flex;flex-direction:column;border:1px solid rgba(220,228,225,.8)}
+.step.here{box-shadow:0 0 0 3px var(--sun),var(--shadow)}
+.step .ph{position:relative;aspect-ratio:16/9;background:linear-gradient(135deg,var(--sea),var(--deep))}
+.step .ph img{width:100%;height:100%;object-fit:cover}
+.step .ph:after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(4,31,39,.6),transparent 55%)}
+.step .n{position:absolute;z-index:1;left:12px;bottom:12px;display:flex;align-items:center;gap:10px;padding:5px 14px 5px 5px;border-radius:14px;background:rgba(4,31,39,.9);color:#fff;font:600 12px var(--hf);letter-spacing:.1em;text-transform:uppercase}
+.step .n b{width:34px;height:34px;border-radius:10px;background:var(--sun);color:var(--deep);display:grid;place-items:center;font:800 16px var(--hf);letter-spacing:0}
+.step .you{position:absolute;z-index:1;right:12px;top:12px;padding:6px 12px;border-radius:999px;background:var(--sun);color:var(--sunink);font:700 11.5px var(--hf);letter-spacing:.1em;text-transform:uppercase}
+.step .body{padding:20px 20px 18px;display:flex;flex-direction:column;flex:1}
+.step h3{font-size:21px;font-weight:700}
+.step p{margin:6px 0 14px;color:var(--mut);font-size:15px}
+.figs{display:grid;grid-template-columns:repeat(auto-fit,minmax(60px,1fr));gap:6px;margin:0 0 14px}
+.fig{background:var(--sand);border-radius:10px;padding:8px 8px 7px}
+.fig b{display:block;font:700 17px/1.15 var(--hf);letter-spacing:-.01em}
+.fig span{display:block;font-size:11.5px;color:var(--mut);line-height:1.3;margin-top:2px}
+.fig.when{grid-column:1/-1;display:flex;justify-content:space-between;align-items:baseline;gap:10px;background:var(--foam)}
+.fig.when b{font-size:15px;color:var(--sea)}
+.step.here .fig.when{background:#FFF3D6}.step.here .fig.when b{color:var(--sunText)}
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:auto}
+.tag{display:inline-flex;align-items:center;gap:5px;font-size:13px;font-weight:600;border-radius:999px;padding:5px 11px;background:var(--foam);color:var(--sea)}
+.tag.soon{background:#fff;border:1px dashed #A2B6B3;color:var(--mut)}
+.tag.deal{background:#FFF3D6;color:#7A5300}
+.tag small,.tag.deal small{font-size:11.5px;font-weight:500}
+.step.dim{opacity:.5}
+.legend{display:flex;gap:18px;flex-wrap:wrap;margin-top:22px;font-size:13.5px;color:var(--mut)}
+.legend i{display:inline-block;width:12px;height:12px;border-radius:4px;margin-right:7px;vertical-align:-1px}
+.l-ready{background:var(--sea2)}.l-soon{background:#fff;border:1px dashed #A2B6B3}.l-deal{background:var(--sun)}
+details.nums{margin-top:24px;background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:0 22px}
+details.nums summary{display:flex;justify-content:space-between;align-items:center;gap:12px;min-height:60px;font:600 17px var(--hf);cursor:pointer;list-style:none}
+details.nums summary::-webkit-details-marker{display:none}
+details.nums summary span{font:500 14px var(--bf);color:var(--mut);margin-left:auto}
+details.nums summary:after{content:"+";font-size:24px;color:var(--sea2)}details.nums[open] summary:after{content:"\2212"}
+.chart{padding:4px 0 22px}
+.chart h4{font-size:16px;margin-bottom:14px}
+.bar{display:grid;grid-template-columns:180px 1fr 70px;gap:12px;align-items:center;margin:9px 0;font-size:14px}
+.bar .tr{display:flex;height:16px;border-radius:8px;overflow:hidden;background:var(--sand)}
+.bar .tr i{display:block;height:100%}
+.bar .v{font-weight:600;text-align:right;white-space:nowrap}
+.axis{display:grid;grid-template-columns:180px 1fr 70px;gap:12px;font-size:12px;color:var(--mut);margin-top:4px}
+.axis span:nth-child(2){display:flex;justify-content:space-between}
+@media(max-width:560px){.bar,.axis{grid-template-columns:96px 1fr 54px;gap:8px;font-size:13px}}
+.wsec{background:#fff}
+.wtools{display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin-bottom:26px}
+.search{display:block;flex:1;min-width:240px;max-width:440px;position:relative}
+.search input{width:100%;min-height:52px;border:1.5px solid var(--line);border-radius:999px;padding:0 20px 0 48px;background:var(--sand);font-size:16px}
+.search input:focus{border-color:var(--sea2);outline:0;background:#fff}
+.search svg{position:absolute;left:17px;top:15px;color:var(--mut)}
+.wcount{font-size:14px;color:var(--mut)}
+.pgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:16px}
+.pcard{position:relative;border-radius:var(--r);overflow:hidden;background:var(--deep);color:#fff;min-height:250px;display:flex;flex-direction:column;justify-content:flex-end;box-shadow:var(--shadow)}
+.pcard img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .5s}
+.pcard:hover img{transform:scale(1.04)}
+.pcard:after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(4,24,30,.94) 0%,rgba(4,24,30,.55) 50%,rgba(4,24,30,.1) 100%)}
+.pcard.cur{box-shadow:0 0 0 3px var(--sun),var(--shadow)}
+.pcard .pt{position:relative;z-index:1;padding:18px}
+.pcard .g{font:700 11.5px var(--hf);letter-spacing:.14em;text-transform:uppercase;color:var(--sun)}
+.pcard h3{font-size:22px;margin:6px 0 4px}
+.pcard p{margin:0 0 12px;font-size:14px;color:rgba(255,255,255,.86);line-height:1.45}
+.pcard .go{all:unset;cursor:pointer;font:600 14.5px var(--hf);color:var(--sun);padding:4px 0}
+.pcard .go:after{content:" \2192"}
+.pcard .go:focus-visible{outline:3px solid var(--sun);outline-offset:3px;border-radius:4px}
+.pcard .fav{position:absolute;z-index:2;right:12px;top:12px}
+.more-ways{display:flex;justify-content:center;margin-top:20px}
+.more-ways button{min-height:50px;padding:0 26px;border-radius:999px;border:1.5px solid var(--sea);background:#fff;color:var(--sea);font:600 15px var(--hf)}
+@media(max-width:560px){.pgrid{grid-template-columns:1fr 1fr;gap:10px}.pcard{min-height:190px}.pcard .pt{padding:12px}.pcard h3{font-size:16px}.pcard p{display:none}.pcard .g{font-size:11.5px;letter-spacing:.08em}.pcard .fav{width:40px;height:40px;right:8px;top:8px}.pcard .go{font-size:13.5px}}
+.fav{width:44px;height:44px;border-radius:12px;border:1.5px solid rgba(255,255,255,.4);background:rgba(4,24,30,.5);color:#fff;font-size:20px;line-height:1}
+.fav[aria-pressed=true]{color:var(--sunink);border-color:var(--sun);background:var(--sun)}
+.empty{padding:26px;border:1.5px dashed var(--line);border-radius:16px;color:var(--mut);text-align:center;grid-column:1/-1}
+dialog{border:0;padding:0;border-radius:24px;width:min(760px,calc(100% - 32px));max-height:min(86vh,820px);background:var(--sand);color:var(--ink);box-shadow:0 30px 80px rgba(4,31,39,.45)}
+dialog::backdrop{background:rgba(4,31,39,.6);backdrop-filter:blur(3px)}
+.dlg-h{position:sticky;top:0;z-index:1;background:var(--deep);color:#fff;padding:20px 22px 18px}
+.dlg-h .row{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.dlg-h h2{font-size:22px}
+.x{width:44px;height:44px;border-radius:50%;border:1px solid rgba(255,255,255,.3);background:none;color:#fff;font-size:22px}
+.dlg-h .search{max-width:none;margin-top:14px}
+.dlg-h .search input{background:#fff;border-color:transparent}
+.dlg-b{padding:20px 22px 26px}
+.wgroup{margin-top:24px}.wgroup:first-child{margin-top:0}
+.wgroup h3{font:700 12.5px var(--hf);letter-spacing:.16em;text-transform:uppercase;color:var(--mut);margin-bottom:10px}
+.wgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:10px}
+.wcard{display:grid;grid-template-columns:44px 1fr 44px;gap:12px;align-items:center;padding:12px;border:1.5px solid var(--line);border-radius:16px;background:#fff}
+.wcard.cur{border-color:var(--sea);box-shadow:inset 0 0 0 1px var(--sea)}
+.wcard .wi{width:44px;height:44px;border-radius:12px;background:var(--foam);color:var(--sea);display:grid;place-items:center}
+.wpick{all:unset;cursor:pointer;display:block;min-width:0}
+.wpick b{display:block;font:600 15.5px var(--hf)}
+.wpick span{display:block;font-size:13px;color:var(--mut);line-height:1.4;margin-top:2px}
+.wpick:focus-visible{outline:3px solid var(--sun);outline-offset:3px;border-radius:6px}
+.wcard .fav{border-color:#8FA6A3;background:#fff;color:var(--sea)}
+.wcard .fav[aria-pressed=true]{color:var(--deep);border-color:var(--sun);background:var(--sun)}
+@media(max-width:560px){dialog{width:100%;max-height:92vh;margin:auto 0 0;border-radius:24px 24px 0 0}}
+.inside{background:linear-gradient(160deg,var(--deep2) 0%,var(--deep) 45%,var(--sea) 100%)}
+.cards{display:grid;grid-template-columns:repeat(5,1fr);gap:16px}
+@media(max-width:1100px){.cards{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:760px){.cards{grid-template-columns:1fr 1fr}}
+@media(max-width:640px){.cards{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:14px;margin:0 -18px;padding:0 18px 14px;scrollbar-width:none}.cards::-webkit-scrollbar{display:none}.card{flex:0 0 74vw;scroll-snap-align:start}}
+.card{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:var(--r);overflow:hidden}
+.card .ph{aspect-ratio:4/3;background:var(--sea)}
+.card .ph img{width:100%;height:100%;object-fit:cover}
+.card .tx{padding:18px}
+.card .no{font:700 12px var(--hf);letter-spacing:.16em;color:var(--sun)}
+.card h3{font-size:19px;margin:8px 0 6px}
+.card p{margin:0;font-size:14px;color:rgba(255,255,255,.82)}
+.promise{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;margin-top:40px;border-radius:var(--r);overflow:hidden;background:rgba(255,255,255,.12)}
+.promise div{background:rgba(4,31,39,.55);padding:20px}
+.promise b{display:block;font:600 16px var(--hf)}.promise span{font-size:14px;color:rgba(255,255,255,.8)}
+@media(max-width:760px){.promise{grid-template-columns:1fr 1fr}}
+.deals{display:grid;grid-template-columns:1.1fr 1fr;gap:28px;align-items:center}
+@media(max-width:900px){.deals{grid-template-columns:1fr}}
+.deal-ph{border-radius:24px;overflow:hidden;aspect-ratio:4/3;box-shadow:var(--shadow);background:var(--sea)}
+.deal-ph img{width:100%;height:100%;object-fit:cover}
+.gates{display:grid;gap:12px}
+.gate{display:grid;grid-template-columns:52px 1fr;gap:16px;align-items:start;background:#fff;border:1px solid var(--line);border-radius:16px;padding:18px}
+.gate .g{width:52px;height:52px;border-radius:14px;background:var(--foam);color:var(--sea);display:grid;place-items:center;font:800 18px var(--hf)}
+.gate h3{font-size:18px}.gate p{margin:4px 0 10px;color:var(--mut);font-size:15px}
+.paid{margin-top:16px;font-size:14px;color:var(--mut);padding:14px 16px;border-left:3px solid var(--sea2);background:#fff;border-radius:0 12px 12px 0}
+.faq{background:#fff}
+.faq-grid{display:grid;grid-template-columns:1fr 1.4fr;gap:48px;align-items:start}
+@media(max-width:900px){.faq-grid{grid-template-columns:1fr;gap:20px}}
+.faq-grid .search{max-width:none;margin-top:24px}
+details.q{border-bottom:1px solid var(--line)}
+details.q summary{display:flex;justify-content:space-between;gap:16px;align-items:center;min-height:64px;font:600 17px var(--hf);cursor:pointer;list-style:none}
+details.q summary::-webkit-details-marker{display:none}
+details.q summary:after{content:"+";font-size:24px;color:var(--sea2);flex:none}details.q[open] summary:after{content:"\2212"}
+details.q p{margin:0 0 20px;color:var(--mut)}
+.cta-band{background:linear-gradient(120deg,var(--deep2) 0%,var(--deep) 50%,var(--sea) 120%);color:#fff}
+.cta-band .wrap{display:flex;justify-content:space-between;align-items:center;gap:24px;padding-top:52px;padding-bottom:52px;flex-wrap:wrap}
+.cta-band h2{font-size:clamp(26px,3.4vw,40px);font-weight:800;max-width:680px}
+.cta-band h2 em{font-style:normal;color:var(--sun)}
+footer{background:var(--deep2);color:rgba(255,255,255,.75);font-size:14px;border-top:1px solid rgba(255,255,255,.08)}
+footer .wrap{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;padding-top:40px;padding-bottom:40px}
+footer .logo{font-size:18px}
+footer nav{display:flex;gap:18px;flex-wrap:wrap}
+footer nav a{text-decoration:none;display:inline-block;padding:6px 0}footer nav a:hover{color:#fff}
+footer p{margin:10px 0 0;max-width:420px}
+.mbar{display:none}
+@media(max-width:760px){
+  footer .wrap{padding-bottom:110px}
+  .mbar{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:45;align-items:center;justify-content:space-between;gap:12px;padding:12px 18px calc(12px + env(safe-area-inset-bottom));background:var(--deep);color:#fff;border-top:3px solid var(--sun)}
+  .mbar b{display:block;font:700 16px var(--hf)}.mbar small{color:rgba(255,255,255,.75);font-size:12.5px}
+  .mbar .btn{min-height:46px;padding:0 20px}
+}
+@media(max-width:640px){
+  .sec{padding:46px 0}.sec-h{margin-bottom:24px}
+  details.nums{display:none}
+  .trust .wrap{flex-wrap:nowrap;overflow-x:auto;white-space:nowrap;scrollbar-width:none;padding-top:14px;padding-bottom:14px}.trust .wrap::-webkit-scrollbar{display:none}
+  .shorts .wrap{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none}.shorts .wrap::-webkit-scrollbar{display:none}
+  .short{flex:0 0 78vw;scroll-snap-align:start}
+  .deal-ph{display:none}
+  .promise{grid-template-columns:1fr 1fr;margin-top:24px}.promise div{padding:14px}.promise span{display:none}
+  .pcard{min-height:160px}
+  .card .tx{padding:14px}
+}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<div class="util"><div class="wrap"><span><i class="dot"></i><b>Free</b> · works with no signal · no account</span><nav aria-label="Quick links"><a href="#faq">Questions</a><a href="#deals">Deals</a><a href="#get">Get the app</a></nav></div></div>
+<header class="top"><div class="wrap">
+  <a class="logo" href="#top" aria-label="Travel Hull home"><span class="mark"><svg class="ico" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M15.5 8.5l-2 5-5 2 2-5z"/></svg></span><span>Travel Hull<small>EVERY TRIP · STEP BY STEP</small></span></a>
+  <nav class="nav" aria-label="Sections"><a class="on" href="#plan">Your plan</a><a href="#ways">Every way</a><a href="#inside">The app</a><a href="#deals">Deals</a><a href="#faq">Questions</a></nav>
+  <a class="btn gold" href="#get">Get the app</a>
+</div></header>
+<div class="wayrow"><div class="wrap"><span class="lab">Your way</span><div class="wchips" id="wayChips" role="group" aria-label="Your way to travel"></div></div></div>
+<section class="hero" id="top">
+  <video id="heroVid" muted loop playsinline preload="none" aria-hidden="true"></video>
+  <div class="wrap"><div class="hero-l">
+    <div class="facts" id="heroFacts">17 ways to travel · 6 steps · works offline</div>
+    <h1>Every trip, <em>step by step.</em></h1>
+    <p class="lead">Pick how you're travelling and when you leave. Travel Hull puts a date on every step, from packing to home again, with the tools for each one on your phone.</p>
+    <form class="tripbar" id="tripbar" autocomplete="off">
+      <label class="field wide"><span>Travelling by</span><select id="fWay" aria-label="Travelling by"></select></label>
+      <label class="field"><span>Leaving</span><input type="date" id="fLeave" aria-label="Leaving date"></label>
+      <label class="field"><span>Nights</span><select id="fNights" aria-label="Nights away"></select></label>
+      <button class="btn gold" type="submit">Build my plan <svg class="ico" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+    </form>
+    <div class="hero-foot"><span id="clipCap"></span><button type="button" class="pause" id="pause" aria-pressed="false">Pause video</button></div>
+  </div>
+  <div class="hero-phone" aria-hidden="true"><div class="hp"><div class="hp-top"><div class="r"><i id="hpIcon"></i><span id="hpWay">Your plane trip</span></div><small id="hpSum"></small></div><ol id="hpSteps"></ol><div class="hp-tab"><span class="on">My trip</span><span>Tools</span><span>Explore</span><span>Deals</span></div></div></div>
+  </div>
+</section>
+<div class="trust"><div class="wrap"><span class="lab">Built on free, official data</span><span>Airline statistics</span><span>NASA weather data</span><span>OpenStreetMap</span><span>Public holiday calendars</span><span>Exchange-rate feeds</span></div></div>
+<div class="shorts"><div class="wrap">
+  <a class="short" href="#plan"><span class="si"><svg class="ico" viewBox="0 0 24 24"><path d="M4 6h16M4 12h10M4 18h7"/><circle cx="18" cy="16" r="3"/></svg></span><span><b>Your 6 steps</b><span>With a date on each one</span></span><span class="arrow">→</span></a>
+  <button type="button" class="short" data-open-all><span class="si"><svg class="ico" viewBox="0 0 24 24"><path d="M12 3l2.6 5.6 6.1.6-4.6 4.1 1.3 6-5.4-3.2-5.4 3.2 1.3-6-4.6-4.1 6.1-.6z"/></svg></span><span><b id="shortWays">Every way to travel</b><span>Star the ones you use</span></span><span class="arrow">→</span></button>
+  <a class="short" href="#step6"><span class="si"><svg class="ico" viewBox="0 0 24 24"><path d="M12 3l9 16H3zM12 10v4M12 17h.01"/></svg></span><span><b>Something went wrong?</b><span>Delays, lost bags, sick or scammed</span></span><span class="arrow">→</span></a>
+</div></div>
+<div class="band"><div class="wrap">
+  <div class="stat"><b><i id="nWays">0</i><u>ways</u></b><span>to travel</span></div>
+  <div class="stat"><b><i id="nReady">0</i><u>tools</u></b><span>ready offline</span></div>
+  <div class="stat"><b>18<u>languages</u></b><span>for phrases</span></div>
+  <div class="stat"><b>45<u>countries</u></b><span>with fair prices</span></div>
+  <div class="stat"><b>$0<u>to use</u></b><span>no account needed</span></div>
+</div></div>
+<section class="sec" id="plan"><div class="wrap">
+  <div class="plan-head">
+    <div class="sec-h">
+      <div class="kick">Your plan</div>
+      <h2 id="planTitle">Your trip in <em>6 steps</em></h2>
+      <p class="summary" id="summary"></p>
+      <div class="chosen"><span class="chip-ico" id="planIcon"></span><button type="button" class="save" id="saveWay" aria-pressed="false"></button><button type="button" class="save" data-open-all>Change how you travel</button></div>
+    </div>
+    <div class="filters" id="filters" role="group" aria-label="Show tools"></div>
+  </div>
+  <p class="swipe">Swipe for the next step &rarr;</p>
+  <div class="steps" id="steps" tabindex="0" aria-label="Your 6 steps. Swipe sideways for the next one."></div>
+  <div class="legend"><span><i class="l-ready"></i>Ready in the app now</span><span><i class="l-soon"></i>Coming next</span><span><i class="l-deal"></i>Deal link (paid link)</span></div>
+  <details class="nums" open><summary>See the numbers <span id="numsNote"></span></summary><div class="chart" id="chart"></div></details>
+</div></section>
+<section class="sec wsec" id="ways"><div class="wrap">
+  <div class="sec-h"><div class="kick">Every way to travel</div><h2>Not just flights. <em>Every way you travel.</em></h2><p>Each way gets its own steps, in its own words. Star the ways you travel and they show first, on the site and in the app.</p></div>
+  <div class="wtools">
+    <label class="search"><svg class="ico" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg><input type="search" id="waySearch" placeholder="Search: boat, bike, walk, caravan…" aria-label="Search ways to travel"></label>
+    <span class="wcount" id="wayCount"></span>
+  </div>
+  <div class="pgrid" id="wayList"></div>
+  <div class="more-ways" id="moreWays"></div>
+</div></section>
+<section class="sec inside on-dark" id="inside"><div class="wrap">
+  <div class="sec-h"><div class="kick">Inside the app</div><h2>Five parts. <em>One app for the whole trip.</em></h2><p>It opens on your trip, so what to do next is always on the first screen. Everything else is one tap away.</p></div>
+  <div class="cards" id="cards"></div>
+  <div class="promise">
+    <div><b>Works with no signal</b><span>Phrases, checklists, rates and maps ship inside the app.</span></div>
+    <div><b>No account</b><span>Your trip, notes and documents stay on your phone.</span></div>
+    <div><b>Free</b><span>Paid deal links keep it free. They're always labelled.</span></div>
+    <div><b>Real data</b><span>Free official sources. Every screen shows its date.</span></div>
+  </div>
+</div></section>
+<section class="sec" id="deals"><div class="wrap deals">
+  <div class="deal-ph" id="dealPh"></div>
+  <div>
+    <div class="sec-h" style="margin-bottom:24px"><div class="kick">Deals</div><h2>Pay less at <em>every step.</em></h2></div>
+    <div class="gates">
+      <div class="gate"><span class="g">A</span><div><h3>Getting there</h3><p>Flights in the quiet months, when planes are emptier and fares soften. Car hire and transfers.</p><div class="tags"><span class="tag deal">Flights <small>paid link</small></span><span class="tag deal">Car hire <small>paid link</small></span><span class="tag deal">Transfers <small>paid link</small></span></div></div></div>
+      <div class="gate"><span class="g">B</span><div><h3>Staying there</h3><p>Stays, eSIMs that fit your trip, and travel insurance.</p><div class="tags"><span class="tag deal">Stays <small>paid link</small></span><span class="tag deal">eSIM <small>paid link</small></span><span class="tag deal">Insurance <small>paid link</small></span></div></div></div>
+      <div class="gate"><span class="g">C</span><div><h3>Doing things</h3><p>Tours, tickets and activities, next to the free things locals know.</p><div class="tags"><span class="tag deal">Tours <small>paid link</small></span><span class="tag">Free things</span><span class="tag">Local tips</span></div></div></div>
+    </div>
+    <p class="paid">Deal links are paid links: we may earn a commission, and it costs you nothing extra. That's how the app stays free.</p>
+  </div>
+</div></section>
+<section class="sec faq" id="faq"><div class="wrap faq-grid">
+  <div class="sec-h" style="margin-bottom:0"><div class="kick">Questions</div><h2>The detail, <em>for people who want it.</em></h2>
+    <label class="search"><svg class="ico" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg><input type="search" id="faqSearch" placeholder="Search the questions" aria-label="Search the questions"></label>
+  </div>
+  <div id="faqList">
+    <details class="q"><summary>How does it work with no signal?</summary><p>Country facts, phrases, checklists and rates ship inside the app. When you have signal it refreshes small data files, and every screen shows when it was last updated.</p></details>
+    <details class="q"><summary>How are the step dates worked out?</summary><p>From the day you leave: start the paperwork 8 weeks before, book the extras from 6 weeks before, then travel day, day 1 and the nights you're away. "You are here" marks the step for today.</p></details>
+    <details class="q"><summary>Is it really free?</summary><p>Yes. There's no subscription and no ads. Some deal links pay us a commission when you book, and they're always marked as paid links.</p></details>
+    <details class="q"><summary>Do I need an account?</summary><p>No. Your trip, favourites, notes and documents stay on your phone. Nothing is uploaded.</p></details>
+    <details class="q"><summary>Where does the data come from?</summary><p>Official airline statistics, NASA weather data, OpenStreetMap, public holiday calendars and exchange-rate feeds. Free sources that allow this use. No scraping.</p></details>
+    <details class="q"><summary>What does "coming next" mean?</summary><p>Tools with a dashed outline are planned but not built yet. We never show them as ready.</p></details>
+    <details class="q"><summary>What can't it do?</summary><p>It can't check live seat maps or guarantee a price. Entry rules change, so every rule links to the official source.</p></details>
+  </div>
+</div></section>
+<section class="cta-band" id="get"><div class="wrap">
+  <h2>Your next trip, <em>step by step.</em> Free, and it works offline.</h2>
+  <a class="btn gold" href="#top">Get Travel Hull</a>
+</div></section>
+<footer><div class="wrap">
+  <div><a class="logo" href="#top"><span class="mark"><svg class="ico" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M15.5 8.5l-2 5-5 2 2-5z"/></svg></span>Travel Hull</a><p>A free travel app for every kind of trip. Paid deal links are always labelled.</p></div>
+  <nav aria-label="Footer"><a href="#plan">Your plan</a><a href="#ways">Every way</a><a href="#inside">The app</a><a href="#deals">Deals</a><a href="#faq">Questions</a></nav>
+</div></footer>
+<div class="mbar"><div><b>Travel Hull</b><small>Free · works offline</small></div><a class="btn gold" href="#get">Get the app</a></div>
+<dialog id="allWays" aria-labelledby="allWaysTitle">
+  <div class="dlg-h">
+    <div class="row"><h2 id="allWaysTitle">Every way to travel</h2><button type="button" class="x" data-close aria-label="Close">×</button></div>
+    <label class="search"><svg class="ico" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg><input type="search" id="dlgSearch" placeholder="Search: boat, bike, walk…" aria-label="Search ways to travel"></label>
+  </div>
+  <div class="dlg-b" id="dlgList"></div>
+</dialog>
+<script>
+(function (root) {
+  "use strict";
+  function esc(s) { return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]; }); }
+  var READY = {
+    docs: "Documents", pack: "Packing", weather: "Weather", time: "Time zones", share: "Share trip",
+    bags: "Baggage", arrive: "Arriving", wallet: "Wallet", near: "Around me", way: "Find my way",
+    tips: "Local tips", money: "Money", spend: "Spending", show: "Show this", phrases: "Phrases",
+    notes: "Notes", help: "Trouble?", deals: "Deals", seats: "Quiet seats"
+  };
+  var ORDER = ["plane", "road", "train", "cruise", "caravan", "mixed"];
+  var J = {
+    plane: { name: "Plane", steps: [
+      ["Before you go", "Get the paperwork and the bag right, weeks ahead.",
+        ["docs", "pack", "weather", "money", ["ready", "arrive", "Visa basics"], ["soon", "Countdown checklist"]]],
+      ["Book smart", "Fly when planes are emptier and book the extras for less.",
+        [["ready", "seats", "Quiet months"], "deals", ["deal", "eSIM"], ["deal", "Insurance"], ["soon", "Points helper"]]],
+      ["At the airport", "Know the rules and keep every booking in one place.",
+        ["bags", "wallet", "time", ["soon", "Lounge guide"]]],
+      ["When you land", "Get into town without being ripped off.",
+        ["arrive", "show", "tips", ["deal", "Transfers"]]],
+      ["While you're there", "Talk, find your way and spend well.",
+        ["phrases", "near", "way", "spend", "notes"]],
+      ["If something goes wrong", "Delays, lost bags, lost passport, sick or scammed.",
+        ["help", ["ready", "help", "Claim letters"], ["ready", "help", "Flight delay rights"]]]
+    ] },
+    road: { name: "Road trip", steps: [
+      ["Before you go", "Car checks, licence rules and a packing list for the boot.",
+        ["pack", "docs", "weather", ["soon", "Car check list"]]],
+      ["Plan the drive", "Split the trip into legs with stops worth making.",
+        [["soon", "Trip legs"], ["soon", "Cheapest fuel"], ["deal", "Car hire"]]],
+      ["On the road", "Fuel, chargers and rest stops near you.",
+        ["near", "way", ["soon", "Toilets and water"]]],
+      ["At each stop", "Hidden gems and free things most people drive past.",
+        [["ready", "near", "Hidden gems"], "tips", ["deal", "Stays"]]],
+      ["While you're there", "Track the spend and keep notes.",
+        ["spend", "notes", "money"]],
+      ["If something goes wrong", "Breakdown steps and emergency numbers.",
+        ["help", ["soon", "Breakdown steps"]]]
+    ] },
+    train: { name: "Train", steps: [
+      ["Before you go", "Documents, packing and passes sorted early.",
+        ["docs", "pack", "weather"]],
+      ["Book smart", "Passes, seat tips and luggage rules.",
+        [["ready", "arrive", "Transport cards"], ["soon", "Rail pass guide"], ["deal", "Stays"]]],
+      ["At the station", "Show the platform or place name in the local script.",
+        ["show", "phrases", "wallet"]],
+      ["When you arrive", "Station to hotel, and the local transport card.",
+        ["arrive", "way", "tips"]],
+      ["While you're there", "Talk, explore and spend well.",
+        ["phrases", "near", "spend", "notes"]],
+      ["If something goes wrong", "Missed trains, lost bags and help numbers.",
+        ["help"]]
+    ] },
+    cruise: { name: "Cruise", steps: [
+      ["Before you go", "Documents, packing for sea and insurance that covers cruising.",
+        ["docs", "pack", ["deal", "Insurance"]]],
+      ["Book smart", "Cabin tips and the quieter sailing months.",
+        [["soon", "Cabin guide"], "deals"]],
+      ["Boarding day", "Port, luggage and the all-aboard time.",
+        ["wallet", "bags", ["soon", "All-aboard alarm"]]],
+      ["Port days", "What's near the port and how to get to town.",
+        ["near", "show", "arrive", ["soon", "Port guides"], ["deal", "Tours"]]],
+      ["On board", "Time zones, spending and seasickness tips.",
+        ["time", "spend", ["soon", "Sea tips"]]],
+      ["If something goes wrong", "Missed the ship, medical help, lost documents.",
+        ["help", ["soon", "Missed ship steps"]]]
+    ] },
+    caravan: { name: "Caravan", steps: [
+      ["Before you go", "Hitch checks, weights and a packing list.",
+        ["pack", "weather", ["soon", "Hitch check list"], ["soon", "Weights calculator"]]],
+      ["Plan the route", "Legs, dump points and fuel on the way.",
+        [["soon", "Trip legs"], ["soon", "Cheapest fuel"]]],
+      ["On the road", "Rest areas, free camps and fuel near you.",
+        ["near", "way"]],
+      ["At camp", "Walks, hidden gems and the weather ahead.",
+        [["ready", "near", "Hidden gems"], "weather", "tips"]],
+      ["While you're there", "Track the spend and keep notes.",
+        ["spend", "notes"]],
+      ["If something goes wrong", "Breakdown steps and emergency numbers.",
+        ["help", ["soon", "Breakdown steps"]]]
+    ] },
+    mixed: { name: "Mixed", steps: [
+      ["Before you go", "One checklist for the whole trip.",
+        ["docs", "pack", "weather", "money"]],
+      ["Book smart", "Every leg in one plan, booked for less.",
+        [["soon", "Trip legs"], "deals", ["deal", "eSIM"], ["deal", "Insurance"]]],
+      ["Getting there", "Rules and bookings for each leg.",
+        ["bags", "wallet", "time"]],
+      ["When you arrive", "Into town, the local way.",
+        ["arrive", "show", "tips"]],
+      ["While you're there", "Talk, explore and spend well.",
+        ["phrases", "near", "way", "spend", "notes"]],
+      ["If something goes wrong", "Help for every kind of trouble.",
+        ["help", ["ready", "help", "Claim letters"]]]
+    ] },
+    outdoor: { name: "Hiking", steps: [
+      ["Before you go", "Gear, water and the weather window, sorted early.",
+        ["pack", "weather", ["soon", "Leave-your-plan note"]]],
+      ["Plan the route", "Distances, water stops and where to sleep.",
+        [["soon", "Offline maps"], ["soon", "Trail notes"], ["deal", "Stays"]]],
+      ["Getting there", "Trailhead, transport and parking.",
+        ["way", "near", ["deal", "Car hire"]]],
+      ["On the trail", "Find your way, and the nearest water and toilets.",
+        ["way", "near", "weather", ["soon", "Toilets and water"]]],
+      ["Each night", "Notes, photos and the spend so far.",
+        ["notes", "spend", "tips"]],
+      ["If something goes wrong", "Hurt, lost or out of water: what to do and who to call.",
+        ["help", ["soon", "SOS tools"]]]
+    ] }
+  };
+  var WAYS = [
+    { id: "plane", name: "Plane", base: "plane", group: "Air", rank: 1, blurb: "Quiet months, baggage rules, airport tips and delay rights." },
+    { id: "road", name: "Road trip", base: "road", group: "Road", rank: 2, blurb: "Fuel and chargers nearby, rest stops and hidden gems." },
+    { id: "caravan", name: "Caravan", base: "caravan", group: "Road", rank: 3, blurb: "Free camps, rest areas, weather ahead and breakdown help." },
+    { id: "cruise", name: "Cruise", base: "cruise", group: "Water", rank: 4, blurb: "Port days, what's near each port and help if you miss the ship." },
+    { id: "train", name: "Train", base: "train", group: "Rail", rank: 5, blurb: "Stations in the local script, transport cards and luggage tips." },
+    { id: "coach", name: "Coach and bus", base: "train", group: "Road", rank: 6, blurb: "Bus stations, passes and luggage rules for long rides.",
+      swap: [["At the station", "At the bus station"], ["Missed trains", "Missed buses"], ["Rail pass guide", "Bus pass guide"]] },
+    { id: "ferry", name: "Ferry", base: "train", group: "Water", rank: 7, blurb: "Terminals, tickets and getting from the wharf to town.",
+      swap: [["At the station", "At the terminal"], ["the platform or place name", "the terminal or place name"], ["Station to hotel", "Terminal to hotel"],
+        ["Missed trains", "Missed ferries"], ["Passes, seat tips and luggage rules.", "Tickets, deck or cabin, and luggage rules."], ["Rail pass guide", "Ferry timetables"]] },
+    { id: "hiking", name: "Hiking and walking", base: "outdoor", group: "Outdoors", rank: 8, blurb: "Leave a plan, find your way and know what to do if you're lost." },
+    { id: "campervan", name: "Campervan", base: "caravan", group: "Road", rank: 9, blurb: "Free camps, dump points and fuel on the way.",
+      swap: [["Hitch checks, weights", "Vehicle checks, weights"], ["Hitch check list", "Vehicle check list"]] },
+    { id: "motorbike", name: "Motorbike", base: "road", group: "Road", rank: 10, blurb: "Bike checks, rest stops and the weather ahead.",
+      swap: [["a packing list for the boot", "a packing list for the panniers"], ["Car check list", "Bike check list"], ["Car hire", "Bike hire"]] },
+    { id: "mixed", name: "Mixed", base: "mixed", group: "Mixed", rank: 0, blurb: "Fly, drive and ferry in one plan with every leg in order." },
+    { id: "backpacking", name: "Backpacking", base: "mixed", group: "Mixed", rank: 0, blurb: "Many stops on a budget, with every leg in one list." },
+    { id: "outback", name: "4WD and outback", base: "road", group: "Road", rank: 0, blurb: "Remote roads, fuel range, water and what to do if you're stuck.",
+      swap: [["Car check list", "4WD check list"]] },
+    { id: "sleeper", name: "Sleeper train", base: "train", group: "Rail", rank: 0, blurb: "Overnight trains: cabins, bags and arriving rested." },
+    { id: "river", name: "River cruise", base: "cruise", group: "Water", rank: 0, blurb: "Small ships, town stops and what's near each mooring." },
+    { id: "cycling", name: "Cycling", base: "outdoor", group: "Outdoors", rank: 0, blurb: "Routes, water stops and where to sleep each night.",
+      swap: [["On the trail", "On the bike"], ["Trailhead", "Start point"], ["Trail notes", "Route notes"]] },
+    { id: "camping", name: "Tent camping", base: "outdoor", group: "Outdoors", rank: 0, blurb: "Campsites, water, weather and fire rules.",
+      swap: [["On the trail", "At camp"], ["Trailhead", "Campground"]] }
+  ];
+  var WAY = {};
+  WAYS.forEach(function (w) { WAY[w.id] = w; });
+  function way(id) { return WAY[id] || null; }
+  function ways() { return WAYS.slice(); }
+  function topWays(n, favs) {
+    var out = [];
+    (favs || []).forEach(function (id) { if (WAY[id] && out.indexOf(WAY[id]) < 0) out.push(WAY[id]); });
+    WAYS.filter(function (w) { return w.rank; }).sort(function (a, b) { return a.rank - b.rank; })
+      .forEach(function (w) { if (out.length < Math.max(n, (favs || []).length) && out.indexOf(w) < 0) out.push(w); });
+    return out;
+  }
+  function toggleFav(favs, id) {
+    var f = (favs || []).filter(function (x) { return WAY[x]; }), i = f.indexOf(id);
+    if (i >= 0) f.splice(i, 1); else if (WAY[id]) f.push(id);
+    return f;
+  }
+  function tool(t) {
+    if (typeof t === "string") return { state: "ready", id: t, label: READY[t] || t };
+    if (t[0] === "ready") return { state: "ready", id: t[1], label: t[2] || READY[t[1]] || t[1] };
+    return { state: t[0] === "deal" ? "deal" : "soon", id: "", label: t[1] };
+  }
+  function types() { return ORDER.map(function (id) { return { id: id, name: J[id].name }; }); }
+  function journey(type) {
+    var w = !J[type] && WAY[type], id = J[type] ? type : w ? type : "mixed", j = J[w ? w.base : id];
+    var sw = (w && w.swap) || [];
+    function say(s) { sw.forEach(function (p) { s = s.split(p[0]).join(p[1]); }); return s; }
+    return { id: id, base: w ? w.base : id, name: w ? w.name : j.name, steps: j.steps.map(function (s, i) {
+      return { n: i + 1, title: say(s[0]), blurb: say(s[1]), tools: s[2].map(tool).map(function (t) { t.label = say(t.label); return t; }) };
+    }) };
+  }
+  function tripName(name) { var n = String(name || "").toLowerCase(); return /\btrip$/.test(n) ? n : n + " trip"; }
+  function counts(type) {
+    var c = { ready: 0, soon: 0, deal: 0 };
+    journey(type).steps.forEach(function (s) { s.tools.forEach(function (t) { c[t.state]++; }); });
+    return c;
+  }
+  function nextStep(type, done) {
+    var d = done || [], steps = journey(type).steps;
+    for (var i = 0; i < steps.length; i++) if (d.indexOf(steps[i].n) < 0) return steps[i];
+    return null;
+  }
+  function problems() {
+    var out = [], seen = {}, ranks = {};
+    WAYS.forEach(function (w) {
+      if (seen[w.id]) out.push(w.id + ": listed twice"); seen[w.id] = 1;
+      if (!J[w.base]) out.push(w.id + ": base trip '" + w.base + "' does not exist");
+      if (J[w.id] && w.base !== w.id) out.push(w.id + ": a base trip's own way must use itself");
+      if (w.rank) { if (ranks[w.rank]) out.push(w.id + ": rank " + w.rank + " used twice"); ranks[w.rank] = 1; }
+      if (!w.name || !w.blurb || !w.group) out.push(w.id + ": needs a name, blurb and group");
+      (w.swap || []).forEach(function (p) {
+        var hit = J[w.base] && JSON.stringify(J[w.base].steps).indexOf(p[0]) >= 0;
+        if (!hit) out.push(w.id + ": swap '" + p[0] + "' matches nothing in " + w.base);
+      });
+    });
+    Object.keys(J).forEach(function (id) { if (!WAYS.some(function (w) { return w.base === id; })) out.push(id + ": no way uses this base trip"); });
+    Object.keys(J).forEach(function (id) {
+      var j = J[id];
+      if (!j) { out.push(id + ": missing"); return; }
+      if (j.steps.length !== 6) out.push(id + ": needs 6 steps, has " + j.steps.length);
+      j.steps.forEach(function (s, i) {
+        if (!s[2].length) out.push(id + " step " + (i + 1) + ": no tools");
+        var ready = 0;
+        s[2].map(tool).forEach(function (t) {
+          if (t.state === "ready") { ready++; if (!READY[t.id]) out.push(id + " step " + (i + 1) + ": '" + t.id + "' is not a built tool"); }
+          if (!t.label) out.push(id + " step " + (i + 1) + ": a tool has no name");
+        });
+        if (i === 5 && !ready) out.push(id + ": the last step must have a ready tool (help)");
+      });
+    });
+    return out;
+  }
+  function chip(t, open) {
+    if (t.state === "ready") {
+      return open && open(t.id)
+        ? '<button type="button" class="qfj-chip" data-tool="' + esc(t.id) + '">' + esc(t.label) + "</button>"
+        : '<span class="qfj-chip">' + esc(t.label) + "</span>";
+    }
+    return '<span class="qfj-chip ' + t.state + '">' + esc(t.label) + (t.state === "deal" ? " <small>paid link</small>" : "") + "</span>";
+  }
+  function pickerView(cur, favs, all) {
+    var f = favs || [];
+    function btn(w) {
+      var on = f.indexOf(w.id) >= 0;
+      return '<span class="qfj-way"><button type="button" class="qfj-type" data-jt-type="' + w.id + '" aria-pressed="' + (w.id === cur) + '">' + esc(w.name) +
+        '</button><button type="button" class="qfj-fav" data-jt-fav="' + w.id + '" aria-pressed="' + on + '" aria-label="' + (on ? "Remove " : "Save ") + esc(w.name) +
+        (on ? " from" : " to") + ' favourites">' + (on ? "★" : "☆") + "</button></span>";
+    }
+    var top = topWays(6, f);
+    if (cur && WAY[cur] && top.indexOf(WAY[cur]) < 0) top.push(WAY[cur]);
+    var html = '<div class="qfj-types" role="group" aria-label="How are you travelling?">' + top.map(btn).join("") +
+      '<button type="button" class="qfj-more" data-jt-more aria-expanded="' + !!all + '">' + (all ? "− Fewer ways" : "+ All " + WAYS.length + " ways") + "</button></div>";
+    if (!all) return html;
+    var groups = [];
+    WAYS.forEach(function (w) { if (groups.indexOf(w.group) < 0) groups.push(w.group); });
+    return html + groups.map(function (g) {
+      return '<div class="qfj-group"><small>' + esc(g) + '</small><div class="qfj-types">' +
+        WAYS.filter(function (w) { return w.group === g; }).map(btn).join("") + "</div></div>";
+    }).join("");
+  }
+  function stepsView(type, done, opts) {
+    var j = journey(type), d = done || [], o = opts || {};
+    return '<ol class="qfj-route" data-type="' + j.id + '">' + j.steps.map(function (s) {
+      var isDone = d.indexOf(s.n) >= 0;
+      return '<li class="qfj-stop' + (isDone ? " done" : "") + '"><span class="qfj-n">' + s.n + "</span><div><h3>" + esc(s.title) +
+        "</h3><p>" + esc(s.blurb) + '</p><div class="qfj-chips">' + s.tools.map(function (t) { return chip(t, o.open); }).join("") + "</div>" +
+        (o.tick ? '<button type="button" class="qfj-tick" data-jt-done="' + s.n + '" aria-pressed="' + isDone + '">' + (isDone ? "Done \u2713" : "Mark as done") + "</button>" : "") +
+        "</div></li>";
+    }).join("") + "</ol>";
+  }
+  function daysTo(start, now) {
+    var t = Date.parse(start);
+    if (isNaN(t)) return null;
+    var d = Math.ceil((t - (now == null ? Date.now() : now)) / 86400000);
+    return d < 0 ? null : d;
+  }
+  function nextTrip(trips, now) {
+    var best = null;
+    (trips || []).forEach(function (t) {
+      var d = daysTo(t && t.start, now);
+      if (d != null && (!best || d < best.days)) best = { name: t.name || "", days: d };
+    });
+    return best;
+  }
+  function tripView(st, trip, head, open) {
+    var t0 = st && st.type, type = J[t0] || WAY[t0] ? t0 : "", done = (st && st.done) || [], favs = (st && st.favs) || [], all = !!(st && st.all);
+    var top = head("My trip", "Any trip, step by step. Pick how you're travelling and follow the steps.");
+    if (!type) return top + '<div class="card"><div class="t">How are you travelling?</div>' + pickerView("", favs, all) + "</div>";
+    var j = journey(type), nx = nextStep(type, done), left = j.steps.length - done.length;
+    var tiles = '<div class="qfj-tiles">' +
+      (trip ? '<div class="qfj-tile hot"><small>Days to go</small><b>' + trip.days + "</b><span>" + esc(trip.name) + "</span></div>" : "") +
+      '<div class="qfj-tile"><small>Step</small><b>' + (nx ? nx.n + " of 6" : "All done") + "</b><span>" + esc(nx ? nx.title : "Have a great trip") + "</span></div>" +
+      '<div class="qfj-tile"><small>Steps left</small><b>' + left + "</b><span>" + esc(tripName(j.name)) + "</span></div></div>";
+    var next = nx ? '<div class="card qfj-next"><div class="t">Do next: ' + esc(nx.title) + '</div><p class="muted">' + esc(nx.blurb) + '</p><div class="qfj-chips">' +
+      nx.tools.map(function (t) { return chip(t, open); }).join("") + "</div></div>" : "";
+    return top + pickerView(type, favs, all) + tiles + next + '<div class="card"><div class="t">Your ' + esc(tripName(j.name)) + ", in 6 steps</div>" +
+      stepsView(type, done, { open: open, tick: true }) + '<p class="muted qfj-key">Dashed = coming next. "Paid link" = a deal link that may earn us a commission.</p></div>';
+  }
+  var DAY = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"], MON = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+  function stepWhen(leave, nights, now) {
+    var plain = ["8 weeks before", "6 weeks before", "Travel day", "Day 1", "During the trip", "Any time"];
+    var m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(leave || ""), nn = Math.max(0, Math.min(365, Math.floor(+nights) || 0));
+    if (!m) return plain.map(function (w, i) { return { n: i + 1, when: w, here: false }; });
+    var L = new Date(+m[1], +m[2] - 1, +m[3]), t = new Date(now == null ? Date.now() : now);
+    var today = new Date(t.getFullYear(), t.getMonth(), t.getDate());
+    function add(d) { return new Date(L.getFullYear(), L.getMonth(), L.getDate() + d); }
+    function fmt(d) { return DAY[d.getDay()] + " " + d.getDate() + " " + MON[d.getMonth()]; }
+    var days = Math.round((L - today) / 86400000);
+    var here = days > 42 ? 1 : days > 0 ? 2 : days === 0 ? 3 : days >= -nn ? 5 : 0;
+    var when = ["From " + fmt(add(-56)), "From " + fmt(add(-42)), fmt(L), fmt(L),
+      nn ? fmt(add(1)) + " to " + fmt(add(nn)) : "During the trip", "Any time"];
+    return when.map(function (w, i) { return { n: i + 1, when: w, here: here === i + 1 }; });
+  }
+  function toggle(done, n) {
+    var d = (done || []).slice(), i = d.indexOf(n);
+    if (i >= 0) d.splice(i, 1); else if (n >= 1 && n <= 6) d.push(n);
+    return d.sort(function (a, b) { return a - b; });
+  }
+  var API = { READY: READY, ORDER: ORDER, types: types, journey: journey, counts: counts, nextStep: nextStep,
+    problems: problems, pickerView: pickerView, way: way, ways: ways, topWays: topWays, toggleFav: toggleFav, stepWhen: stepWhen, tripName: tripName, stepsView: stepsView, tripView: tripView, daysTo: daysTo, nextTrip: nextTrip,
+    toggle: toggle, esc: esc };
+  if (typeof module !== "undefined" && module.exports) { module.exports = API; return; }
+  root.QFJ = API;
+  function mount() {
+    var Q = root.QFT;
+    if (!Q || !Q.addTool) return;
+    var css = document.createElement("style");
+    css.textContent = ".qfj-types{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px;margin:10px 0}" +
+      ".qfj-way{display:flex}.qfj-way .qfj-type{flex:1;border-radius:12px 0 0 12px;text-align:left;padding:0 12px}" +
+      ".qfj-fav{width:44px;min-height:44px;border-radius:0 12px 12px 0;border:1px solid rgba(143,208,255,.35);border-left:0;background:rgba(255,255,255,.05);color:#F4B740;font-size:18px;cursor:pointer}" +
+      ".qfj-more{min-height:44px;border-radius:12px;border:1px dashed rgba(143,208,255,.5);background:none;color:#8FD0FF;font:700 14px var(--sans,system-ui);cursor:pointer}" +
+      ".qfj-group small{display:block;margin-top:12px;font:600 10px var(--mono,ui-monospace,monospace);letter-spacing:.1em;text-transform:uppercase;color:#8FD0FF}" +
+      ".qfj-type{min-height:44px;border-radius:12px;border:1px solid rgba(143,208,255,.35);background:rgba(255,255,255,.05);color:var(--text,#E8F1F8);font:600 14px var(--sans,system-ui);cursor:pointer}" +
+      ".qfj-type[aria-pressed=true]{background:#1572C9;border-color:#1572C9;color:#fff}" +
+      ".qfj-tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(96px,1fr));gap:8px;margin:10px 0}" +
+      ".qfj-tile{background:#0D2747;border:1px solid rgba(143,208,255,.2);border-radius:14px;padding:12px;display:grid;gap:2px}" +
+      ".qfj-tile.hot{border-color:#FFA552}.qfj-tile small{font:600 10px var(--mono,ui-monospace,monospace);letter-spacing:.1em;text-transform:uppercase;color:#8FD0FF}" +
+      ".qfj-tile b{font-size:22px}.qfj-tile span{font-size:12px;color:var(--muted,#9FB6CB)}" +
+      ".qfj-route{list-style:none;margin:10px 0 0;padding:0}.qfj-stop{display:grid;grid-template-columns:36px 1fr;gap:12px;padding:14px 0;border-top:1px solid rgba(159,182,203,.15)}" +
+      ".qfj-stop:first-child{border-top:0}.qfj-n{width:36px;height:36px;border-radius:10px;background:#1572C9;color:#fff;display:grid;place-items:center;font-weight:800}" +
+      ".qfj-stop.done .qfj-n{background:#0D2747;color:#8FD0FF}.qfj-stop:last-child .qfj-n{background:#E8821E;color:#1b0f00}" +
+      ".qfj-stop h3{margin:0;font-size:17px}.qfj-stop p{margin:2px 0 8px;font-size:14px;color:var(--muted,#9FB6CB)}" +
+      ".qfj-chips{display:flex;flex-wrap:wrap;gap:6px}.qfj-chip{font:600 13px var(--sans,system-ui);border-radius:999px;padding:7px 12px;min-height:34px;background:rgba(30,143,230,.18);color:#8FD0FF;border:1px solid rgba(143,208,255,.35)}" +
+      "button.qfj-chip{cursor:pointer}.qfj-chip.soon{background:none;border-style:dashed;color:var(--muted,#9FB6CB)}.qfj-chip.deal{background:rgba(232,130,30,.15);border-color:rgba(255,165,82,.5);color:#FFA552}" +
+      ".qfj-chip small{font-weight:400;opacity:.8}.qfj-tick{margin-top:10px;min-height:40px;border-radius:10px;border:1px solid rgba(143,208,255,.35);background:none;color:var(--text,#E8F1F8);font:600 13px var(--sans,system-ui);padding:0 14px;cursor:pointer}" +
+      ".qfj-tick[aria-pressed=true]{background:#1572C9;border-color:#1572C9;color:#fff}.qfj-key{font-size:12px;margin-top:10px}";
+    document.head.appendChild(css);
+    function state() { var s = Q.ls("qf_journey") || {}; return { type: s.type || "", done: s.done || [], favs: s.favs || [], all: !!s.all }; }
+    function open(id) { return id !== "deals" && id !== "seats"; }
+    Q.addTool("trip", "My trip", {
+      html: function () { return tripView(state(), nextTrip(Q.trips()), Q.head, open); },
+      click: function (b, redraw) {
+        var s = state();
+        if (b.hasAttribute("data-jt-type")) { var nt = b.getAttribute("data-jt-type"); if (nt !== s.type) s.done = []; s.type = nt; s.all = false; }
+        else if (b.hasAttribute("data-jt-fav")) s.favs = toggleFav(s.favs, b.getAttribute("data-jt-fav"));
+        else if (b.hasAttribute("data-jt-more")) s.all = !s.all;
+        else if (b.hasAttribute("data-jt-done")) s.done = toggle(s.done, +b.getAttribute("data-jt-done"));
+        else return;
+        Q.ls("qf_journey", s); redraw();
+      }
+    });
+  }
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", mount); else mount();
+})(this);
+</script>
+<script>var KCLIPS=["plane-1", "road-1", "road-2", "caravan-1", "caravan-2", "cruise-1", "train-1", "coach-1", "coach-2", "ferry-1", "ferry-2"];</script>
+<script>
+(function(){
+"use strict";
+var E=QFJ.esc,$=function(id){return document.getElementById(id);};
+var P='<svg class="ico" viewBox="0 0 24 24">',Z='</svg>';
+var ICON={
+  plane:'<path d="M3 13l18-7-7 18-2.5-7.5z"/>',
+  road:'<path d="M5 16h14l-1.5-5h-11zM7 16v3M17 16v3M8 11l1.5-4h5L16 11"/>',
+  caravan:'<path d="M2 8h13a3 3 0 013 3v6H2zM18 15h4M6 11h4v3H6z"/><circle cx="7" cy="18" r="1.6"/>',
+  campervan:'<path d="M3 7h11l4 4h3v6H3zM14 7v4h7M6 10h5"/><circle cx="7" cy="17.5" r="1.6"/><circle cx="17" cy="17.5" r="1.6"/>',
+  cruise:'<path d="M3 16l2 4h14l2-4-9-3zM6 14V9h12v5M9 9V5h6v4"/>',
+  river:'<path d="M4 14l1.5 3h13l1.5-3zM7 14v-3h10v3M2 20c2 0 2-1 4-1s2 1 4 1 2-1 4-1 2 1 4 1 2-1 4-1"/>',
+  ferry:'<path d="M3 15l2 4h14l2-4zM6 15v-4h12v4M9 11V7h6v4M2 21c2 0 2-1 4-1s2 1 4 1 2-1 4-1 2 1 4 1"/>',
+  train:'<rect x="6" y="3" width="12" height="14" rx="3"/><path d="M6 11h12M9 21l1.5-4M15 21l-1.5-4"/>',
+  sleeper:'<rect x="6" y="5" width="12" height="12" rx="3"/><path d="M6 12h12M9 21l1.5-4M15 21l-1.5-4M19 2.5a3 3 0 103 3 2.4 2.4 0 01-3-3z"/>',
+  coach:'<rect x="4" y="4" width="16" height="13" rx="2"/><path d="M4 11h16M8 21v-4M16 21v-4M8 4v7"/>',
+  motorbike:'<circle cx="5.5" cy="16.5" r="3"/><circle cx="18.5" cy="16.5" r="3"/><path d="M5.5 16.5L9 10h5l4.5 6.5M14 10l-2-3H9.5M12 16.5h-2"/>',
+  outback:'<path d="M2 19h20M5 19l5-8 3 4 2-2 4 6"/><circle cx="17" cy="6" r="2.5"/>',
+  hiking:'<circle cx="13" cy="4" r="2"/><path d="M11 21l2-6-2-3 1-5 3 3 3 1M10 9l-3 3M13 15l3 6"/>',
+  cycling:'<circle cx="5.5" cy="17" r="3.5"/><circle cx="18.5" cy="17" r="3.5"/><path d="M5.5 17L9 9h6l3.5 8M12 17l-3-8M14 6h3"/>',
+  camping:'<path d="M3 20L12 5l9 15zM12 20l-3-6h6z"/>',
+  backpacking:'<path d="M7 9a5 5 0 0110 0v11H7zM10 4h4M7 14h10M10 14v3"/>',
+  mixed:'<circle cx="6" cy="18" r="2"/><circle cx="18" cy="6" r="2"/><path d="M8 18h6a4 4 0 000-8h-4a4 4 0 010-8"/>'
+};
+function ico(id){return P+(ICON[id]||ICON.mixed)+Z;}
+var CLIPS={plane:["k:plane-1","m:plane"],road:["k:road-1","k:road-2","m:road"],caravan:["k:caravan-1","k:caravan-2","m:caravan"],campervan:["k:caravan-2","m:caravan"],cruise:["k:cruise-1","m:cruise"],river:["m:boats"],ferry:["k:ferry-1","k:ferry-2","m:ferry"],train:["k:train-1","m:train"],sleeper:["m:train"],coach:["k:coach-1","k:coach-2","m:city"],motorbike:["k:road-2","m:road"],outback:["m:road"],hiking:["m:mountains","m:waterfall"],cycling:["m:bike"],camping:["m:lake","m:rainforest"],backpacking:["m:islands","m:beach"],mixed:["k:ferry-2","m:mixed"]};
+var CARD={plane:"k:plane-1",road:"k:road-1",caravan:"k:caravan-1",campervan:"m:caravan",cruise:"k:cruise-1",river:"m:boats",ferry:"k:ferry-1",train:"k:train-1",sleeper:"m:train",coach:"k:coach-1",motorbike:"k:road-2",outback:"m:road",hiking:"m:mountains",cycling:"m:bike",camping:"m:lake",backpacking:"m:islands",mixed:"k:ferry-2"};
+var KC=window.KCLIPS||[];
+var INSIDE=[["section-mytrip","My trip","Where you're up to, what to do next and the tools for this step."],["section-tools","Tools","Money, phrases, packing, time zones and help. All offline."],["section-explore","Explore","Hidden gems, free things, fair prices and local tips."],["section-deals","Deals","Flights, stays, eSIMs and tours. Always marked as paid links."],["section-flights","Flights","Quiet months on 2,900 routes, from official airline data."]];
+var FILTERS=[["all","All tools"],["ready","Ready now"],["soon","Coming next"],["deal","Deals"]];
+var KEYS={plane:"fly flight air airport",road:"car drive self-drive",caravan:"van tow trailer",campervan:"van motorhome rv",cruise:"ship boat sea ocean",river:"boat ship",ferry:"boat ship water island",train:"rail",sleeper:"rail overnight night",coach:"bus",motorbike:"motorcycle bike ride",outback:"4x4 desert remote off-road",hiking:"walk trek bushwalk trail",cycling:"bike bicycle ride",camping:"tent camp",backpacking:"budget hostel gap year",mixed:"multi combination"};
+var WAYS=QFJ.ways(),MEDIA="",PH={},show="all",paused=false,clipN=0,allWays=false;
+function words(w){return (w.name+" "+w.blurb+" "+w.group+" "+(KEYS[w.id]||"")).toLowerCase();}
+var S={cur:"road",favs:[],leave:"",nights:7};   
+try{var s0=JSON.parse(localStorage.getItem("rr_ways")||"{}")||{};
+  if(QFJ.way(s0.cur))S.cur=s0.cur;
+  if(Array.isArray(s0.favs))S.favs=s0.favs.filter(function(x){return QFJ.way(x);});
+  if(/^\d{4}-\d{2}-\d{2}$/.test(s0.leave||""))S.leave=s0.leave;
+  if(s0.nights>=0&&s0.nights<=30)S.nights=Math.floor(s0.nights);
+}catch(e){}
+function save(){try{localStorage.setItem("rr_ways",JSON.stringify(S));}catch(e){}}
+function isFav(id){return S.favs.indexOf(id)>=0;}
+function photo(file){var p=PH[file];if(!p)return "";var f=(p.small&&p.small.file)||p.file;
+  return /^[\w.-]+$/.test(f||"")?'<img src="media/'+f+'" alt="" loading="lazy" decoding="async">':"";}
+var STEPPH={road:["k:road-2","k:road-1"],motorbike:["k:road-2","m:road"],outback:["m:road","k:road-1"],caravan:["k:caravan-1","k:caravan-2"],campervan:["k:caravan-2","k:caravan-1"],cruise:["k:cruise-1","m:cruise"],river:["m:boats","m:cruise"],train:["k:train-1","m:train"],sleeper:["m:train","k:train-1"],coach:["k:coach-2","k:coach-1"],ferry:["k:ferry-1","k:ferry-2"],hiking:["m:mountains","m:waterfall"],cycling:["m:bike","m:rainforest"],camping:["m:lake","m:rainforest"],backpacking:["m:islands","m:beach"]};
+function wayPhoto(n){var l=STEPPH[S.cur],k=l&&(n===3||n===4)?l[n-3]:"";if(!k||!hasClip(k,""))return "";var p=k.split(":");return '<img src="media/card-'+p[0]+"-"+p[1]+'.webp" alt="" decoding="async">';}
+function stepPhoto(n){var own=wayPhoto(n);if(own)return own;for(var k in PH)if(k.indexOf("step-"+n+"-")===0){var h=photo(k);return n<=3?h.replace(' loading="lazy"',""):h;}return "";}
+function hasClip(key,sq){var p=key.split(":");if(p[0]==="k")return KC.indexOf(p[1])>=0;var f="trip-"+p[1]+sq+".mp4";return MEDIA.indexOf('"'+f+'"')>=0||MEDIA.indexOf("/"+f+'"')>=0;}
+function clipFiles(key,sq){var p=key.split(":");return p[0]==="k"?{src:"media/hero-k-"+p[1]+".mp4",poster:"media/hero-k-"+p[1]+".jpg"}:{src:"media/trip-"+p[1]+sq+".mp4",poster:"media/trip-"+p[1]+sq+"-poster.jpg"};}
+function cardPhoto(id){var c=CARD[id];if(!c||!hasClip(c,""))return "";var p=c.split(":");return '<img src="media/card-'+p[0]+"-"+p[1]+'.webp" alt="" loading="lazy" decoding="async" onerror="this.remove()">';}
+function drawChips(){
+  var top=QFJ.topWays(7,S.favs);if(top.indexOf(QFJ.way(S.cur))<0)top.push(QFJ.way(S.cur));
+  $("wayChips").innerHTML=top.map(function(w){
+    return '<button type="button" class="wchip" data-way="'+w.id+'" aria-pressed="'+(w.id===S.cur)+'">'+ico(w.id)+E(w.name)+(isFav(w.id)?'<span class="star" aria-label="favourite">★</span>':"")+"</button>";
+  }).join("")+'<button type="button" class="wchip more" data-open-all aria-haspopup="dialog">+ All '+WAYS.length+" ways</button>";
+}
+function drawForm(){
+  var f=S.favs.map(QFJ.way),rest=WAYS.filter(function(w){return f.indexOf(w)<0;});
+  function opt(w){return '<option value="'+w.id+'"'+(w.id===S.cur?" selected":"")+">"+E(w.name)+"</option>";}
+  $("fWay").innerHTML=(f.length?'<optgroup label="Your favourites">'+f.map(opt).join("")+"</optgroup>":"")+'<optgroup label="'+(f.length?"Every other way":"Every way")+'">'+rest.map(opt).join("")+"</optgroup>";
+  if(document.activeElement!==$("fLeave"))$("fLeave").value=S.leave;
+  var nights="";for(var i=0;i<=30;i++)nights+='<option value="'+i+'"'+(i===S.nights?" selected":"")+">"+(i===0?"Day trip":i+(i===1?" night":" nights"))+"</option>";
+  $("fNights").innerHTML=nights;
+}
+function card(w){
+  var f=isFav(w.id);
+  return '<article class="pcard'+(w.id===S.cur?" cur":"")+'">'+cardPhoto(w.id)+'<button type="button" class="fav" data-fav="'+w.id+'" aria-pressed="'+f+'" aria-label="'+(f?"Remove ":"Save ")+E(w.name)+(f?" from":" to")+' favourites">'+(f?"★":"☆")+'</button><div class="pt"><div class="g">'+(f?"★ Favourite":E(w.group))+"</div><h3>"+E(w.name)+"</h3><p>"+E(w.blurb)+'</p><button type="button" class="go" data-way="'+w.id+'">'+(w.id===S.cur?"Your plan":"Plan this trip")+"</button></div></article>";
+}
+function row(w){
+  var f=isFav(w.id);
+  return '<div class="wcard'+(w.id===S.cur?" cur":"")+'"><span class="wi">'+ico(w.id)+'</span><button type="button" class="wpick" data-way="'+w.id+'"><b>'+E(w.name)+"</b><span>"+E(w.blurb)+'</span></button><button type="button" class="fav" data-fav="'+w.id+'" aria-pressed="'+f+'" aria-label="'+(f?"Remove ":"Save ")+E(w.name)+(f?" from":" to")+' favourites">'+(f?"★":"☆")+"</button></div>";
+}
+function match(q){q=(q||"").trim().toLowerCase();return WAYS.filter(function(w){return !q||words(w).indexOf(q)>=0;});}
+function noHit(q){return '<div class="empty">No way to travel matches "'+E(q)+'". Try "boat", "bike" or "walk".</div>';}
+function drawGrid(){   
+  var q=$("waySearch").value,hit=match(q),order=QFJ.topWays(WAYS.length,S.favs);
+  WAYS.forEach(function(w){if(order.indexOf(w)<0)order.push(w);});
+  order=order.filter(function(w){return hit.indexOf(w)>=0;});
+  var cap=Math.max(8,S.favs.length),cut=!q.trim()&&!allWays&&order.length>cap;
+  $("wayList").innerHTML=order.length?(cut?order.slice(0,cap):order).map(card).join(""):noHit(q.trim());
+  $("moreWays").innerHTML=cut?'<button type="button" data-allways>Show all '+WAYS.length+" ways</button>":(!q.trim()&&allWays?'<button type="button" data-allways>Show fewer</button>':"");
+  $("wayCount").textContent=q.trim()?order.length+" of "+WAYS.length+" ways":WAYS.length+" ways · "+S.favs.length+" saved";
+}
+function drawDialog(){   
+  var q=$("dlgSearch").value,hit=match(q),groups=[];
+  if(!q.trim()&&S.favs.length)groups.push(["Your favourites",S.favs.map(QFJ.way)]);
+  WAYS.forEach(function(w){if(!groups.some(function(g){return g[0]===w.group;}))groups.push([w.group,[]]);});
+  hit.forEach(function(w){groups.forEach(function(g){if(g[0]===w.group)g[1].push(w);});});
+  $("dlgList").innerHTML=hit.length?groups.filter(function(g){return g[1].length;}).map(function(g){return '<div class="wgroup"><h3>'+E(g[0])+'</h3><div class="wgrid">'+g[1].map(row).join("")+"</div></div>";}).join(""):noHit(q.trim());
+}
+function uniqReady(j){var o={};j.steps.forEach(function(s){s.tools.forEach(function(t){if(t.state==="ready")o[t.id]=1;});});return Object.keys(o).length;}
+function n(list,st){return list.filter(function(t){return t.state===st;}).length;}
+function tag(t){return '<span class="tag'+(t.state==="ready"?"":" "+t.state)+'">'+E(t.label)+(t.state==="deal"?" <small>paid link</small>":"")+"</span>";}
+function fig(v,lab){return v?'<div class="fig"><b>'+v+"</b><span>"+lab+"</span></div>":"";}   
+function daysAway(){if(!S.leave)return null;var p=S.leave.split("-"),L=new Date(+p[0],p[1]-1,+p[2]),t=new Date();t=new Date(t.getFullYear(),t.getMonth(),t.getDate());return Math.round((L-t)/864e5);}
+function drawPlan(){
+  var w=QFJ.way(S.cur),j=QFJ.journey(S.cur),c=QFJ.counts(S.cur),when=QFJ.stepWhen(S.leave,S.nights);
+  $("planTitle").innerHTML="Your "+E(QFJ.tripName(w.name))+" in <em>6 steps</em>";
+  var d=daysAway(),nt=S.nights?S.nights+(S.nights===1?" night":" nights"):"a day trip";
+  $("summary").innerHTML=d==null?"Add the day you leave, up top, and every step gets its date.":
+    d>0?"Leaving in <b>"+d+" day"+(d===1?"":"s")+"</b> · "+nt+" · "+E(when[2].when):d===0?"<b>You leave today</b> · "+nt+". Have a great trip.":
+    -d<=S.nights?"<b>Day "+(1-d)+" of your trip</b> · "+nt:"This trip is over. Pick a new date for the next one.";
+  $("planIcon").innerHTML=ico(w.id);
+  var f=isFav(w.id);$("saveWay").setAttribute("aria-pressed",f);$("saveWay").setAttribute("data-fav",w.id);
+  $("saveWay").innerHTML='<span class="s">'+(f?"★":"☆")+"</span>"+(f?"Saved to favourites":"Save to favourites");
+  $("filters").innerHTML=FILTERS.map(function(x){return '<button type="button" class="filter" data-f="'+x[0]+'" aria-pressed="'+(x[0]===show)+'">'+x[1]+"</button>";}).join("");
+  $("steps").innerHTML=j.steps.map(function(s,i){
+    var list=s.tools.filter(function(t){return show==="all"||t.state===show;}),h=when[i].here;
+    return '<article class="step'+(list.length?"":" dim")+(h?" here":"")+'" id="step'+s.n+'"><div class="ph">'+stepPhoto(s.n)+(h?'<span class="you">You are here</span>':"")+'<div class="n"><b>'+s.n+"</b>Step "+s.n+" of 6</div></div>"+
+      '<div class="body"><h3>'+E(s.title)+"</h3><p>"+E(s.blurb)+'</p><div class="figs">'+
+      '<div class="fig when"><span>When</span><b>'+E(when[i].when)+"</b></div>"+
+      '<div class="fig"><b>'+s.tools.length+"</b><span>tools</span></div>"+
+      fig(n(s.tools,"ready"),"ready now")+fig(n(s.tools,"soon"),"coming")+fig(n(s.tools,"deal"),"deal links")+"</div>"+
+      '<div class="tags">'+(list.length?list.map(tag).join(""):'<span class="tag soon">None in this step</span>')+"</div></div></article>";
+  }).join("");
+  $("hpWay").textContent="Your "+QFJ.tripName(w.name);$("hpIcon").innerHTML=ico(w.id);
+  $("hpSum").textContent=d==null?"6 steps · "+uniqReady(j)+" tools ready offline":d>0?"Leaving in "+d+" day"+(d===1?"":"s")+" · "+nt:d===0?"You leave today":-d<=S.nights?"Day "+(1-d)+" of your trip":"6 steps · "+uniqReady(j)+" tools ready";
+  $("hpSteps").innerHTML=j.steps.map(function(s,i){return '<li'+(when[i].here?' class="here"':"")+"><b>"+s.n+"</b><span>"+E(s.title)+"<small>"+E(when[i].when)+" · "+n(s.tools,"ready")+" ready</small></span></li>";}).join("");
+  var max=Math.max.apply(null,j.steps.map(function(s){return s.tools.length;}));
+  $("numsNote").textContent=uniqReady(j)+" tools ready · "+c.soon+" coming · "+c.deal+" deal links";
+  $("chart").innerHTML="<h4>How many tools help at each step of a "+E(QFJ.tripName(w.name))+"?</h4>"+j.steps.map(function(s){
+    var r=n(s.tools,"ready"),o=n(s.tools,"soon"),dd=n(s.tools,"deal");
+    function seg(v,cl,lab){return v?'<i class="'+cl+'" style="width:'+(v/max*100)+'%" title="'+v+" "+lab+'"></i>':"";}
+    return '<div class="bar"><span>'+s.n+". "+E(s.title)+'</span><div class="tr" role="img" aria-label="'+r+" ready, "+o+" coming, "+dd+' deal links">'+seg(r,"l-ready","ready")+seg(o,"l-soon","coming")+seg(dd,"l-deal","deal links")+'</div><span class="v">'+s.tools.length+" tools</span></div>";
+  }).join("")+'<div class="axis"><span></span><span><span>0</span><span>'+max+' tools</span></span><span></span></div>';
+}
+function setVideo(){
+  var v=$("heroVid"),hero=document.querySelector(".hero");if(!v)return;
+  var sq=innerWidth/innerHeight<0.8?"-square":"";
+  var list=(CLIPS[S.cur]||[]).filter(function(c){return hasClip(c,sq);});
+  if(!list.length)list=["m:mixed"].filter(function(c){return hasClip(c,sq);});
+  var key=list.length?list[clipN%list.length]:"";
+  $("clipCap").textContent=key?QFJ.way(S.cur).name+(list.length>1?" · tap it again for another view":""):"";
+  $("pause").style.display=key?"":"none";
+  if(!key){v.classList.remove("on");v.pause();v.removeAttribute("src");v.load();return;}
+  var cf=clipFiles(key,sq);hero.style.backgroundImage="url("+cf.poster+")";
+  if(paused||matchMedia("(prefers-reduced-motion: reduce)").matches){v.classList.remove("on");v.pause();return;}
+  var f=cf.src;if(v.getAttribute("src")===f){if(v.paused)v.play().catch(function(){});v.classList.add("on");return;}
+  v.classList.remove("on");v.poster=cf.poster;v.src=f;
+  v.oncanplay=function(){if(!paused)v.classList.add("on");};
+  var p=v.play();if(p&&p.catch)p.catch(function(){});
+}
+function drawInside(){$("cards").innerHTML=INSIDE.map(function(x,i){return '<div class="card"><div class="ph">'+photo(x[0])+'</div><div class="tx"><div class="no">0'+(i+1)+"</div><h3>"+x[1]+"</h3><p>"+x[2]+"</p></div></div>";}).join("");}
+function drawAll(){drawChips();drawForm();drawPlan();drawGrid();if($("allWays").open)drawDialog();setVideo();}
+document.addEventListener("click",function(e){
+  var b=e.target.closest("button,[data-open-all]");if(!b)return;
+  if(b.hasAttribute("data-way")){var nw=b.getAttribute("data-way");clipN=nw===S.cur?clipN+1:0;S.cur=nw;show="all";save();drawAll();
+    if($("allWays").open)$("allWays").close();
+    if(b.closest("#ways")||b.closest("#allWays"))$("plan").scrollIntoView({behavior:"smooth"});}
+  else if(b.hasAttribute("data-fav")){var df=b.getAttribute("data-fav"),id=b.id,inDlg=!!b.closest("#allWays");S.favs=QFJ.toggleFav(S.favs,df);save();drawAll();
+    var again=id?$(id):document.querySelector((inDlg?"#allWays ":"#wayList ")+'[data-fav="'+df+'"]');if(again)again.focus();}
+  else if(b.hasAttribute("data-f")){show=b.getAttribute("data-f");drawPlan();}
+  else if(b.hasAttribute("data-allways")){allWays=!allWays;drawGrid();}
+  else if(b.hasAttribute("data-open-all")){e.preventDefault();$("dlgSearch").value="";drawDialog();
+    if($("allWays").showModal){$("allWays").showModal();setTimeout(function(){$("dlgSearch").focus();},30);}else $("ways").scrollIntoView();}
+  else if(b.hasAttribute("data-close"))$("allWays").close();
+  else if(b.id==="pause"){paused=!paused;b.setAttribute("aria-pressed",paused);b.textContent=paused?"Play video":"Pause video";setVideo();}
+});
+$("allWays").addEventListener("click",function(e){if(e.target===this)this.close();});
+$("tripbar").addEventListener("submit",function(e){e.preventDefault();S.cur=$("fWay").value;S.leave=/^\d{4}-\d{2}-\d{2}$/.test($("fLeave").value)?$("fLeave").value:"";S.nights=+$("fNights").value;show="all";save();drawAll();$("plan").scrollIntoView({behavior:"smooth"});});
+$("fWay").addEventListener("change",function(){S.cur=this.value;clipN=0;save();drawAll();});
+$("fLeave").addEventListener("change",function(){S.leave=/^\d{4}-\d{2}-\d{2}$/.test(this.value)?this.value:"";save();drawPlan();});
+$("fNights").addEventListener("change",function(){S.nights=+this.value;save();drawPlan();});
+$("waySearch").addEventListener("input",drawGrid);
+$("dlgSearch").addEventListener("input",drawDialog);
+$("faqSearch").addEventListener("input",function(){
+  var q=this.value.trim().toLowerCase();
+  [].forEach.call(document.querySelectorAll("#faqList details"),function(d){var hit=!q||d.textContent.toLowerCase().indexOf(q)>=0;d.style.display=hit?"":"none";if(q&&hit)d.open=true;});
+});
+(function(){var all={};WAYS.forEach(function(w){QFJ.journey(w.id).steps.forEach(function(s){s.tools.forEach(function(t){if(t.state==="ready")all[t.id]=1;});});});
+  $("nReady").textContent=Object.keys(all).length;$("nWays").textContent=WAYS.length;
+  $("heroFacts").textContent=WAYS.length+" ways to travel · 6 steps · works offline";$("shortWays").textContent="All "+WAYS.length+" ways to travel";})();
+if(matchMedia("(min-width:641px)").matches)$("dealPh").innerHTML='<img src="media/section-deals-800.webp" alt="" loading="lazy" decoding="async" onerror="this.parentNode.style.display=\'none\'">';
+drawAll();drawInside();
+if(window.fetch)fetch("media/media-manifest.json").then(function(r){return r.ok?r.text():"";}).then(function(t){
+  MEDIA=t||"";try{PH=JSON.parse(MEDIA).photos||{};}catch(e){PH={};}drawAll();drawInside();
+}).catch(function(){});
+var rz;addEventListener("resize",function(){clearTimeout(rz);rz=setTimeout(setVideo,300);});
+})();
+</script>
+</body>
+</html>
