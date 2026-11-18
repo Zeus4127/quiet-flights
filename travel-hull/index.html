@@ -92,6 +92,9 @@ a{color:inherit}
 .hp li span{font:600 13.5px/1.25 var(--hf);min-width:0}.hp li small{display:block;font:500 11.5px var(--bf);color:var(--mut);margin-top:2px}
 .hp-tab{display:flex;justify-content:space-around;padding:11px 6px 15px;border-top:1px solid var(--line);font:600 11.5px var(--bf);color:var(--mut);background:#fff}
 .hp-tab .on{color:var(--sea)}
+.hp-tab button,.hp-tab a{all:unset;cursor:pointer;padding:8px 6px;font:600 11.5px var(--bf);color:var(--mut)}.hp-tab button.on{color:var(--sea)}
+.hp li{cursor:pointer}.hp li:hover{border-color:var(--sea3)}
+.hp li button{all:unset;display:flex;gap:10px;align-items:center;width:100%;cursor:pointer}
 .facts{font:700 12.5px var(--hf);letter-spacing:.16em;text-transform:uppercase;color:var(--sun)}
 .hero h1{font-size:clamp(46px,7.6vw,104px);font-weight:800;max-width:980px;margin:18px 0 20px;letter-spacing:-.035em;line-height:.98}
 .hero h1 em{font-style:normal;color:var(--sun)}
@@ -108,7 +111,7 @@ a{color:inherit}
 .pause{display:inline-flex;align-items:center;gap:8px;min-height:36px;padding:0 14px;border-radius:999px;border:1px solid rgba(255,255,255,.3);background:rgba(4,24,30,.4);color:#fff;font:600 12px var(--hf);letter-spacing:.08em;text-transform:uppercase}
 @media(max-width:560px){.hero .wrap{padding-top:48px}}
 .trust{background:var(--deep);color:rgba(255,255,255,.86);border-top:1px solid rgba(255,255,255,.08)}
-.trust .wrap{display:flex;align-items:center;flex-wrap:wrap;gap:10px 30px;padding-top:18px;padding-bottom:18px;font-weight:600;font-size:14.5px}
+.trust .wrap{display:flex;align-items:center;flex-wrap:wrap;gap:6px 22px;padding-top:14px;padding-bottom:14px;font-weight:400;font-size:13px;color:rgba(255,255,255,.7)}
 .trust .lab{font:700 11.5px var(--hf);letter-spacing:.16em;text-transform:uppercase;color:var(--sun)}
 .shorts{background:var(--deep);padding-bottom:26px}
 .shorts .wrap{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
@@ -338,6 +341,40 @@ dialog::backdrop{background:rgba(4,31,39,.6);backdrop-filter:blur(3px)}
 .dchart .src{font-size:11.5px;color:var(--mut);margin-top:8px}
 .dchart text{font-family:var(--bf);fill:var(--mut)}
 @media(max-width:640px){.dsum{grid-template-columns:1fr 1fr}.dcharts{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;margin:22px -18px 0;padding:0 18px 12px;scrollbar-width:none}.dcharts::-webkit-scrollbar{display:none}.dchart{flex:0 0 86vw;scroll-snap-align:start}}
+.runbtn{margin-top:14px;min-height:54px;font-size:16px}
+.rembtn{margin:14px 10px 0 0;min-height:54px;vertical-align:top}
+.rrow{margin-top:16px}.rrow b{display:block;font:600 14.5px var(--hf);margin-bottom:8px}
+.rchip{flex:none;min-height:44px;padding:0 16px;border-radius:999px;border:1.5px solid var(--line);background:#fff;font-weight:600;font-size:14px;color:var(--ink)}.rchip[aria-pressed=true]{background:var(--deep);border-color:var(--deep);color:#fff}
+.rf{display:block}.rf span{display:block;font:600 14px var(--hf);margin-bottom:6px}.rf input{min-height:52px;width:100%;border:1.5px solid var(--line);border-radius:14px;padding:0 14px;font-size:16px;background:#fff}
+.gd-f button[disabled]{opacity:.5}
+.stepgo{align-self:flex-start;min-height:44px;padding:0 18px;margin:0 0 12px;border-radius:999px;border:0;background:var(--deep);color:#fff;font:600 14px var(--hf)}
+.tag.act{cursor:pointer;border:0;font:inherit;font-size:13px;font-weight:600}
+.tag.act:hover{background:var(--foam2,#C9E6E4)}
+.tag.later{background:none;border:0;padding:5px 2px;color:var(--mut);font-weight:500}
+.tag.later:before{content:"Soon: "}
+.gd{width:min(640px,calc(100% - 24px))}
+.gd-h{position:sticky;top:0;background:var(--deep);color:#fff;padding:16px 20px 14px;z-index:1}
+.gd-h .row{display:flex;justify-content:space-between;align-items:center;gap:12px;font:700 12.5px var(--hf);letter-spacing:.14em;text-transform:uppercase;color:var(--sun)}
+.gd-bar{height:6px;border-radius:3px;background:rgba(255,255,255,.15);margin-top:12px;overflow:hidden}.gd-bar i{display:block;height:100%;background:var(--sun);transition:width .4s}
+.gd-b{padding:20px}
+.gd-b h2{font-size:26px}.gd-b .gw{display:inline-block;margin:8px 0 4px;padding:5px 12px;border-radius:999px;background:var(--foam);color:var(--sea);font:600 13.5px var(--hf)}
+.gd-b p{color:var(--mut);margin:8px 0 16px}
+.gt{display:grid;grid-template-columns:44px 1fr auto;gap:12px;align-items:center;padding:12px;border:1.5px solid var(--line);border-radius:14px;background:#fff;margin-bottom:8px}
+.gt.done{background:#EEF7F5;border-color:var(--sea3)}
+.gt .tk{width:44px;height:44px;border-radius:12px;border:2px solid var(--sea3);background:#fff;color:var(--sea);font-size:22px;line-height:1}
+.gt.done .tk{background:var(--sea2);border-color:var(--sea2);color:#fff}
+.gt b{display:block;font:600 15px var(--hf)}.gt span{display:block;font-size:13px;color:var(--mut)}
+.gt a,.gt .go2{display:inline-flex;align-items:center;min-height:44px;padding:0 16px;border-radius:999px;background:var(--deep);color:#fff;font:600 13.5px var(--hf);text-decoration:none;white-space:nowrap;border:0}
+.gd-f{position:sticky;bottom:0;display:flex;gap:10px;padding:14px 20px;background:var(--sand);border-top:1px solid var(--line)}
+.gd-f button{flex:1;min-height:52px;border-radius:999px;font:600 15.5px var(--hf);border:1.5px solid var(--sea);background:#fff;color:var(--sea)}
+.gd-f button.main{background:var(--sun);border-color:var(--sun);color:var(--sunink)}
+.ready{text-align:center;padding:10px 0}.ready .big{font:800 56px/1 var(--hf);color:var(--sea2)}
+.ready ul{list-style:none;padding:0;margin:16px 0;text-align:left}.ready li{padding:8px 0;border-top:1px solid var(--line);font-size:14.5px}
+@media(max-width:560px){.gt{grid-template-columns:44px 1fr}.gt a,.gt .go2{grid-column:1/-1;justify-content:center}}
+.likes{margin:20px 0 10px}.lk-h b{display:block;font:600 16px var(--hf);color:#fff}.lk-h span{font-size:13.5px;color:rgba(255,255,255,.8)}
+.lk .wchip[aria-pressed=true]:before{content:"✓ "}
+.eatkm{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:0 0 16px}.eatkm b{font:600 15px var(--hf);color:#fff}
+.deal .liked{display:inline-block;margin-left:8px;padding:2px 8px;border-radius:999px;background:var(--sun);color:var(--deep);font:700 11.5px var(--hf);letter-spacing:.06em;vertical-align:1px}
 .tl{margin-top:24px;display:grid;grid-template-columns:150px 1fr;gap:28px;align-items:center;padding:24px 26px;border-radius:var(--r);background:linear-gradient(120deg,var(--deep),var(--sea));color:#fff;box-shadow:var(--shadow)}
 .ring{position:relative;width:150px;height:150px}
 .ring svg{width:150px;height:150px;transform:rotate(-90deg)}
@@ -423,14 +460,14 @@ footer p{margin:10px 0 0;max-width:420px}
     </form>
     <div class="hero-foot"><span id="clipCap"></span><button type="button" class="pause" id="pause" aria-pressed="false">Pause video</button></div>
   </div>
-  <div class="hero-phone" aria-hidden="true"><div class="hp"><div class="hp-top"><div class="r"><i id="hpIcon"></i><span id="hpWay">Your plane trip</span></div><small id="hpSum"></small></div><ol id="hpSteps"></ol><div class="hp-tab"><span class="on">My trip</span><span>Tools</span><span>Explore</span><span>Deals</span></div></div></div>
+  <div class="hero-phone"><div class="hp"><div class="hp-top"><div class="r"><i id="hpIcon"></i><span id="hpWay">Your plane trip</span></div><small id="hpSum"></small></div><ol id="hpSteps"></ol><div class="hp-tab"><button type="button" class="on" data-guide="1">My trip</button><a href="../app/">Tools</a><a href="#ways">Explore</a><a href="#deals">Deals</a></div></div></div>
   </div>
 </section>
 <div class="trust"><div class="wrap"><span class="lab">Built on free, official data</span><span>Airline statistics</span><span>NASA weather data</span><span>OpenStreetMap</span><span>Public holiday calendars</span><span>Exchange-rate feeds</span></div></div>
 <div class="shorts"><div class="wrap">
-  <a class="short" href="#plan"><span class="si"><svg class="ico" viewBox="0 0 24 24"><path d="M4 6h16M4 12h10M4 18h7"/><circle cx="18" cy="16" r="3"/></svg></span><span><b>Your 6 steps</b><span>With a date on each one</span></span><span class="arrow">→</span></a>
+  <button type="button" class="short" data-guide="1"><span class="si"><svg class="ico" viewBox="0 0 24 24"><path d="M4 6h16M4 12h10M4 18h7"/><circle cx="18" cy="16" r="3"/></svg></span><span><b>Run through your 6 steps</b><span>Tick each one off as you go</span></span><span class="arrow">→</span></button>
   <button type="button" class="short" data-open-all><span class="si"><svg class="ico" viewBox="0 0 24 24"><path d="M12 3l2.6 5.6 6.1.6-4.6 4.1 1.3 6-5.4-3.2-5.4 3.2 1.3-6-4.6-4.1 6.1-.6z"/></svg></span><span><b id="shortWays">Every way to travel</b><span>Star the ones you use</span></span><span class="arrow">→</span></button>
-  <a class="short" href="#step6"><span class="si"><svg class="ico" viewBox="0 0 24 24"><path d="M12 3l9 16H3zM12 10v4M12 17h.01"/></svg></span><span><b>Something went wrong?</b><span>Delays, lost bags, sick or scammed</span></span><span class="arrow">→</span></a>
+  <button type="button" class="short" data-guide="6"><span class="si"><svg class="ico" viewBox="0 0 24 24"><path d="M12 3l9 16H3zM12 10v4M12 17h.01"/></svg></span><span><b>Something went wrong?</b><span>Delays, lost bags, sick or scammed</span></span><span class="arrow">→</span></button>
 </div></div>
 <div class="band"><div class="wrap">
   <div class="stat"><b><i id="nWays">0</i><u>ways</u></b><span>to travel</span></div>
@@ -446,6 +483,8 @@ footer p{margin:10px 0 0;max-width:420px}
       <h2 id="planTitle">Your trip in <em>6 steps</em></h2>
       <p class="summary" id="summary"></p>
       <div class="chosen"><span class="chip-ico" id="planIcon"></span><button type="button" class="save" id="saveWay" aria-pressed="false"></button><button type="button" class="save" data-open-all>Change how you travel</button></div>
+      <button type="button" class="save rembtn" data-guide="8">🔔 Set reminders</button>
+      <button type="button" class="btn gold runbtn" data-guide="1">Run through my trip, step by step <svg class="ico" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
     </div>
     <div class="filters" id="filters" role="group" aria-label="Show tools"></div>
   </div>
@@ -485,6 +524,8 @@ footer p{margin:10px 0 0;max-width:420px}
     <li><b>3</b><span><strong>Tap the button.</strong> It opens the map, the reviews or the booking site, already filled in. You book with them, not us.</span></li>
   </ol>
   <div class="dl-status" id="dlStatus" aria-live="polite"></div>
+  <div class="likes"><div class="lk-h"><b>What do you like?</b><span>Tap all that fit. Your kind of places come first, wherever you go.</span></div><div class="chips-row lk" id="dlLikes" role="group" aria-label="What you like"></div></div>
+  <div class="eatkm"><b>Restaurants within</b><div class="chips-row" id="dlKm" role="group" aria-label="Restaurants within"></div></div>
   <div class="dsum" id="dlSum"></div>
   <div class="dbar"><div class="chips-row" id="dlFilters" role="group" aria-label="Show"></div><div class="chips-row" id="dlSort" role="group" aria-label="Rank by"></div></div>
   <ol class="dlist" id="dlList"></ol>
@@ -516,6 +557,7 @@ footer p{margin:10px 0 0;max-width:420px}
   <nav aria-label="Footer"><a href="#plan">Your plan</a><a href="#ways">Every way</a><a href="#inside">The app</a><a href="#deals">Deals</a><a href="#faq">Questions</a></nav>
 </div></footer>
 <div class="mbar"><div><b>Travel Hull</b><small>Free · works offline</small></div><a class="btn gold" href="#get">Get the app</a></div>
+<dialog id="guide" class="gd" aria-labelledby="gdTitle"><div class="gd-h"><div class="row"><span id="gdProg"></span><button type="button" class="x" data-gclose aria-label="Close">×</button></div><div class="gd-bar"><i id="gdBar"></i></div></div><div class="gd-b" id="gdBody"></div><div class="gd-f" id="gdFoot"></div></dialog>
 <dialog id="allWays" aria-labelledby="allWaysTitle">
   <div class="dlg-h">
     <div class="row"><h2 id="allWaysTitle">Every way to travel</h2><button type="button" class="x" data-close aria-label="Close">×</button></div>
@@ -1348,6 +1390,9 @@ try{var s0=JSON.parse(localStorage.getItem("rr_ways")||"{}")||{};
   if(/^\d{4}-\d{2}-\d{2}$/.test(s0.leave||""))S.leave=s0.leave;
   if(s0.nights>=0&&s0.nights<=30)S.nights=Math.floor(s0.nights);
   if(typeof s0.dest==="string")S.dest=s0.dest;
+  if(Array.isArray(s0.likes))S.likes=s0.likes.filter(function(x){return typeof x==="string";});
+  if([1,2,5,10].indexOf(s0.eatKm)>=0)S.eatKm=s0.eatKm;
+  if(s0.rem&&Array.isArray(s0.rem.steps))S.rem={steps:s0.rem.steps.filter(function(x){return x>=1&&x<=5;}),before:[0,1,3,7].indexOf(s0.rem.before)>=0?s0.rem.before:1,hour:[7,8,12,18].indexOf(s0.rem.hour)>=0?s0.rem.hour:8};
 }catch(e){}
 function save(){try{localStorage.setItem("rr_ways",JSON.stringify(S));}catch(e){}}
 function isFav(id){return S.favs.indexOf(id)>=0;}
@@ -1359,6 +1404,90 @@ function stepPhoto(n){var own=wayPhoto(n);if(own)return own;for(var k in PH)if(k
 function hasClip(key,sq){var p=key.split(":");if(p[0]==="k")return KC.indexOf(p[1])>=0;var f="trip-"+p[1]+sq+".mp4";return MEDIA.indexOf('"'+f+'"')>=0||MEDIA.indexOf("/"+f+'"')>=0;}
 function clipFiles(key,sq){var p=key.split(":");return p[0]==="k"?{src:"media/hero-k-"+p[1]+".mp4",poster:"media/hero-k-"+p[1]+".jpg"}:{src:"media/trip-"+p[1]+sq+".mp4",poster:"media/trip-"+p[1]+sq+"-poster.jpg"};}
 function cardPhoto(id){var c=CARD[id];if(!c||!hasClip(c,""))return "";var p=c.split(":");return '<img src="media/card-'+p[0]+"-"+p[1]+'.webp" alt="" loading="lazy" decoding="async" onerror="this.remove()">';}
+var LIKES=[["cafe","Cafés",/cafe|coffee|bakery/],["restaurant","Restaurants",/restaurant/],["bar","Pubs and bars",/pub|bar|biergarten/],["veg","Vegan and vegetarian",/vegan|vegetarian/],
+  ["museum","Museums and galleries",/museum|gallery|arts/],["park","Parks and gardens",/park|garden/],["beach","Beaches",/beach/],["view","Lookouts",/viewpoint|lookout/],
+  ["market","Markets",/market|marketplace/],["kids","Kids' fun",/zoo|aquarium|theme|water_park|playground|miniature_golf|trampoline|arcade/],["history","History",/castle|ruins|monument|temple|shrine|church|cathedral|historic|fort/]];
+if(!Array.isArray(S.likes))S.likes=[];if(!(S.eatKm>0))S.eatKm=2;
+if(!S.rem||!Array.isArray(S.rem.steps))S.rem={steps:[1,2,3,5],before:1,hour:8};
+function likedBy(p){var hay=(p.kind+" "+p.what+" "+(p.extra||"")).toLowerCase(),out=[];LIKES.forEach(function(l){if(S.likes.indexOf(l[0])>=0&&l[2].test(hay))out.push(l[1]);});return out;}
+var G={n:1},TICK={};
+try{TICK=JSON.parse(localStorage.getItem("th_ticks")||"{}")||{};}catch(e){TICK={};}
+function tickKey(){return S.dest+"|"+S.cur;}
+function ticks(){return TICK[tickKey()]||{};}
+function saveTicks(t){TICK[tickKey()]=t;try{localStorage.setItem("th_ticks",JSON.stringify(TICK));}catch(e){}}
+function action(t,d){
+  var city=d[1].replace(/ \(.*/,""),place=city+(d[7]?" Australia":" "+d[2]),app=["../app/","Open in the app"],L=t.label,id=t.id,deal=(buildDeals(d).filter(function(x){return x.type==="book";})),f=function(tag){for(var i=0;i<deal.length;i++)if(deal[i].tag===tag)return deal[i].links[0];return null;};
+  if(id==="docs"||/visa/i.test(L))return d[7]?["Pack your licence and cards","https://www.google.com/search?q="+encodeURIComponent("what to take on a trip to "+place),"Make a list of the cards and documents you need."]:
+    ["Check the official advice","https://www.smartraveller.gov.au/destinations","Smartraveller (Australian Government): entry rules, visas and safety for "+d[2]+"."];
+  if(id==="weather")return ["See the weather","#dlCharts","Average highs and rainy days in "+city+" each month."];
+  if(id==="money"||id==="spend")return ["See fair prices","#dlCharts","What everyday things cost in "+d[2]+", so you know a fair price."];
+  if(id==="seats"||/quiet/i.test(L)){var fl=f("Flights");return fl?["See the cheapest month",fl[1],"The month planes to "+city+" are emptiest, from airline data."]:["Find flights","https://www.google.com/travel/flights?q="+encodeURIComponent("Flights to "+city),"Compare flights to "+city+"."];}
+  if(id==="deals")return ["See every deal","#deals","Every deal for "+city+", ranked."];
+  if(/esim/i.test(L))return ["Compare eSIMs","https://www.google.com/search?q="+encodeURIComponent("eSIM for "+d[2]+" travel"),"A phone plan that works the moment you land."];
+  if(/insurance/i.test(L))return ["Compare insurance","https://www.google.com/search?q="+encodeURIComponent("travel insurance "+d[2]+" compare"),"Cover for medical, cancellations and lost bags."];
+  if(/stays/i.test(L)){var st=f("Stays");return st?["See stays",st[1],"Places to stay in "+city+", with your dates."]:null;}
+  if(/tour/i.test(L)){var tu=f("Tours and tickets");return tu?["See tours",tu[1],"Tours and tickets in "+city+"."]:null;}
+  if(/car hire/i.test(L)){var ca=f("Car hire");return ca?["See car hire",ca[1],"Compare car hire in "+city+"."]:null;}
+  if(/transfer/i.test(L))return ["Find a transfer","https://www.google.com/search?q="+encodeURIComponent("airport transfer "+place),"Getting from the airport to town."];
+  if(id==="near"||/gems/i.test(L))return ["See places near you","#deals","Sights, free things and food in "+city+"."];
+  return [app[1],app[0],"This tool is in the "+NAME+" app: "+L+"."];
+}
+function stepDate(n){   
+  if(!S.leave)return null;var p=S.leave.split("-"),off=[-56,-42,0,0,1][n-1],d=new Date(+p[0],p[1]-1,+p[2]+off),t=new Date();t=new Date(t.getFullYear(),t.getMonth(),t.getDate()+1);
+  return d<t&&n<3?t:d;
+}
+function ymd(d){return d.getFullYear()+("0"+(d.getMonth()+1)).slice(-2)+("0"+d.getDate()).slice(-2);}
+function icsText(){
+  var d=dest(S.dest),city=d[1].replace(/ \(.*/,""),j=QFJ.journey(S.cur),hrs=S.rem.hour-24*S.rem.before,trig=(hrs<0?"-":"")+"PT"+Math.abs(hrs)+"H";
+  function esc(x){return String(x).replace(/\\/g,"\\\\").replace(/;/g,"\\;").replace(/,/g,"\\,").replace(/\n/g,"\\n");}
+  var L=["BEGIN:VCALENDAR","VERSION:2.0","PRODID:-//Travel Hull//Trip steps//EN","CALSCALE:GREGORIAN"];
+  S.rem.steps.slice().sort().forEach(function(n){
+    var s=j.steps[n-1],dt=stepDate(n);if(!s||!dt)return;var end=new Date(dt.getFullYear(),dt.getMonth(),dt.getDate()+1);
+    var todo=s.tools.filter(function(t){return t.state!=="soon";}).map(function(t){return "- "+t.label;}).join("\n");
+    L.push("BEGIN:VEVENT","UID:th-"+S.dest+"-"+S.cur+"-"+n+"-"+ymd(dt)+"@travelhull","DTSTAMP:"+ymd(new Date())+"T000000Z","DTSTART;VALUE=DATE:"+ymd(dt),"DTEND;VALUE=DATE:"+ymd(end),
+      "SUMMARY:"+esc(city+" trip, step "+n+": "+s.title),"DESCRIPTION:"+esc(s.blurb+"\n\nTo do:\n"+todo+"\n\nOpen your plan: https://zeus4127.github.io/quiet-flights/travel-hull/"),
+      "BEGIN:VALARM","ACTION:DISPLAY","DESCRIPTION:"+esc(city+" trip: "+s.title),"TRIGGER:"+trig,"END:VALARM","END:VEVENT");
+  });
+  return L.concat(["END:VCALENDAR"]).join("\r\n");
+}
+function remScreen(){
+  var d=dest(S.dest),city=d[1].replace(/ \(.*/,""),j=QFJ.journey(S.cur),r=S.rem;
+  function fmt(x){return ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"][x.getDay()]+" "+x.getDate()+" "+MONTHS[x.getMonth()];}
+  $("gdProg").textContent="Reminders";
+  if(!S.leave){$("gdBody").innerHTML='<h2>Reminders</h2><p>Add the day you leave first, so each reminder gets a date.</p><label class="rf"><span>Leaving</span><input type="date" id="remLeave"></label>';
+    $("gdFoot").innerHTML='<button type="button" data-gstep="7">Back</button>';return;}
+  $("gdBody").innerHTML="<h2>Remind me</h2><p>Pick the steps, how early and what time. They go into your phone's own calendar, so you get the alert even with no signal.</p>"+
+    j.steps.slice(0,5).map(function(s){var on=r.steps.indexOf(s.n)>=0,dt=stepDate(s.n);
+      return '<div class="gt'+(on?" done":"")+'"><button type="button" class="tk" data-rem="'+s.n+'" aria-pressed="'+on+'" aria-label="Remind me: '+E(s.title)+'">'+(on?"✓":"")+"</button><div><b>"+E(s.title)+"</b><span>"+fmt(dt)+"</span></div></div>";}).join("")+
+    '<div class="rrow"><b>How early</b><div class="chips-row">'+[[0,"On the day"],[1,"1 day before"],[3,"3 days before"],[7,"1 week before"]].map(function(x){return '<button type="button" class="rchip" data-rbefore="'+x[0]+'" aria-pressed="'+(r.before===x[0])+'">'+x[1]+"</button>";}).join("")+"</div></div>"+
+    '<div class="rrow"><b>What time</b><div class="chips-row">'+[[7,"7 am"],[8,"8 am"],[12,"Midday"],[18,"6 pm"]].map(function(x){return '<button type="button" class="rchip" data-rhour="'+x[0]+'" aria-pressed="'+(r.hour===x[0])+'">'+x[1]+"</button>";}).join("")+"</div></div>"+
+    '<p style="font-size:13px;margin-top:14px">Tapping the button saves a small calendar file. Open it and your phone asks to add the reminders. Change your dates later? Make a new file.</p>';
+  $("gdFoot").innerHTML='<button type="button" data-gstep="7">Back</button><button type="button" class="main" data-remsave'+(r.steps.length?"":" disabled")+">Add "+r.steps.length+" reminder"+(r.steps.length===1?"":"s")+" to my calendar</button>";
+}
+var NAME="Travel Hull";
+function openGuide(n){G.n=Math.max(1,Math.min(8,n||1));drawGuide();var g=$("guide");if(!g.open){if(g.showModal)g.showModal();else g.setAttribute("open","");}}
+function drawGuide(){
+  var d=dest(S.dest),city=d[1].replace(/ \(.*/,""),w=QFJ.way(S.cur),j=QFJ.journey(S.cur),when=QFJ.stepWhen(S.leave,S.nights),tk=ticks();
+  $("gdBar").style.width=(Math.min(G.n-1,6)/6*100).toFixed(0)+"%";
+  if(G.n===8){remScreen();return;}
+  if(G.n>6){
+    var all=0,done=0,miss=[];j.steps.forEach(function(s){s.tools.forEach(function(t,k){if(t.state==="soon")return;all++;if(tk[s.n+"."+k])done++;else miss.push(s.title+": "+t.label);});});
+    $("gdProg").textContent="All done";
+    $("gdBody").innerHTML='<div class="ready"><div class="big">'+done+" / "+all+"</div><h2>"+(done===all?"You're ready to go.":"Nearly ready.")+"</h2><p>Your "+E(QFJ.tripName(w.name))+" to "+E(city)+(S.leave?", leaving "+E(when[2].when):"")+".</p>"+
+      (miss.length?"<b>Still to do:</b><ul>"+miss.slice(0,8).map(function(m){return "<li>"+E(m)+"</li>";}).join("")+"</ul>":"<p>Every step is ticked. Have a great trip.</p>")+"</div>";
+    $("gdFoot").innerHTML='<button type="button" data-gstep="6">Back</button><button type="button" data-gstep="8">Set reminders</button><button type="button" class="main" data-gclose>Finish</button>';
+    return;
+  }
+  var s=j.steps[G.n-1],wn=when[G.n-1];
+  $("gdProg").textContent="Step "+G.n+" of 6 · "+QFJ.tripName(w.name)+" to "+city;
+  $("gdBody").innerHTML="<h2>"+E(s.title)+'</h2><span class="gw">'+E(wn.when)+(wn.here?" · you are here":"")+"</span><p>"+E(s.blurb)+"</p>"+s.tools.map(function(t,k){
+    if(t.state==="soon")return "";
+    var a=action(t,d);if(!a)return "";var on=!!tk[s.n+"."+k],ext=a[1].charAt(0)!=="#";
+    return '<div class="gt'+(on?" done":"")+'"><button type="button" class="tk" data-tick="'+s.n+"."+k+'" aria-pressed="'+on+'" aria-label="'+(on?"Done: ":"Mark done: ")+E(t.label)+'">'+(on?"✓":"")+"</button><div><b>"+E(t.label)+"</b><span>"+E(a[2])+"</span></div>"+
+      (ext?'<a href="'+E(a[1])+'" target="_blank" rel="noopener">'+E(a[0])+" ↗</a>":'<button type="button" class="go2" data-gjump="'+E(a[1])+'">'+E(a[0])+"</button>")+"</div>";
+  }).join("")+(s.tools.some(function(t){return t.state==="soon";})?'<p style="font-size:13px">Coming soon in this step: '+E(s.tools.filter(function(t){return t.state==="soon";}).map(function(t){return t.label;}).join(", "))+".</p>":"");
+  $("gdFoot").innerHTML=(G.n>1?'<button type="button" data-gstep="'+(G.n-1)+'">Back</button>':"")+'<button type="button" class="main" data-gstep="'+(G.n+1)+'">'+(G.n<6?"Done, next step →":"Finish: am I ready?")+"</button>";
+}
 var DEST=[["tokyo","Tokyo","Japan","JP",35.6812,139.7671,"JPY"],["bali","Bali (Seminyak)","Indonesia","ID",-8.6913,115.1683,"IDR"],["auckland","Auckland","New Zealand","NZ",-36.8485,174.7633,"NZD"],
 ["singapore","Singapore","Singapore","SG",1.2897,103.8501,"SGD"],["bangkok","Bangkok","Thailand","TH",13.7563,100.5018,"THB"],["nadi","Fiji (Nadi)","Fiji","FJ",-17.7765,177.4356,"FJD"],
 ["queenstown","Queenstown","New Zealand","NZ",-45.0312,168.6626,"NZD"],["phuket","Phuket (Patong)","Thailand","TH",7.8961,98.2961,"THB"],["london","London","United Kingdom","GB",51.5074,-0.1278,"GBP"],
@@ -1378,7 +1507,8 @@ try{SCAN=JSON.parse(localStorage.getItem("th_scan")||"{}")||{};}catch(e){SCAN={}
 function saveScan(){try{var k=Object.keys(SCAN).sort(function(a,b){return SCAN[b].time-SCAN[a].time;}).slice(0,6),o={};k.forEach(function(x){o[x]=SCAN[x];});SCAN=o;localStorage.setItem("th_scan",JSON.stringify(SCAN));}catch(e){}}
 var MAPSERVERS=["https://overpass-api.de/api/interpreter","https://overpass.kumi.systems/api/interpreter","https://overpass.private.coffee/api/interpreter"];
 function askMap(cat,d){
-  var body="data="+encodeURIComponent(NEARAPI.overpassQuery(cat,d[4],d[5]));
+  var qq=NEARAPI.overpassQuery(cat,d[4],d[5]);if(cat==="eat")qq=qq.replace(/around:\d+/g,"around:"+(S.eatKm*1000));
+  var body="data="+encodeURIComponent(qq);
   function ask(i){
     if(i>=2)return Promise.reject(new Error("busy"));   
     var ctl=window.AbortController?new AbortController():null,t=setTimeout(function(){if(ctl)ctl.abort();},12000);
@@ -1411,16 +1541,17 @@ function scan(force){
   var d=dest(S.dest),id=d[0];
   if(!NEARAPI||!window.fetch){scanState="off";drawDeals();return;}
   var have=SCAN[id];
-  if(have&&!force&&Date.now()-have.time<864e5&&have["do"]&&have.free&&have.eat&&have.wiki){scanState="";drawDeals();return;}
+  if(have&&!force&&Date.now()-have.time<864e5&&have["do"]&&have.free&&have.eat&&have.wiki&&(have.eatKm||2)>=S.eatKm){scanState="";drawDeals();return;}
   if(scanState==="loading"&&scanFor===id)return;
   if(navigator.onLine===false){scanState="offline";drawDeals();return;}
   scanState="loading";scanFor=id;drawDeals();
+  if(have&&have.eat&&(have.eatKm||2)<S.eatKm){have.eat=null;}
   var cats=["do","free","eat"].filter(function(c){return force||!have||!have[c];}),got=have&&!force?have:{time:Date.now()};
   if(force||!got.wiki)askWiki(d).then(function(list){if(S.dest!==id)return;got.wiki=list.slice(0,40);SCAN[id]=got;saveScan();drawDeals();},function(){});
   (function next(i,run){
     if(S.dest!==id)return;                       
     if(i>=cats.length){got.time=Date.now();SCAN[id]=got;saveScan();scanState=got["do"]||got.free||got.eat||got.wiki?"":"error";drawDeals();return;}
-    askMap(cats[i],d).then(function(list){got[cats[i]]=list.slice(0,40).map(function(p){return {id:p.id,name:p.name,what:p.what,kind:p.kind,lat:p.lat,lon:p.lon,km:p.km,known:p.known,fee:p.fee,price:p.price,extra:p.extra||""};});SCAN[id]=got;drawDeals();next(i+1,0);},
+    askMap(cats[i],d).then(function(list){if(cats[i]==="eat")got.eatKm=S.eatKm;got[cats[i]]=list.slice(0,cats[i]==="eat"?80:40).map(function(p){return {id:p.id,name:p.name,what:p.what,kind:p.kind,lat:p.lat,lon:p.lon,km:p.km,known:p.known,fee:p.fee,price:p.price,extra:p.extra||""};});SCAN[id]=got;drawDeals();next(i+1,0);},
       function(){if(run>=1){SCAN[id]=got;saveScan();scanState=got["do"]||got.free||got.eat||got.wiki?"":(got.wiki===undefined?"error":"error");drawDeals();}else next(i+1,run+1);});
   })(0,0);
 }
@@ -1455,17 +1586,17 @@ function buildDeals(d){
       saveLab:"What you gain",save:gap.toFixed(1)+" points emptier planes",score:100+gap,links:[["See "+MONTHS[best]+" flights ↗","https://www.google.com/travel/flights?q="+encodeURIComponent("Flights from "+q.from+" to "+city+" in "+MFULL[best])]]});
   }
   var free=(sc.free||[]).concat((sc["do"]||[]).filter(function(p){return p.fee==="no";}));
-  free.forEach(function(p){out.push({type:"free",tag:"Free",title:p.name||p.what,where:NEARAPI.distText(p.km)+" from the centre of "+city,what:p.what+(p.extra&&p.extra!=="free entry"?" · "+p.extra:"")+". No ticket needed.",
+  free.forEach(function(p){out.push({place:p,type:"free",tag:"Free",title:p.name||p.what,where:NEARAPI.distText(p.km)+" from the centre of "+city,what:p.what+(p.extra&&p.extra!=="free entry"?" · "+p.extra:"")+". No ticket needed.",
     saveLab:"You pay",save:"Nothing. Free entry",score:80+(p.known||0)*3-p.km,km:p.km,known:p.known||0,links:[["Directions ↗",NEARAPI.mapsLink(p)],["Reviews ↗",NEARAPI.reviewsLink(p),1]]});});
-  (sc["do"]||[]).filter(function(p){return p.fee!=="no";}).forEach(function(p){out.push({type:"do",tag:"Things to do",title:p.name||p.what,where:NEARAPI.distText(p.km)+" from the centre of "+city,what:p.what+". Check opening hours before you go.",
+  (sc["do"]||[]).filter(function(p){return p.fee!=="no";}).forEach(function(p){out.push({place:p,type:"do",tag:"Things to do",title:p.name||p.what,where:NEARAPI.distText(p.km)+" from the centre of "+city,what:p.what+". Check opening hours before you go.",
     saveLab:p.price?"Listed price":"Price",save:p.price?p.price:"Check at the door or online",score:(p.price?52:44)+(p.known||0)*3-p.km/2,km:p.km,known:p.known||0,links:[["Reviews ↗",NEARAPI.reviewsLink(p)],["Directions ↗",NEARAPI.mapsLink(p),1]]});});
   var mapNames={};(sc["do"]||[]).concat(sc.free||[]).forEach(function(p){mapNames[(p.name||"").toLowerCase()]=1;});
-  (sc.wiki||[]).filter(function(p){return !mapNames[p.name.toLowerCase()];}).forEach(function(p){out.push({type:"do",tag:"Well-known sight",title:p.name,where:p.km.toFixed(1)+" km from the centre of "+city,
+  (sc.wiki||[]).filter(function(p){return !mapNames[p.name.toLowerCase()];}).forEach(function(p){out.push({place:p,type:"do",tag:"Well-known sight",title:p.name,where:p.km.toFixed(1)+" km from the centre of "+city,
     what:p.what+". Has its own Wikipedia page. Check opening hours and prices before you go.",saveLab:"Price",save:"Check the reviews for today's price",score:50+5-p.km/2,km:p.km,known:5,
     links:[["Reviews ↗",NEARAPI.reviewsLink(p)],["Directions ↗",NEARAPI.mapsLink(p),1]]});});
   var meal=rows&&rows[0];
-  (sc.eat||[]).forEach(function(p){out.push({type:"eat",tag:"Food and drink",title:p.name||p.what,where:NEARAPI.distText(p.km)+" from the centre of "+city,what:p.what+(p.extra?" · "+p.extra:"")+".",
-    saveLab:meal?"Fair price here":"Price",save:meal?meal[0]+": "+money(meal[1],d[6])+(meal[2]>meal[1]?" to "+money(meal[2],d[6]):""):"See the menu",score:36+(p.known||0)*3-p.km,km:p.km,known:p.known||0,links:[["Reviews ↗",NEARAPI.reviewsLink(p)],["Directions ↗",NEARAPI.mapsLink(p),1]]});});
+  (sc.eat||[]).forEach(function(p){out.push({place:p,type:"eat",tag:p.what,title:p.name||p.what,where:NEARAPI.distText(p.km)+" from the centre of "+city,what:p.what+(p.extra?" · "+p.extra:"")+".",
+    saveLab:meal?"Fair price here":"Price",save:meal?meal[0]+": "+money(meal[1],d[6])+(meal[2]>meal[1]?" to "+money(meal[2],d[6]):""):"See the menu",score:36+(p.known||0)*3-p.km,km:p.km,known:p.known||0,links:[["See rating ↗",NEARAPI.reviewsLink(p)],["Book a table ↗","https://www.google.com/search?q="+encodeURIComponent("book a table "+(p.name||"")+" "+city),1],["Directions ↗",NEARAPI.mapsLink(p),1]]});});
   var dates=S.leave?"&checkin="+S.leave+"&checkout="+isoPlus(Math.max(1,S.nights)):"";
   out.push({type:"book",tag:"Stays",title:"Compare stays in "+city,where:"Opens Booking.com",what:"A search for "+city+(S.leave?", with your dates already filled in ("+Math.max(1,S.nights)+" night"+(S.nights>1?"s":"")+").":". Add your leaving date up top and the dates fill in too.")+" Sort by price there to see the cheapest first.",
     saveLab:"How you save",save:"Compare every stay on one page",score:70,links:[["See stays ↗","https://www.booking.com/searchresults.html?ss="+encodeURIComponent(place)+dates]]});
@@ -1496,10 +1627,14 @@ function wxChart(w,lm){
 function drawDeals(){
   var d=dest(S.dest),city=d[1].replace(/ \(.*/,""),sc=SCAN[d[0]]||{},lm=leaveMonth(),q=QUIETD[d[0]],rows=FAIRD[d[3]],w=WX[d[0]];
   $("dlCity").textContent="Every deal in "+city+", ranked.";
-  function opts(){var o='<optgroup label="Overseas">',au='<optgroup label="Australia">';DEST.forEach(function(x){var h='<option value="'+x[0]+'"'+(x[0]===d[0]?" selected":"")+">"+E(x[1])+"</option>";if(x[7])au+=h;else o+=h;});return o+"</optgroup>"+au+"</optgroup>";}
+  function opts(){var o='<optgroup label="Overseas">',au='<optgroup label="Australia">';DEST.slice().sort(function(a,b){return a[1].localeCompare(b[1]);}).forEach(function(x){var h='<option value="'+x[0]+'"'+(x[0]===d[0]?" selected":"")+">"+E(x[1])+"</option>";if(x[7])au+=h;else o+=h;});return o+"</optgroup>"+au+"</optgroup>";}
   $("dDest").innerHTML=opts();$("fDest").innerHTML=opts();
   $("dlChips").innerHTML=POPULAR.map(function(id){var x=dest(id);return '<button type="button" class="wchip" data-dest="'+id+'" aria-pressed="'+(id===d[0])+'">'+E(x[1].replace(/ \(.*/,""))+"</button>";}).join("");
-  var all=buildDeals(d),nFree=all.filter(function(x){return x.type==="free";}).length,scanned=!!sc.free;
+  $("dlLikes").innerHTML=LIKES.map(function(l){var on=S.likes.indexOf(l[0])>=0;return '<button type="button" class="wchip" data-like="'+l[0]+'" aria-pressed="'+on+'">'+l[1]+"</button>";}).join("");
+  $("dlKm").innerHTML=[1,2,5,10].map(function(k){return '<button type="button" class="wchip" data-km="'+k+'" aria-pressed="'+(S.eatKm===k)+'">'+k+" km</button>";}).join("");
+  var all=buildDeals(d).filter(function(x){return x.type!=="eat"||x.km<=S.eatKm;});
+  all.forEach(function(x){if(x.place){x.likes=likedBy(x.place);if(x.likes.length)x.score+=30;}});
+  var nFree=all.filter(function(x){return x.type==="free";}).length,scanned=!!sc.free;
   $("dlStatus").innerHTML=scanState==="loading"?'<i class="pulse"></i>'+(sc.wiki?"Found "+sc.wiki.length+" well-known sights. Still checking the map for free things and food…":"Scanning "+E(city)+" for sights, free things and food…"):
     scanState==="error"?"The free map servers are busy, so free things and food near "+E(city)+" aren't loaded yet. Everything else below works. <button type=\"button\" data-rescan>Try again</button>":
     scanState==="offline"?"No signal. Showing what was saved last time.":scanState==="off"?"The live scan needs a newer browser.":
@@ -1509,14 +1644,14 @@ function drawDeals(){
     "<div><b>"+(scanned?nFree:scanState==="loading"?"…":"?")+"</b><span>"+(scanned||scanState==="loading"?"free things to do":"free things (map servers busy)")+"</span></div>"+
     "<div><b>"+(bestM>=0?MFULL[bestM]:"n/a")+"</b><span>"+(bestM>=0?"quietest month to fly":"no flight data for this place")+"</span></div>"+
     "<div><b>"+(rows&&rows[0]?money(rows[0][1],d[6]):d[7]?"AUD":"n/a")+"</b><span>"+(rows&&rows[0]?"fair price: "+E(rows[0][0].toLowerCase()):d[7]?"no price guide needed at home":"no price guide yet")+"</span></div>";
-  var F=[["all","All"],["free","Free"],["do","Things to do"],["eat","Food and drink"],["book","Flights and bookings"]];
-  $("dlFilters").innerHTML=F.map(function(f){var n=f[0]==="all"?all.length:all.filter(function(x){return x.type===f[0];}).length;return '<button type="button" class="wchip" data-dfilter="'+f[0]+'" aria-pressed="'+(dFilter===f[0])+'">'+f[1]+" "+n+"</button>";}).join("");
+  var F=[["all","All"]].concat(S.likes.length?[["you","For you"]]:[]).concat([["free","Free"],["do","Things to do"],["eat","Restaurants and cafés"],["book","Flights and bookings"]]);
+  $("dlFilters").innerHTML=F.map(function(f){var n=f[0]==="all"?all.length:f[0]==="you"?all.filter(function(x){return x.likes&&x.likes.length;}).length:all.filter(function(x){return x.type===f[0];}).length;return '<button type="button" class="wchip" data-dfilter="'+f[0]+'" aria-pressed="'+(dFilter===f[0])+'">'+f[1]+" "+n+"</button>";}).join("");
   $("dlSort").innerHTML=[["best","Best saving"],["near","Nearest"],["known","Best known"]].map(function(x){return '<button type="button" class="wchip" data-dsort="'+x[0]+'" aria-pressed="'+(dSort===x[0])+'">'+x[1]+"</button>";}).join("");
-  var list=all.filter(function(x){return dFilter==="all"||x.type===dFilter;});
+  var list=all.filter(function(x){return dFilter==="all"||(dFilter==="you"?x.likes&&x.likes.length:x.type===dFilter);});
   list.sort(dSort==="near"?function(a,b){return (a.km==null?1e9:a.km)-(b.km==null?1e9:b.km)||b.score-a.score;}:dSort==="known"?function(a,b){return (b.known||0)-(a.known||0)||b.score-a.score;}:function(a,b){return b.score-a.score;});
   var top=innerWidth<640?5:8,cap=dAll?list.length:top;
   $("dlList").innerHTML=list.slice(0,cap).map(function(x,i){
-    return '<li class="deal"><div class="rk">'+(i+1)+"<small>RANK</small></div><div><span class=\"ty\">"+E(x.tag)+"</span><h3>"+E(x.title)+'</h3><div class="wh">'+E(x.where)+'</div><div class="wt">'+E(x.what)+"</div></div>"+
+    return '<li class="deal"><div class="rk">'+(i+1)+"<small>RANK</small></div><div><span class=\"ty\">"+E(x.tag)+"</span>"+(x.likes&&x.likes.length?'<span class="liked">For you</span>':"")+"<h3>"+E(x.title)+'</h3><div class="wh">'+E(x.where)+'</div><div class="wt">'+E(x.what)+"</div></div>"+
       '<div class="sv"><small>'+E(x.saveLab)+"</small><b>"+E(x.save)+'</b></div><div class="ac">'+x.links.map(function(l){return '<a'+(l[2]?' class="alt"':"")+' href="'+E(l[1])+'" target="_blank" rel="noopener">'+E(l[0])+"</a>";}).join("")+"</div></li>";
   }).join("")+(scanState==="loading"?'<li class="deal skel-row"></li><li class="deal skel-row"></li>':"")+(list.length?"":'<li class="deal" style="display:block">Nothing in this group for '+E(city)+" yet.</li>");
   $("dlMore").innerHTML=list.length>top?'<button type="button" data-dall>'+(dAll?"Show the top "+top:"Show all "+list.length)+"</button>":"";
@@ -1576,7 +1711,7 @@ function drawDialog(){
 }
 function uniqReady(j){var o={};j.steps.forEach(function(s){s.tools.forEach(function(t){if(t.state==="ready")o[t.id]=1;});});return Object.keys(o).length;}
 function n(list,st){return list.filter(function(t){return t.state===st;}).length;}
-function tag(t){return '<span class="tag'+(t.state==="ready"?"":" "+t.state)+'">'+E(t.label)+(t.state==="deal"?" <small>paid link</small>":"")+"</span>";}
+function tag(t,n){return t.state==="soon"?'<span class="tag later">'+E(t.label)+"</span>":'<button type="button" class="tag act'+(t.state==="deal"?" deal":"")+'" data-guide="'+n+'">'+E(t.label)+"</button>";}
 function fig(v,lab){return v?'<div class="fig"><b>'+v+"</b><span>"+lab+"</span></div>":"";}   
 function daysAway(){if(!S.leave)return null;var p=S.leave.split("-"),L=new Date(+p[0],p[1]-1,+p[2]),t=new Date();t=new Date(t.getFullYear(),t.getMonth(),t.getDate());return Math.round((L-t)/864e5);}
 function drawPlan(){
@@ -1597,11 +1732,11 @@ function drawPlan(){
       '<div class="fig when"><span>When</span><b>'+E(when[i].when)+"</b></div>"+
       '<div class="fig"><b>'+s.tools.length+"</b><span>tools</span></div>"+
       fig(n(s.tools,"ready"),"ready now")+fig(n(s.tools,"soon"),"coming")+fig(n(s.tools,"deal"),"deal links")+"</div>"+
-      '<div class="tags">'+(list.length?list.map(tag).join(""):'<span class="tag soon">None in this step</span>')+"</div></div></article>";
+      '<button type="button" class="stepgo" data-guide="'+s.n+'">Open this step →</button><div class="tags">'+(list.length?list.map(function(t){return tag(t,s.n);}).join(""):'<span class="tag later">Nothing in this step</span>')+"</div></div></article>";
   }).join("");
   $("hpWay").textContent="Your "+QFJ.tripName(w.name);$("hpIcon").innerHTML=ico(w.id);
   $("hpSum").textContent=d==null?"6 steps · "+uniqReady(j)+" tools ready offline":d>0?"Leaving in "+d+" day"+(d===1?"":"s")+" · "+nt:d===0?"You leave today":-d<=S.nights?"Day "+(1-d)+" of your trip":"6 steps · "+uniqReady(j)+" tools ready";
-  $("hpSteps").innerHTML=j.steps.map(function(s,i){return '<li'+(when[i].here?' class="here"':"")+"><b>"+s.n+"</b><span>"+E(s.title)+"<small>"+E(when[i].when)+" · "+n(s.tools,"ready")+" ready</small></span></li>";}).join("");
+  $("hpSteps").innerHTML=j.steps.map(function(s,i){return '<li'+(when[i].here?' class="here"':"")+'><button type="button" data-guide="'+s.n+'" aria-label="Open step '+s.n+": "+E(s.title)+'"><b>'+s.n+"</b><span>"+E(s.title)+"<small>"+E(when[i].when)+" · "+n(s.tools,"ready")+" ready</small></span></button></li>";}).join("");
   var hereN=0;when.forEach(function(x){if(x.here)hereN=x.n;});
   var C=2*Math.PI*52,frac=hereN?hereN/6:0;
   $("timeline").innerHTML='<div class="ring"><svg viewBox="0 0 120 120" aria-hidden="true"><circle class="bg" cx="60" cy="60" r="52"/><circle class="fg" cx="60" cy="60" r="52" stroke-dasharray="'+C.toFixed(1)+'" stroke-dashoffset="'+(C*(1-frac)).toFixed(1)+'"/></svg><div>'+
@@ -1642,13 +1777,26 @@ document.addEventListener("click",function(e){
   else if(b.hasAttribute("data-dfilter")){dFilter=b.getAttribute("data-dfilter");dAll=false;drawDeals();}
   else if(b.hasAttribute("data-dsort")){dSort=b.getAttribute("data-dsort");drawDeals();}
   else if(b.hasAttribute("data-dall")){dAll=!dAll;drawDeals();}
+  else if(b.hasAttribute("data-guide"))openGuide(+b.getAttribute("data-guide"));
+  else if(b.hasAttribute("data-gstep")){G.n=+b.getAttribute("data-gstep");drawGuide();$("guide").scrollTop=0;}
+  else if(b.hasAttribute("data-gclose"))$("guide").close();
+  else if(b.hasAttribute("data-tick")){var tk=ticks(),k=b.getAttribute("data-tick");if(tk[k])delete tk[k];else tk[k]=1;saveTicks(tk);drawGuide();}
+  else if(b.hasAttribute("data-gjump")){$("guide").close();var el=document.querySelector(b.getAttribute("data-gjump"));if(el)el.scrollIntoView({behavior:"smooth"});}
+  else if(b.hasAttribute("data-rem")){var rn=+b.getAttribute("data-rem"),ri=S.rem.steps.indexOf(rn);if(ri>=0)S.rem.steps.splice(ri,1);else S.rem.steps.push(rn);save();drawGuide();}
+  else if(b.hasAttribute("data-rbefore")){S.rem.before=+b.getAttribute("data-rbefore");save();drawGuide();}
+  else if(b.hasAttribute("data-rhour")){S.rem.hour=+b.getAttribute("data-rhour");save();drawGuide();}
+  else if(b.hasAttribute("data-remsave")){var blob=new Blob([icsText()],{type:"text/calendar"}),u=URL.createObjectURL(blob),a=document.createElement("a");a.href=u;a.download="travel-hull-reminders.ics";document.body.appendChild(a);a.click();a.remove();setTimeout(function(){URL.revokeObjectURL(u);},4000);b.textContent="Saved. Open the file to add them";}
+  else if(b.hasAttribute("data-like")){var lk=b.getAttribute("data-like"),i=S.likes.indexOf(lk);if(i>=0)S.likes.splice(i,1);else S.likes.push(lk);save();drawDeals();}
+  else if(b.hasAttribute("data-km")){S.eatKm=+b.getAttribute("data-km");save();drawDeals();scan(false);}
   else if(b.hasAttribute("data-open-all")){e.preventDefault();$("dlgSearch").value="";drawDialog();
     if($("allWays").showModal){$("allWays").showModal();setTimeout(function(){$("dlgSearch").focus();},30);}else $("ways").scrollIntoView();}
   else if(b.hasAttribute("data-close"))$("allWays").close();
   else if(b.id==="pause"){paused=!paused;b.setAttribute("aria-pressed",paused);b.textContent=paused?"Play video":"Pause video";setVideo();}
 });
 $("allWays").addEventListener("click",function(e){if(e.target===this)this.close();});
-$("tripbar").addEventListener("submit",function(e){e.preventDefault();S.cur=$("fWay").value;S.leave=/^\d{4}-\d{2}-\d{2}$/.test($("fLeave").value)?$("fLeave").value:"";S.nights=+$("fNights").value;S.dest=dest($("fDest").value)[0];show="all";save();drawAll();drawDeals();scan(false);$("plan").scrollIntoView({behavior:"smooth"});});
+$("guide").addEventListener("click",function(e){if(e.target===this)this.close();});
+$("guide").addEventListener("change",function(e){if(e.target.id==="remLeave"&&/^\d{4}-\d{2}-\d{2}$/.test(e.target.value)){S.leave=e.target.value;save();drawAll();drawDeals();drawGuide();}});
+$("tripbar").addEventListener("submit",function(e){e.preventDefault();S.cur=$("fWay").value;S.leave=/^\d{4}-\d{2}-\d{2}$/.test($("fLeave").value)?$("fLeave").value:"";S.nights=+$("fNights").value;S.dest=dest($("fDest").value)[0];show="all";save();drawAll();drawDeals();scan(false);openGuide(1);});
 $("fWay").addEventListener("change",function(){S.cur=this.value;clipN=0;save();drawAll();});
 $("fLeave").addEventListener("change",function(){S.leave=/^\d{4}-\d{2}-\d{2}$/.test(this.value)?this.value:"";save();drawPlan();drawDeals();});
 $("fNights").addEventListener("change",function(){S.nights=+this.value;save();drawPlan();drawDeals();});
