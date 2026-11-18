@@ -447,7 +447,7 @@ footer p{margin:10px 0 0;max-width:420px}
 <div class="util"><div class="wrap"><span><i class="dot"></i><b>Free</b> · works with no signal · no account</span><nav aria-label="Quick links"><a href="#faq">Questions</a><a href="#deals">Deals</a><a href="#get">Get the app</a></nav></div></div>
 <header class="top"><div class="wrap">
   <a class="logo" href="#top" aria-label="Travel Hull home"><span class="mark"><svg class="ico" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M15.5 8.5l-2 5-5 2 2-5z"/></svg></span><span>Travel Hull<small>EVERY TRIP · STEP BY STEP</small></span></a>
-  <nav class="nav" aria-label="Sections"><a class="on" href="#plan">Your plan</a><a href="#ways">Every way</a><a href="#inside">The app</a><a href="#deals">Deals</a><a href="weather.html">Weather</a><a href="money.html">Money</a><a href="#faq">Questions</a></nav>
+  <nav class="nav" aria-label="Sections"><a class="on" href="#plan">Your plan</a><a href="#ways">Every way</a><a href="#deals">Deals</a><a href="../app/#seats">Flights</a><a href="weather.html">Weather</a><a href="money.html">Money</a><a href="#faq">Questions</a></nav>
   <a class="btn gold" href="#get">Get the app</a>
 </div></header>
 <div class="wayrow"><div class="wrap"><span class="lab">Your way</span><div class="wchips" id="wayChips" role="group" aria-label="Your way to travel"></div></div></div>
@@ -560,7 +560,7 @@ footer p{margin:10px 0 0;max-width:420px}
 </div></section>
 <footer><div class="wrap">
   <div><a class="logo" href="#top"><span class="mark"><svg class="ico" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M15.5 8.5l-2 5-5 2 2-5z"/></svg></span>Travel Hull</a><p>A free travel app for every kind of trip. Paid deal links are always labelled.</p></div>
-  <nav aria-label="Footer"><a href="#plan">Your plan</a><a href="#ways">Every way</a><a href="#deals">Deals</a><a href="weather.html">Weather</a><a href="money.html">Money</a><a href="#faq">Questions</a></nav>
+  <nav aria-label="Footer"><a href="#plan">Your plan</a><a href="#ways">Every way</a><a href="#deals">Deals</a><a href="../app/#seats">Flights</a><a href="weather.html">Weather</a><a href="money.html">Money</a><a href="#faq">Questions</a></nav>
 </div></footer>
 <div class="mbar"><div><b>Travel Hull</b><small>Free · works offline</small></div><a class="btn gold" href="#get">Get the app</a></div>
 <dialog id="guide" class="gd" aria-labelledby="gdTitle"><div class="gd-h"><div class="row"><span id="gdProg"></span><button type="button" class="x" data-gclose aria-label="Close">×</button></div><div class="gd-bar"><i id="gdBar"></i></div></div><div class="gd-b" id="gdBody"></div><div class="gd-f" id="gdFoot"></div></dialog>
@@ -1381,7 +1381,7 @@ var ICON={
   mixed:'<circle cx="6" cy="18" r="2"/><circle cx="18" cy="6" r="2"/><path d="M8 18h6a4 4 0 000-8h-4a4 4 0 010-8"/>'
 };
 function ico(id){return P+(ICON[id]||ICON.mixed)+Z;}
-var CLIPS={plane:["k:plane-1","m:plane"],road:["k:road-1","k:road-2","m:road"],caravan:["k:caravan-1","k:caravan-2","m:caravan"],campervan:["k:caravan-2","m:caravan"],cruise:["k:cruise-1","m:cruise"],river:["m:boats"],ferry:["k:ferry-1","k:ferry-2","m:ferry"],train:["k:train-1","m:train"],sleeper:["m:train"],coach:["k:coach-1","k:coach-2","m:city"],motorbike:["k:road-2","m:road"],outback:["m:road"],hiking:["m:mountains","m:waterfall"],cycling:["m:bike"],camping:["m:lake","m:rainforest"],backpacking:["m:islands","m:beach"],mixed:["k:ferry-2","m:mixed"]};
+var CLIPS={plane:["m:plane"],road:["k:road-1","k:road-2","m:road"],caravan:["k:caravan-1","k:caravan-2","m:caravan"],campervan:["k:caravan-2","m:caravan"],cruise:["k:cruise-1","m:cruise"],river:["m:boats"],ferry:["k:ferry-1","k:ferry-2","m:ferry"],train:["k:train-1","m:train"],sleeper:["m:train"],coach:["k:coach-1","k:coach-2","m:city"],motorbike:["k:road-2","m:road"],outback:["m:road"],hiking:["m:mountains","m:waterfall"],cycling:["m:bike"],camping:["m:lake","m:rainforest"],backpacking:["m:islands","m:beach"],mixed:["k:ferry-2","m:mixed"]};
 var CARD={plane:"k:plane-1",road:"k:road-1",caravan:"k:caravan-1",campervan:"m:caravan",cruise:"k:cruise-1",river:"m:boats",ferry:"k:ferry-1",train:"k:train-1",sleeper:"m:train",coach:"k:coach-1",motorbike:"k:road-2",outback:"m:road",hiking:"m:mountains",cycling:"m:bike",camping:"m:lake",backpacking:"m:islands",mixed:"k:ferry-2"};
 var KC=window.KCLIPS||[];
 var INSIDE=[["section-mytrip","My trip","Where you're up to, what to do next and the tools for this step."],["section-tools","Tools","Money, phrases, packing, time zones and help. All offline."],["section-explore","Explore","Hidden gems, free things, fair prices and local tips."],["section-deals","Deals","Flights, stays, eSIMs and tours. Always marked as paid links."],["section-flights","Flights","Quiet months on 2,900 routes, from official airline data."]];
@@ -1591,7 +1591,7 @@ function buildDeals(d){
     if(gap>=2)out.push({type:"book",tag:"Flights",title:"Fly in "+MFULL[best]+", the quietest month",where:q.from+" to "+city,
       what:"Planes on this route are usually "+q.usual.toFixed(0)+"% full. In "+MFULL[best]+" they run "+gap.toFixed(1)+" points emptier, which usually means softer fares and a better chance of a spare seat."+
         (mine!=null&&lm!==best?" Your month, "+MFULL[lm]+", runs "+Math.abs(mine).toFixed(1)+" points "+(mine>0?"fuller":"emptier")+" than usual.":""),
-      saveLab:"What you gain",save:gap.toFixed(1)+" points emptier planes",score:100+gap,links:[["See "+MONTHS[best]+" flights ↗","https://www.google.com/travel/flights?q="+encodeURIComponent("Flights from "+q.from+" to "+city+" in "+MFULL[best])]]});
+      saveLab:"What you gain",save:gap.toFixed(1)+" points emptier planes",score:100+gap,links:[["See "+MONTHS[best]+" flights ↗","https://www.google.com/travel/flights?q="+encodeURIComponent("Flights from "+q.from+" to "+city+" in "+MFULL[best])],["Every route, every month →","../app/#seats",1]]});
   }
   var free=(sc.free||[]).concat((sc["do"]||[]).filter(function(p){return p.fee==="no";}));
   free.forEach(function(p){out.push({place:p,type:"free",tag:"Free",title:p.name||p.what,where:NEARAPI.distText(p.km)+" from the centre of "+city,what:p.what+(p.extra&&p.extra!=="free entry"?" · "+p.extra:"")+". No ticket needed.",
