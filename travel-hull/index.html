@@ -445,10 +445,8 @@ footer p{margin:10px 0 0;max-width:420px}
 html[data-mood=reef]{--deep:#04404A;--deep2:#022B32;--deep3:#075763;--sea:#0A6B73}
 html[data-mood=beach]{--deep:#0A3556;--deep2:#06233B;--deep3:#104A75;--sea:#0E5E8F}
 html[data-mood=rainforest]{--deep:#12381F;--deep2:#0A2414;--deep3:#1B4D2C;--sea:#1F6B3A}
-html[data-mood=outback]{--deep:#4A2410;--deep2:#30160A;--deep3:#643318;--sea:#94481B}
 html[data-mood=alpine]{--deep:#1B3550;--deep2:#102338;--deep3:#274869;--sea:#2C5E8C}
 html[data-mood=city]{--deep:#1E2A33;--deep2:#131C23;--deep3:#2C3C48;--sea:#3A5466}
-html[data-mood=wine]{--deep:#3D2E12;--deep2:#2A1F0B;--deep3:#54401A;--sea:#75560F}
 .top,.wayrow,.trust,.shorts,footer{transition:background-color .5s}
 @media(prefers-reduced-motion:reduce){.top,.wayrow,.trust,.shorts,footer{transition:none}}
 .tripbar .field.kind{grid-column:1/-1;min-height:54px}
@@ -1790,7 +1788,7 @@ var MOODCLIP={reef:["m:islands","m:snorkel","m:sailing"],beach:["m:beach","m:isl
 var MOODNAME={reef:"Reef and islands",beach:"Beach",rainforest:"Rainforest",outback:"Outback",alpine:"Mountains and snow",city:"City",wine:"Country and coast"};
 var MOODLEAD={reef:"Warm water, coral and island days.",beach:"Sun, surf and long lazy days.",rainforest:"Green hills, waterfalls and slow mornings.",outback:"Red dirt, big skies and long roads.",alpine:"Mountains, lakes and crisp air.",city:"Food, lights and streets to walk.",wine:"Cellar doors, coast roads and quiet towns."};
 if(!AD.styles[S.style])S.style="";
-function applyMood(){document.documentElement.setAttribute("data-mood",MOODS[S.dest]||"default");}
+function applyMood(){document.documentElement.setAttribute("data-mood","default");}   
 function stage(){var d=daysAway();if(d==null)return "dream";if(d>30)return "booked";if(d>7)return "month";if(d>0)return "week";if(d===0||-d===S.nights)return "day";if(-d<S.nights)return "there";return "home";}
 function drawHero(){
   var d=dest(S.dest),city=d[1].replace(/ \(.*/,""),w=QFJ.way(S.cur),st=AD.styles[S.style],da=daysAway(),mood=MOODS[S.dest]||"";
