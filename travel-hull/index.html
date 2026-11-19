@@ -503,7 +503,7 @@ a.ktile:hover{border-color:var(--sea);box-shadow:var(--shadow)}
 <div class="util"><div class="wrap"><span><i class="dot"></i><b>Free</b> · works with no signal · no account</span><nav aria-label="Quick links"><a href="#faq">Questions</a><a href="#deals">Deals</a><a href="#get">Get the app</a></nav></div></div>
 <header class="top"><div class="wrap">
   <a class="logo" href="#top" aria-label="Travel Hull home"><span class="mark"><svg class="ico" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M15.5 8.5l-2 5-5 2 2-5z"/></svg></span><span>Travel Hull<small>EVERY TRIP · STEP BY STEP</small></span></a>
-  <nav class="nav" aria-label="Sections"><a class="on" href="#plan">Steps</a><a href="trip.html">My plan</a><a href="tools.html">Tools</a><a href="#deals">Deals</a><a href="../app/#seats">Flights</a><a href="weather.html">Weather</a><a href="money.html">Money</a></nav>
+  <nav class="nav" aria-label="Sections"><a class="on" href="#plan">Steps</a><a href="trip.html">My plan</a><a href="tools.html">Tools</a><a href="#deals">Deals</a><a href="flights.html">Flights</a><a href="weather.html">Weather</a><a href="money.html">Money</a></nav>
   <a class="btn gold" href="#get">Get the app</a>
 </div></header>
 <div class="wayrow"><div class="wrap"><span class="lab">Your way</span><div class="wchips" id="wayChips" role="group" aria-label="Your way to travel"></div></div></div>
@@ -627,7 +627,7 @@ a.ktile:hover{border-color:var(--sea);box-shadow:var(--shadow)}
 </div></section>
 <footer><div class="wrap">
   <div><a class="logo" href="#top"><span class="mark"><svg class="ico" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M15.5 8.5l-2 5-5 2 2-5z"/></svg></span>Travel Hull</a><p>A free travel app for every kind of trip. Paid deal links are always labelled.</p></div>
-  <nav aria-label="Footer"><a href="#plan">Your plan</a><a href="#ways">Every way</a><a href="tools.html">Tools</a><a href="#deals">Deals</a><a href="../app/#seats">Flights</a><a href="weather.html">Weather</a><a href="money.html">Money</a><a href="#faq">Questions</a></nav>
+  <nav aria-label="Footer"><a href="#plan">Your plan</a><a href="#ways">Every way</a><a href="tools.html">Tools</a><a href="#deals">Deals</a><a href="flights.html">Flights</a><a href="weather.html">Weather</a><a href="money.html">Money</a><a href="#faq">Questions</a></nav>
 </div></footer>
 <div class="mbar"><div><b>Travel Hull</b><small>Free · works offline</small></div><a class="btn gold" href="#get">Get the app</a></div>
 <dialog id="guide" class="gd" aria-labelledby="gdTitle"><div class="gd-h"><div class="row"><span id="gdProg"></span><button type="button" class="x" data-gclose aria-label="Close">×</button></div><div class="gd-bar"><i id="gdBar"></i></div></div><div class="gd-b" id="gdBody"></div><div class="gd-f" id="gdFoot"></div></dialog>
@@ -1597,6 +1597,7 @@ if(dest(S.dest)[0]!==S.dest)S.dest="goldcoast";
 var NEARAPI=window.QFN||null,FAIRD=window.FAIR||{},PLACES={};
 function getPlaces(d){
   if(PLACES[d[0]]!==undefined||!window.fetch)return;PLACES[d[0]]=null;
+  if(window.PLACESALL&&PLACESALL[d[0]]){PLACES[d[0]]=PLACESALL[d[0]];return;}
   fetch("places/"+d[0]+".json").then(function(r){if(!r.ok)throw 0;return r.json();}).then(function(j){PLACES[d[0]]=j;if(S.dest===d[0])drawDeals();},function(){PLACES[d[0]]=false;});
 }
 var SCAN={},scanState="",scanFor="";
@@ -1909,14 +1910,14 @@ function drawPlan(){
       return '<li class="'+(hereN&&s.n<hereN?"done":when[i].here?"here":"")+'"><i>'+(hereN&&s.n<hereN?"✓":s.n)+"</i><b>"+E(s.title)+"</b><span>"+E(when[i].when)+"</span></li>";}).join("")+"</ol></div>";
 }
 function heroPhoto(){var H=window.HEROPH||{place:[],mood:[]},m=MOODS[S.dest]||"",sm=innerWidth<900?"-800":"";
-  if(H.place.indexOf(S.dest)>=0)return "media/place-"+S.dest+sm+".webp";if(hasClip("m:"+m,innerWidth/innerHeight<0.8?"-square":""))return "";if(H.mood.indexOf(m)>=0)return "media/mood-"+m+sm+".webp";return "";}
+  if(H.place.indexOf(S.dest)>=0)return "media/place-"+S.dest+sm+".webp";if(hasClip("m:"+m,window.MEDIAMAN||innerWidth/innerHeight<0.8?"-square":""))return "";if(H.mood.indexOf(m)>=0)return "media/mood-"+m+sm+".webp";return "";}
 function setVideo(){
   var v=$("heroVid"),hero=document.querySelector(".hero"),st=$("heroStill");if(!v)return;
   var ph=heroPhoto();
   if(ph){st.style.backgroundImage="url("+ph+")";st.classList.add("on");v.classList.remove("on");v.pause();v.removeAttribute("src");v.load();
     $("clipCap").textContent=(MOODNAME[MOODS[S.dest]]||"")+" · "+dest(S.dest)[1].replace(/ \(.*/,"");$("pause").style.display="none";return;}
   st.classList.remove("on");
-  var sq=innerWidth/innerHeight<0.8?"-square":"";
+  var sq=window.MEDIAMAN||innerWidth/innerHeight<0.8?"-square":"";   
   var mood=MOODS[S.dest]||"",list=(MOODCLIP[mood]||[]).concat(CLIPS[S.cur]||[]).filter(function(c,i,a){return a.indexOf(c)===i&&hasClip(c,sq);});
   if(!list.length)list=["m:mixed"].filter(function(c){return hasClip(c,sq);});
   var key=list.length?list[clipN%list.length]:"";
@@ -1987,7 +1988,7 @@ $("faqSearch").addEventListener("input",function(){
 getPlaces(dest(S.dest));drawAll();drawInside();drawDeals();
 if("serviceWorker" in navigator)navigator.serviceWorker.register("sw.js").catch(function(){});
 if(window.IntersectionObserver){var io=new IntersectionObserver(function(en){if(en[0].isIntersecting){io.disconnect();scan(false);}},{rootMargin:"200px"});io.observe($("deals"));}else scan(false);
-if(window.fetch)fetch("media/media-manifest.json",{cache:"no-cache"}).then(function(r){return r.ok?r.text():"";}).then(function(t){
+if(window.fetch)(window.MEDIAMAN?Promise.resolve(JSON.stringify(window.MEDIAMAN)):fetch("media/media-manifest.json",{cache:"no-cache"}).then(function(r){return r.ok?r.text():"";})).then(function(t){
   MEDIA=t||"";try{PH=JSON.parse(MEDIA).photos||{};}catch(e){PH={};}drawAll();drawInside();
 }).catch(function(){});
 var rz;addEventListener("resize",function(){clearTimeout(rz);rz=setTimeout(setVideo,300);});

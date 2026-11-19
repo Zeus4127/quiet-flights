@@ -1,7 +1,7 @@
 // Offline copy of Quiet Flights. Network first, but never wait long: after 3.5 s on a weak signal the saved copy is
 // shown and the fresh one keeps downloading in the background for next time. With no signal the saved copy is used.
 // Only this site's own files are handled; other services (maps, rates, holidays) go straight to the network.
-const CACHE = 'qf-2026-11-19-1500';
+const CACHE = 'qf-2026-11-19-1630';
 const FILES = ['./', './index.html', './app/', './app/index.html', './data/app_data.js', './data/economy_data.js', './app/economy_logic.js', './app/economy_ui.js', './app/travel_kit.js', './app/travel_tools.js', './app/travel_notes.js', './app/travel_local.js', './app/travel_plan.js', './app/travel_near.js', './app/travel_arrive.js', './app/travel_vault.js', './app/travel_help.js', './app/travel_way.js', './app/travel_journey.js', './app/travel_baked.js', './app/travel_charts.js', './data/summary.js', './data/map.js', './manifest.webmanifest', './icons/icon-192.png'];
 const WAIT_MS = 3500;
 // One file failing (e.g. a slow big file) must not throw away the whole offline copy, so save them one by one.
