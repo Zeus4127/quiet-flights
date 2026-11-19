@@ -451,6 +451,46 @@
     "file": "trip-plane2-square-poster.jpg",
     "bytes": 6947
    }
+  },
+  "outback": {
+   "source": "Pexels 40688832 aerial of red outback at golden hour (slow drone), https://www.pexels.com/video/40688832/",
+   "hero": false,
+   "video": {
+    "file": "trip-outback.mp4",
+    "bytes": 876357
+   },
+   "video_square": {
+    "file": "trip-outback-square.mp4",
+    "bytes": 551842
+   },
+   "poster": {
+    "file": "trip-outback-poster.jpg",
+    "bytes": 140012
+   },
+   "poster_square": {
+    "file": "trip-outback-square-poster.jpg",
+    "bytes": 85283
+   }
+  },
+  "wine": {
+   "source": "Pexels 36331668 drone view of vineyard and rolling hills, https://www.pexels.com/video/36331668/",
+   "hero": false,
+   "video": {
+    "file": "trip-wine.mp4",
+    "bytes": 907796
+   },
+   "video_square": {
+    "file": "trip-wine-square.mp4",
+    "bytes": 574593
+   },
+   "poster": {
+    "file": "trip-wine-poster.jpg",
+    "bytes": 173272
+   },
+   "poster_square": {
+    "file": "trip-wine-square-poster.jpg",
+    "bytes": 98657
+   }
   }
  },
  "photos": {

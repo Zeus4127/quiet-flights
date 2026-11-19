@@ -1,0 +1,271 @@
+{
+ "updated": "2026-11-19",
+ "credits": [
+  {
+   "file": "mood-reef.webp",
+   "bytes": 86890,
+   "source_url": "https://www.pexels.com/photo/26726469/",
+   "author": "eclipse-chasers (Pexels)",
+   "licence": "Pexels License (free for commercial use, no attribution required)"
+  },
+  {
+   "file": "mood-reef-800.webp",
+   "bytes": 26576,
+   "source_url": "https://www.pexels.com/photo/26726469/",
+   "author": "eclipse-chasers (Pexels)",
+   "licence": "Pexels License (free for commercial use, no attribution required)"
+  },
+  {
+   "file": "mood-beach.webp",
+   "bytes": 144874,
+   "source_url": "https://www.pexels.com/photo/13833135/",
+   "author": "slimmars (Pexels)",
+   "licence": "Pexels License (free for commercial use, no attribution required)"
+  },
+  {
+   "file": "mood-beach-800.webp",
+   "bytes": 43358,
+   "source_url": "https://www.pexels.com/photo/13833135/",
+   "author": "slimmars (Pexels)",
+   "licence": "Pexels License (free for commercial use, no attribution required)"
+  },
+  {
+   "file": "mood-rainforest.webp",
+   "bytes": 381256,
+   "source_url": "https://www.pexels.com/photo/17677840/",
+   "author": "Rohi Bernard Codillo (Pexels)",
+   "licence": "Pexels License (free for commercial use, no attribution required)"
+  },
+  {
+   "file": "mood-rainforest-800.webp",
+   "bytes": 107064,
+   "source_url": "https://www.pexels.com/photo/17677840/",
+   "author": "Rohi Bernard Codillo (Pexels)",
+   "licence": "Pexels License (free for commercial use, no attribution required)"
+  },
+  {
+   "file": "mood-outback.webp",
+   "bytes": 359542,
+   "source_url": "https://www.pexels.com/photo/21273962/",
+   "author": "Petra Nesti (Pexels)",
+   "licence": "Pexels License (free for commercial use, no attribution required)"
+  },
+  {
+   "file": "mood-outback-800.webp",
+   "bytes": 86726,
+   "source_url": "https://www.pexels.com/photo/21273962/",
+   "author": "Petra Nesti (Pexels)",
+   "licence": "Pexels License (free for commercial use, no attribution required)"
+  },
+  {
+   "file": "mood-alpine.webp",
+   "bytes": 169408,
+   "source_url": "https://www.pexels.com/photo/27667695/",
+   "author": "Nanda Gopal Lakshman (Pexels)",
+   "licence": "Pexels License (free for commercial use, no attribution required)"
+  },
+  {
+   "file": "mood-alpine-800.webp",
+   "bytes": 66278,
+   "source_url": "https://www.pexels.com/photo/27667695/",
+   "author": "Nanda Gopal Lakshman (Pexels)",
+   "licence": "Pexels License (free for commercial use, no attribution required)"
+  },
+  {
+   "file": "mood-city.webp",
+   "bytes": 180454,
+   "source_url": "https://www.pexels.com/photo/15906464/",
+   "author": "He Zhang (Pexels)",
+   "licence": "Pexels License (free for commercial use, no attribution required)"
+  },
+  {
+   "file": "mood-city-800.webp",
+   "bytes": 49866,
+   "source_url": "https://www.pexels.com/photo/15906464/",
+   "author": "He Zhang (Pexels)",
+   "licence": "Pexels License (free for commercial use, no attribution required)"
+  },
+  {
+   "file": "mood-wine.webp",
+   "bytes": 395886,
+   "source_url": "https://www.pexels.com/photo/8821416/",
+   "author": "chaitaastic (Pexels)",
+   "licence": "Pexels License (free for commercial use, no attribution required)"
+  },
+  {
+   "file": "mood-wine-800.webp",
+   "bytes": 136798,
+   "source_url": "https://www.pexels.com/photo/8821416/",
+   "author": "chaitaastic (Pexels)",
+   "licence": "Pexels License (free for commercial use, no attribution required)"
+  },
+  {
+   "file": "place-goldcoast.webp",
+   "bytes": 207730,
+   "source_url": "https://www.pexels.com/photo/19823955/",
+   "author": "Martin Skerik (Pexels)",
+   "licence": "Pexels License (free for commercial use, no attribution required)"
+  },
+  {
+   "file": "place-goldcoast-800.webp",
+   "bytes": 63178,
+   "source_url": "https://www.pexels.com/photo/19823955/",
+   "author": "Martin Skerik (Pexels)",
+   "licence": "Pexels License (free for commercial use, no attribution required)"
+  },
+  {
+   "file": "place-bali.webp",
+   "bytes": 373034,
+   "source_url": "https://www.pexels.com/photo/36810327/",
+   "author": "Tom Fisk (Pexels)",
+   "licence": "Pexels License (free for commercial use, no attribution required)"
+  },
+  {
+   "file": "place-bali-800.webp",
+   "bytes": 113256,
+   "source_url": "https://www.pexels.com/photo/36810327/",
+   "author": "Tom Fisk (Pexels)",
+   "licence": "Pexels License (free for commercial use, no attribution required)"
+  },
+  {
+   "file": "place-sunshinecoast.webp",
+   "bytes": 397092,
+   "source_url": "https://www.pexels.com/photo/2157800/",
+   "author": "Daniel Jurin (Pexels)",
+   "licence": "Pexels License (free for commercial use, no attribution required)"
+  },
+  {
+   "file": "place-sunshinecoast-800.webp",
+   "bytes": 109654,
+   "source_url": "https://www.pexels.com/photo/2157800/",
+   "author": "Daniel Jurin (Pexels)",
+   "licence": "Pexels License (free for commercial use, no attribution required)"
+  },
+  {
+   "file": "place-nadi.webp",
+   "bytes": 194482,
+   "source_url": "https://www.pexels.com/photo/4911906/",
+   "author": "Lukas (Pexels)",
+   "licence": "Pexels License (free for commercial use, no attribution required)"
+  },
+  {
+   "file": "place-nadi-800.webp",
+   "bytes": 51684,
+   "source_url": "https://www.pexels.com/photo/4911906/",
+   "author": "Lukas (Pexels)",
+   "licence": "Pexels License (free for commercial use, no attribution required)"
+  },
+  {
+   "file": "place-cairns.webp",
+   "bytes": 392648,
+   "source_url": "https://www.pexels.com/photo/38333005/",
+   "author": "Relaxing Journeys (Pexels)",
+   "licence": "Pexels License (free for commercial use, no attribution required)"
+  },
+  {
+   "file": "place-cairns-800.webp",
+   "bytes": 125034,
+   "source_url": "https://www.pexels.com/photo/38333005/",
+   "author": "Relaxing Journeys (Pexels)",
+   "licence": "Pexels License (free for commercial use, no attribution required)"
+  },
+  {
+   "file": "place-phuket.webp",
+   "bytes": 219462,
+   "source_url": "https://www.pexels.com/photo/11476544/",
+   "author": "gokudo (Pexels)",
+   "licence": "Pexels License (free for commercial use, no attribution required)"
+  },
+  {
+   "file": "place-phuket-800.webp",
+   "bytes": 65438,
+   "source_url": "https://www.pexels.com/photo/11476544/",
+   "author": "gokudo (Pexels)",
+   "licence": "Pexels License (free for commercial use, no attribution required)"
+  },
+  {
+   "file": "place-whitsundays.webp",
+   "bytes": 64386,
+   "source_url": "https://www.pexels.com/photo/39842264/",
+   "author": "fran (Pexels)",
+   "licence": "Pexels License (free for commercial use, no attribution required)"
+  },
+  {
+   "file": "place-whitsundays-800.webp",
+   "bytes": 23454,
+   "source_url": "https://www.pexels.com/photo/39842264/",
+   "author": "fran (Pexels)",
+   "licence": "Pexels License (free for commercial use, no attribution required)"
+  },
+  {
+   "file": "place-tokyo.webp",
+   "bytes": 152470,
+   "source_url": "https://www.pexels.com/photo/12544839/",
+   "author": "Nguyen Khac Tien (Pexels)",
+   "licence": "Pexels License (free for commercial use, no attribution required)"
+  },
+  {
+   "file": "place-tokyo-800.webp",
+   "bytes": 58192,
+   "source_url": "https://www.pexels.com/photo/12544839/",
+   "author": "Nguyen Khac Tien (Pexels)",
+   "licence": "Pexels License (free for commercial use, no attribution required)"
+  },
+  {
+   "file": "place-byron.webp",
+   "bytes": 99674,
+   "source_url": "https://www.pexels.com/photo/3798155/",
+   "author": "Valeriia Miller (Pexels)",
+   "licence": "Pexels License (free for commercial use, no attribution required)"
+  },
+  {
+   "file": "place-byron-800.webp",
+   "bytes": 28612,
+   "source_url": "https://www.pexels.com/photo/3798155/",
+   "author": "Valeriia Miller (Pexels)",
+   "licence": "Pexels License (free for commercial use, no attribution required)"
+  },
+  {
+   "file": "place-queenstown.webp",
+   "bytes": 203982,
+   "source_url": "https://www.pexels.com/photo/8856179/",
+   "author": "andromeda99 (Pexels)",
+   "licence": "Pexels License (free for commercial use, no attribution required)"
+  },
+  {
+   "file": "place-queenstown-800.webp",
+   "bytes": 65556,
+   "source_url": "https://www.pexels.com/photo/8856179/",
+   "author": "andromeda99 (Pexels)",
+   "licence": "Pexels License (free for commercial use, no attribution required)"
+  },
+  {
+   "file": "place-noosa.webp",
+   "bytes": 237920,
+   "source_url": "https://www.pexels.com/photo/30294458/",
+   "author": "Dillon Hunt (Pexels)",
+   "licence": "Pexels License (free for commercial use, no attribution required)"
+  },
+  {
+   "file": "place-noosa-800.webp",
+   "bytes": 68926,
+   "source_url": "https://www.pexels.com/photo/30294458/",
+   "author": "Dillon Hunt (Pexels)",
+   "licence": "Pexels License (free for commercial use, no attribution required)"
+  },
+  {
+   "file": "place-hobart.webp",
+   "bytes": 269876,
+   "source_url": "https://www.pexels.com/photo/33899484/",
+   "author": "Mark Direen (Pexels)",
+   "licence": "Pexels License (free for commercial use, no attribution required)"
+  },
+  {
+   "file": "place-hobart-800.webp",
+   "bytes": 76178,
+   "source_url": "https://www.pexels.com/photo/33899484/",
+   "author": "Mark Direen (Pexels)",
+   "licence": "Pexels License (free for commercial use, no attribution required)"
+  }
+ ]
+}
