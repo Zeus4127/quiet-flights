@@ -10,6 +10,7 @@
 @font-face{font-family:Sora;src:url(fonts/sora.woff2) format("woff2");font-weight:100 800;font-display:swap}
 @font-face{font-family:Inter;src:url(fonts/inter.woff2) format("woff2");font-weight:100 900;font-display:swap}
 :root{
+  --deep3:#0A3B47;
   --deep:#062F3A;--deep2:#041F27;--sea:#0B5566;--sea2:#137A8A;--sea3:#2BA3B0;--foam:#E2F1F0;
   --sand:#F6F3EC;--card:#fff;--sun:#F4B740;--sun2:#FFD27A;--sunink:#2B1D00;--sunText:#8A5F00;
   --ink:#0F2A31;--mut:#56696F;--line:#DCE4E1;
@@ -58,7 +59,7 @@ a{color:inherit}
 .top .btn{min-height:44px;padding:0 20px;font-size:15px}
 @media(max-width:960px){.nav{display:none}.top .btn{margin-left:auto}}
 @media(max-width:400px){.logo{font-size:18px}.logo small{display:none}.top .btn{padding:0 16px}}
-.wayrow{background:#0A3B47;color:#fff;border-bottom:3px solid var(--sun)}
+.wayrow{background:var(--deep3);color:#fff;border-bottom:3px solid var(--sun)}
 .wayrow .wrap{display:flex;align-items:center;gap:14px;min-height:58px}
 .wayrow .lab{flex:none;font:700 11.5px var(--hf);letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.7)}
 .wchips{display:flex;gap:8px;overflow-x:auto;padding:8px 2px;scrollbar-width:none}
@@ -73,7 +74,7 @@ a{color:inherit}
 .hero{position:relative;color:#fff;background:var(--deep) center/cover no-repeat;overflow:hidden}
 .hero video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity 1s}
 .hero video.on{opacity:1}
-.hero:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(4,24,30,.62),rgba(4,24,30,.42) 34%,rgba(6,47,58,.86) 78%,var(--deep)),linear-gradient(90deg,rgba(4,24,30,.55),transparent 65%)}
+.hero:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(4,24,30,.62),rgba(4,24,30,.42) 34%,color-mix(in srgb,var(--deep) 86%,transparent) 78%,var(--deep)),linear-gradient(90deg,rgba(4,24,30,.55),transparent 65%)}
 .hero .wrap{position:relative;z-index:1;padding-top:76px;padding-bottom:40px}
 @media(min-width:1001px){.hero .wrap{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,.75fr);gap:44px;align-items:center}}
 .hero-l{min-width:0}
@@ -264,7 +265,7 @@ dialog::backdrop{background:rgba(4,31,39,.6);backdrop-filter:blur(3px)}
 .gate .g{width:52px;height:52px;border-radius:14px;background:var(--foam);color:var(--sea);display:grid;place-items:center;font:800 18px var(--hf)}
 .gate h3{font-size:18px}.gate p{margin:4px 0 10px;color:var(--mut);font-size:15px}
 .paid{margin-top:16px;font-size:14px;color:var(--mut);padding:14px 16px;border-left:3px solid var(--sea2);background:#fff;border-radius:0 12px 12px 0}
-.dl{position:relative;background:linear-gradient(160deg,var(--deep2),var(--deep) 55%,#0A3B47)}
+.dl{position:relative;background:linear-gradient(160deg,var(--deep2),var(--deep) 55%,var(--deep3))}
 .dl .wrap{position:relative}
 .dl-top{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;flex-wrap:wrap;margin-bottom:18px}
 .dl-top .sec-h{margin-bottom:0}
@@ -328,7 +329,7 @@ dialog::backdrop{background:rgba(4,31,39,.6);backdrop-filter:blur(3px)}
 .deal .ac a.alt{background:#fff;color:var(--sea);border:1.5px solid var(--sea)}
 .deal .mini{grid-column:2/-1;margin-top:2px}
 .deal.skel-row{min-height:84px;background:linear-gradient(90deg,rgba(255,255,255,.1),rgba(255,255,255,.2),rgba(255,255,255,.1));background-size:200% 100%;animation:sk 1.2s infinite}
-@media(max-width:900px){.deal{grid-template-columns:44px minmax(0,1fr);gap:10px 12px}.deal .rk{width:44px;height:44px;font-size:17px}.deal .sv,.deal .ac,.deal .mini{grid-column:1/-1}.deal .ac{flex-direction:row}.deal .ac a{flex:1}}
+@media(max-width:900px){.deal{grid-template-columns:44px minmax(0,1fr);gap:10px 12px}.deal .rk{width:44px;height:44px;font-size:17px}.deal .sv,.deal .ac,.deal .mini{grid-column:1/-1}.deal .ac{flex-direction:row;flex-wrap:wrap;min-width:0}.deal .ac a{flex:1 1 auto}}
 .dmore{display:flex;justify-content:center;margin-top:14px}
 .dmore button{min-height:48px;padding:0 24px;border-radius:999px;border:1px solid rgba(255,255,255,.5);background:none;color:#fff;font:600 15px var(--hf)}
 .dcharts{display:grid;grid-template-columns:2fr 1fr 1fr;gap:14px;margin-top:22px;align-items:stretch}
@@ -441,7 +442,57 @@ footer p{margin:10px 0 0;max-width:420px}
   .card .tx{padding:14px}
 }
 @media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
-.pg-h{background:linear-gradient(160deg,var(--deep2),var(--deep) 60%,#0A3B47);color:#fff;padding:44px 0 30px}
+html[data-mood=reef]{--deep:#04404A;--deep2:#022B32;--deep3:#075763;--sea:#0A6B73}
+html[data-mood=beach]{--deep:#0A3556;--deep2:#06233B;--deep3:#104A75;--sea:#0E5E8F}
+html[data-mood=rainforest]{--deep:#12381F;--deep2:#0A2414;--deep3:#1B4D2C;--sea:#1F6B3A}
+html[data-mood=outback]{--deep:#4A2410;--deep2:#30160A;--deep3:#643318;--sea:#94481B}
+html[data-mood=alpine]{--deep:#1B3550;--deep2:#102338;--deep3:#274869;--sea:#2C5E8C}
+html[data-mood=city]{--deep:#1E2A33;--deep2:#131C23;--deep3:#2C3C48;--sea:#3A5466}
+html[data-mood=wine]{--deep:#3D2E12;--deep2:#2A1F0B;--deep3:#54401A;--sea:#75560F}
+.top,.wayrow,.trust,.shorts,footer{transition:background-color .5s}
+@media(prefers-reduced-motion:reduce){.top,.wayrow,.trust,.shorts,footer{transition:none}}
+.tripbar .field.kind{grid-column:1/-1;min-height:54px}
+.foryou{background:var(--sand)}
+.nowcard{position:relative;border-radius:24px;padding:28px;color:#fff;background:linear-gradient(140deg,var(--deep2),var(--deep) 55%,var(--deep3));box-shadow:var(--shadow);display:grid;grid-template-columns:1.25fr 1fr;gap:28px;align-items:start}
+.nowcard .stage{display:inline-flex;align-items:center;gap:8px;font:700 12px var(--hf);letter-spacing:.14em;text-transform:uppercase;color:var(--sun)}
+.nowcard .stage i{width:9px;height:9px;border-radius:50%;background:var(--sun);box-shadow:0 0 0 5px rgba(244,183,64,.22)}
+.nowcard h3{font:800 clamp(24px,3.4vw,34px)/1.12 var(--hf);letter-spacing:-.02em;margin:10px 0 8px;color:#fff;text-wrap:balance}
+.nowcard p{color:rgba(255,255,255,.86);margin:0 0 16px;max-width:54ch}
+.nowcard .acts{display:flex;gap:10px;flex-wrap:wrap}
+.nowcard .acts a,.nowcard .acts button{display:inline-flex;align-items:center;min-height:48px;padding:0 20px;border-radius:999px;font-weight:700;text-decoration:none;cursor:pointer;border:1px solid rgba(255,255,255,.3);background:rgba(255,255,255,.08);color:#fff;font-size:15px}
+.nowcard .acts .go{background:var(--sun);border-color:var(--sun);color:var(--sunink)}
+.nowcard .why{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.16);border-radius:18px;padding:18px}
+.nowcard .why b{display:block;font:700 12px var(--hf);letter-spacing:.12em;text-transform:uppercase;color:var(--sun);margin-bottom:6px}
+.nowcard .why p{font-size:14.5px;margin:0 0 8px;color:rgba(255,255,255,.9)}
+.nowcard .why a{color:var(--sun2);font-weight:600;font-size:13.5px}
+.nowcard .dl2{margin:14px 0 0;padding:0;list-style:none;display:grid;gap:6px}
+.nowcard .dl2 li{position:relative;padding-left:22px;font-size:14.5px;color:rgba(255,255,255,.9)}
+.nowcard .dl2 li:before{content:"";position:absolute;left:2px;top:8px;width:9px;height:9px;border-radius:2px;background:var(--sun)}
+.fy-h{font:700 13px var(--hf);letter-spacing:.12em;text-transform:uppercase;color:var(--mut);margin:34px 0 12px}
+.know{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px}
+.ktile{display:flex;flex-direction:column;gap:4px;background:#fff;border:1px solid var(--line);border-radius:16px;padding:14px 16px;min-width:0;text-decoration:none;color:var(--ink)}
+a.ktile:hover{border-color:var(--sea);box-shadow:var(--shadow)}
+.ktile span{font:700 11.5px var(--hf);letter-spacing:.12em;text-transform:uppercase;color:var(--mut)}
+.ktile b{font:700 17px/1.25 var(--hf);overflow-wrap:anywhere}
+.ktile small{font-size:13px;color:var(--mut)}
+.ktile.l2 b{color:#8A5F00}.ktile.l3 b,.ktile.l4 b{color:#B3261E}.ktile.l1 b{color:#0E6B47}
+.watch{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px}
+.wcard{background:#fff;border:1px solid var(--line);border-radius:18px;padding:18px;display:flex;flex-direction:column;gap:8px;min-width:0}
+.wcard .from{font:700 11.5px var(--hf);letter-spacing:.12em;text-transform:uppercase;color:var(--sea)}
+.wcard h4{font:700 18px/1.2 var(--hf);margin:0}
+.wcard p{margin:0;color:var(--ink);font-size:15px}
+.wcard .fig{background:#FFF6DF;color:#3A2A00;border-radius:12px;padding:10px 12px;font-size:14px}
+.wcard .fig b{font-weight:700}
+.wcard a{font-weight:600;color:var(--sea);font-size:13.5px;align-self:flex-start}
+.forgot{display:flex;flex-wrap:wrap;gap:8px}
+.fchip{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 14px;border-radius:999px;background:#fff;border:1px solid var(--line);font-weight:600;font-size:14.5px;cursor:pointer;color:var(--ink);text-align:left}
+.fchip i{flex:none;width:18px;height:18px;border-radius:5px;border:2px solid var(--sea)}
+.fchip[aria-pressed=true]{background:var(--foam);border-color:var(--sea)}
+.fchip[aria-pressed=true] i{background:var(--sea)}
+.fchip[aria-pressed=true] span{text-decoration:line-through;color:var(--mut)}
+.fy-src{margin-top:18px;font-size:13px;color:var(--mut)}
+@media(max-width:820px){.nowcard{grid-template-columns:1fr;padding:20px}}
+.pg-h{background:linear-gradient(160deg,var(--deep2),var(--deep) 60%,var(--deep3));color:#fff;padding:44px 0 30px}
 .pg-h h1{font-size:clamp(32px,5vw,56px);font-weight:800;margin-top:12px}
 .pg-h h1 em{font-style:normal;color:var(--sun)}
 .pg-h p{color:rgba(255,255,255,.85);font-size:17px;max-width:680px;margin:12px 0 0}
@@ -537,7 +588,7 @@ details.more{margin-top:12px}details.more summary{cursor:pointer;font-weight:600
 var $=function(id){return document.getElementById(id);};
 function E(s){return String(s==null?"":s).replace(/[&<>"']/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c];});}
 var MONTHS=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],MFULL=["January","February","March","April","May","June","July","August","September","October","November","December"],DAYS=["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
-var DEST=[["goldcoast","Gold Coast","Australia","AU",-28.0027,153.431,"AUD",1,"QLD"],["sunshinecoast","Sunshine Coast (Mooloolaba)","Australia","AU",-26.6806,153.1182,"AUD",1,"QLD"],["noosa","Noosa","Australia","AU",-26.3925,153.0905,"AUD",1,"QLD"],["brisbane","Brisbane","Australia","AU",-27.4698,153.0251,"AUD",1,"QLD"],["cairns","Cairns","Australia","AU",-16.9203,145.771,"AUD",1,"QLD"],["portdouglas","Port Douglas","Australia","AU",-16.4836,145.4653,"AUD",1,"QLD"],["whitsundays","Whitsundays (Airlie Beach)","Australia","AU",-20.2683,148.7177,"AUD",1,"QLD"],["townsville","Townsville","Australia","AU",-19.259,146.8169,"AUD",1,"QLD"],["byron","Byron Bay","Australia","AU",-28.6474,153.602,"AUD",1,"NSW"],["sydney","Sydney","Australia","AU",-33.8688,151.2093,"AUD",1,"NSW"],["bluemountains","Blue Mountains (Katoomba)","Australia","AU",-33.7124,150.3119,"AUD",1,"NSW"],["huntervalley","Hunter Valley","Australia","AU",-32.7853,151.2955,"AUD",1,"NSW"],["portstephens","Port Stephens","Australia","AU",-32.7187,152.1067,"AUD",1,"NSW"],["canberra","Canberra","Australia","AU",-35.2809,149.13,"AUD",1,"ACT"],["melbourne","Melbourne","Australia","AU",-37.8136,144.9631,"AUD",1,"VIC"],["greatoceanroad","Great Ocean Road (Lorne)","Australia","AU",-38.5418,143.9748,"AUD",1,"VIC"],["phillipisland","Phillip Island","Australia","AU",-38.4833,145.2333,"AUD",1,"VIC"],["hobart","Hobart","Australia","AU",-42.8821,147.3272,"AUD",1,"TAS"],["launceston","Launceston","Australia","AU",-41.4332,147.1441,"AUD",1,"TAS"],["adelaide","Adelaide","Australia","AU",-34.9285,138.6007,"AUD",1,"SA"],["perth","Perth","Australia","AU",-31.9523,115.8613,"AUD",1,"WA"],["margaretriver","Margaret River","Australia","AU",-33.9536,115.0739,"AUD",1,"WA"],["broome","Broome","Australia","AU",-17.9614,122.2359,"AUD",1,"WA"],["darwin","Darwin","Australia","AU",-12.4634,130.8456,"AUD",1,"NT"],["alice","Alice Springs","Australia","AU",-23.698,133.8807,"AUD",1,"NT"],["uluru","Uluru (Yulara)","Australia","AU",-25.2406,130.9889,"AUD",1,"NT"],["bali","Bali (Seminyak)","Indonesia","ID",-8.6913,115.1683,"IDR",0,"Asia"],["ubud","Bali (Ubud)","Indonesia","ID",-8.5069,115.2625,"IDR",0,"Asia"],["phuket","Phuket (Patong)","Thailand","TH",7.8961,98.2961,"THB",0,"Asia"],["bangkok","Bangkok","Thailand","TH",13.7563,100.5018,"THB",0,"Asia"],["chiangmai","Chiang Mai","Thailand","TH",18.7883,98.9853,"THB",0,"Asia"],["kohsamui","Koh Samui","Thailand","TH",9.512,100.0136,"THB",0,"Asia"],["singapore","Singapore","Singapore","SG",1.2897,103.8501,"SGD",0,"Asia"],["kl","Kuala Lumpur","Malaysia","MY",3.1478,101.6953,"MYR",0,"Asia"],["hanoi","Hanoi","Vietnam","VN",21.0285,105.8542,"VND",0,"Asia"],["hcmc","Ho Chi Minh City","Vietnam","VN",10.7769,106.7009,"VND",0,"Asia"],["hoian","Hoi An","Vietnam","VN",15.8801,108.338,"VND",0,"Asia"],["tokyo","Tokyo","Japan","JP",35.6812,139.7671,"JPY",0,"Asia"],["osaka","Osaka","Japan","JP",34.6937,135.5023,"JPY",0,"Asia"],["kyoto","Kyoto","Japan","JP",35.0116,135.7681,"JPY",0,"Asia"],["niseko","Niseko","Japan","JP",42.8048,140.6874,"JPY",0,"Asia"],["seoul","Seoul","South Korea","KR",37.5665,126.978,"KRW",0,"Asia"],["hongkong","Hong Kong","Hong Kong","HK",22.2819,114.1582,"HKD",0,"Asia"],["dubai","Dubai","UAE","AE",25.1972,55.2744,"AED",0,"Middle East"],["nadi","Fiji (Nadi)","Fiji","FJ",-17.7765,177.4356,"FJD",0,"Pacific"],["portvila","Vanuatu (Port Vila)","Vanuatu","VU",-17.7334,168.3273,"VUV",0,"Pacific"],["noumea","New Caledonia (Noumea)","New Caledonia","NC",-22.2758,166.458,"XPF",0,"Pacific"],["rarotonga","Cook Islands (Rarotonga)","Cook Islands","CK",-21.2075,-159.7754,"NZD",0,"Pacific"],["auckland","Auckland","New Zealand","NZ",-36.8485,174.7633,"NZD",0,"New Zealand"],["queenstown","Queenstown","New Zealand","NZ",-45.0312,168.6626,"NZD",0,"New Zealand"],["rotorua","Rotorua","New Zealand","NZ",-38.1368,176.2497,"NZD",0,"New Zealand"],["christchurch","Christchurch","New Zealand","NZ",-43.5321,172.6362,"NZD",0,"New Zealand"],["wellington","Wellington","New Zealand","NZ",-41.2865,174.7762,"NZD",0,"New Zealand"],["honolulu","Honolulu (Waikiki)","USA","US",21.2793,-157.8292,"USD",0,"Americas"],["la","Los Angeles","USA","US",34.0522,-118.2437,"USD",0,"Americas"],["lasvegas","Las Vegas","USA","US",36.1147,-115.1728,"USD",0,"Americas"],["nyc","New York","USA","US",40.758,-73.9855,"USD",0,"Americas"],["london","London","United Kingdom","GB",51.5074,-0.1278,"GBP",0,"Europe"],["paris","Paris","France","FR",48.8566,2.3522,"EUR",0,"Europe"],["rome","Rome","Italy","IT",41.9028,12.4964,"EUR",0,"Europe"],["barcelona","Barcelona","Spain","ES",41.3874,2.1686,"EUR",0,"Europe"],["athens","Athens","Greece","GR",37.9838,23.7275,"EUR",0,"Europe"]];
+var DEST=[["goldcoast","Gold Coast","Australia","AU",-28.0027,153.431,"AUD",1,"QLD"],["sunshinecoast","Sunshine Coast (Mooloolaba)","Australia","AU",-26.6806,153.1182,"AUD",1,"QLD"],["noosa","Noosa","Australia","AU",-26.3925,153.0905,"AUD",1,"QLD"],["brisbane","Brisbane","Australia","AU",-27.4698,153.0251,"AUD",1,"QLD"],["cairns","Cairns","Australia","AU",-16.9203,145.771,"AUD",1,"QLD"],["portdouglas","Port Douglas","Australia","AU",-16.4836,145.4653,"AUD",1,"QLD"],["whitsundays","Whitsundays (Airlie Beach)","Australia","AU",-20.2683,148.7177,"AUD",1,"QLD"],["townsville","Townsville","Australia","AU",-19.259,146.8169,"AUD",1,"QLD"],["byron","Byron Bay","Australia","AU",-28.6474,153.602,"AUD",1,"NSW"],["sydney","Sydney","Australia","AU",-33.8688,151.2093,"AUD",1,"NSW"],["bluemountains","Blue Mountains (Katoomba)","Australia","AU",-33.7124,150.3119,"AUD",1,"NSW"],["huntervalley","Hunter Valley","Australia","AU",-32.7853,151.2955,"AUD",1,"NSW"],["portstephens","Port Stephens","Australia","AU",-32.7187,152.1067,"AUD",1,"NSW"],["canberra","Canberra","Australia","AU",-35.2809,149.13,"AUD",1,"ACT"],["melbourne","Melbourne","Australia","AU",-37.8136,144.9631,"AUD",1,"VIC"],["greatoceanroad","Great Ocean Road (Lorne)","Australia","AU",-38.5418,143.9748,"AUD",1,"VIC"],["phillipisland","Phillip Island","Australia","AU",-38.4833,145.2333,"AUD",1,"VIC"],["hobart","Hobart","Australia","AU",-42.8821,147.3272,"AUD",1,"TAS"],["launceston","Launceston","Australia","AU",-41.4332,147.1441,"AUD",1,"TAS"],["adelaide","Adelaide","Australia","AU",-34.9285,138.6007,"AUD",1,"SA"],["perth","Perth","Australia","AU",-31.9523,115.8613,"AUD",1,"WA"],["margaretriver","Margaret River","Australia","AU",-33.9536,115.0739,"AUD",1,"WA"],["broome","Broome","Australia","AU",-17.9614,122.2359,"AUD",1,"WA"],["darwin","Darwin","Australia","AU",-12.4634,130.8456,"AUD",1,"NT"],["alice","Alice Springs","Australia","AU",-23.698,133.8807,"AUD",1,"NT"],["uluru","Uluru (Yulara)","Australia","AU",-25.2406,130.9889,"AUD",1,"NT"],["bali","Bali (Seminyak)","Indonesia","ID",-8.6913,115.1683,"IDR",0,"Asia"],["ubud","Bali (Ubud)","Indonesia","ID",-8.5069,115.2625,"IDR",0,"Asia"],["phuket","Phuket (Patong)","Thailand","TH",7.8961,98.2961,"THB",0,"Asia"],["bangkok","Bangkok","Thailand","TH",13.7563,100.5018,"THB",0,"Asia"],["chiangmai","Chiang Mai","Thailand","TH",18.7883,98.9853,"THB",0,"Asia"],["kohsamui","Koh Samui","Thailand","TH",9.512,100.0136,"THB",0,"Asia"],["singapore","Singapore","Singapore","SG",1.2897,103.8501,"SGD",0,"Asia"],["kl","Kuala Lumpur","Malaysia","MY",3.1478,101.6953,"MYR",0,"Asia"],["hanoi","Hanoi","Vietnam","VN",21.0285,105.8542,"VND",0,"Asia"],["hcmc","Ho Chi Minh City","Vietnam","VN",10.7769,106.7009,"VND",0,"Asia"],["hoian","Hoi An","Vietnam","VN",15.8801,108.338,"VND",0,"Asia"],["tokyo","Tokyo","Japan","JP",35.6812,139.7671,"JPY",0,"Asia"],["osaka","Osaka","Japan","JP",34.6937,135.5023,"JPY",0,"Asia"],["kyoto","Kyoto","Japan","JP",35.0116,135.7681,"JPY",0,"Asia"],["niseko","Niseko","Japan","JP",42.8048,140.6874,"JPY",0,"Asia"],["seoul","Seoul","South Korea","KR",37.5665,126.978,"KRW",0,"Asia"],["hongkong","Hong Kong","Hong Kong","HK",22.2819,114.1582,"HKD",0,"Asia"],["dubai","Dubai","UAE","AE",25.1972,55.2744,"AED",0,"Middle East"],["nadi","Fiji (Nadi)","Fiji","FJ",-17.7765,177.4356,"FJD",0,"Pacific"],["portvila","Vanuatu (Port Vila)","Vanuatu","VU",-17.7334,168.3273,"VUV",0,"Pacific"],["noumea","New Caledonia (Noumea)","New Caledonia","NC",-22.2758,166.458,"XPF",0,"Pacific"],["rarotonga","Cook Islands (Rarotonga)","Cook Islands","CK",-21.2075,-159.7754,"NZD",0,"Pacific"],["auckland","Auckland","New Zealand","NZ",-36.8485,174.7633,"NZD",0,"New Zealand"],["queenstown","Queenstown","New Zealand","NZ",-45.0312,168.6626,"NZD",0,"New Zealand"],["rotorua","Rotorua","New Zealand","NZ",-38.1368,176.2497,"NZD",0,"New Zealand"],["christchurch","Christchurch","New Zealand","NZ",-43.5321,172.6362,"NZD",0,"New Zealand"],["wellington","Wellington","New Zealand","NZ",-41.2865,174.7762,"NZD",0,"New Zealand"],["honolulu","Honolulu (Waikiki)","USA","US",21.2793,-157.8292,"USD",0,"Americas"],["la","Los Angeles","USA","US",34.0522,-118.2437,"USD",0,"Americas"],["lasvegas","Las Vegas","USA","US",36.1147,-115.1728,"USD",0,"Americas"],["nyc","New York","USA","US",40.758,-73.9855,"USD",0,"Americas"],["london","London","United Kingdom","GB",51.5074,-0.1278,"GBP",0,"Europe"],["paris","Paris","France","FR",48.8566,2.3522,"EUR",0,"Europe"],["rome","Rome","Italy","IT",41.9028,12.4964,"EUR",0,"Europe"],["barcelona","Barcelona","Spain","ES",41.3874,2.1686,"EUR",0,"Europe"],["athens","Athens","Greece","GR",37.9838,23.7275,"EUR",0,"Europe"]];window.MOOD={"cairns":"reef","portdouglas":"reef","whitsundays":"reef","townsville":"reef","nadi":"reef","rarotonga":"reef","noumea":"reef","portvila":"reef","goldcoast":"beach","sunshinecoast":"beach","noosa":"beach","byron":"beach","bali":"beach","phuket":"beach","kohsamui":"beach","honolulu":"beach","broome":"beach","portstephens":"beach","ubud":"rainforest","hoian":"rainforest","chiangmai":"rainforest","bluemountains":"rainforest","hanoi":"rainforest","uluru":"outback","alice":"outback","darwin":"outback","queenstown":"alpine","niseko":"alpine","hobart":"alpine","launceston":"alpine","rotorua":"alpine","christchurch":"alpine","sydney":"city","melbourne":"city","brisbane":"city","canberra":"city","adelaide":"city","perth":"city","tokyo":"city","osaka":"city","kyoto":"city","singapore":"city","bangkok":"city","kl":"city","hcmc":"city","seoul":"city","hongkong":"city","dubai":"city","auckland":"city","wellington":"city","la":"city","lasvegas":"city","nyc":"city","london":"city","paris":"city","rome":"city","barcelona":"city","athens":"city","huntervalley":"wine","margaretriver":"wine","greatoceanroad":"wine","phillipisland":"wine"};
 var LOCAL = {
   ft: { goldcoast: "com.au/gold-coast", sunshinecoast: "com.au/sunshine-coast", noosa: "com.au/sunshine-coast/noosa", brisbane: "com.au/brisbane", cairns: "com.au/cairns",
     portdouglas: "com.au/cairns/port-douglas", whitsundays: "com.au/airlie-beach", townsville: "com.au/townsville", byron: "com.au/northern-new-south-wales/byron-bay",
@@ -569,6 +620,7 @@ function dest(id){for(var i=0;i<DEST.length;i++)if(DEST[i][0]===id)return DEST[i
 function cityOf(d){return d[1].replace(/ \(.*/,"");}
 var S={dest:"tokyo",leave:"",nights:7};
 try{var s0=JSON.parse(localStorage.getItem("rr_ways")||"{}")||{};if(typeof s0.dest==="string")S.dest=dest(s0.dest)[0];if(/^\d{4}-\d{2}-\d{2}$/.test(s0.leave||""))S.leave=s0.leave;if(s0.nights>=0&&s0.nights<=30)S.nights=Math.floor(s0.nights);}catch(e){}
+function applyMood(){document.documentElement.setAttribute("data-mood",(window.MOOD||{})[S.dest]||"default");}applyMood();
 function saveDest(){try{var o=JSON.parse(localStorage.getItem("rr_ways")||"{}")||{};o.dest=S.dest;localStorage.setItem("rr_ways",JSON.stringify(o));}catch(e){}}
 function money(v,cur,dp){var f=dp!=null?dp:(v%1?2:0),s;try{s=new Intl.NumberFormat("en-AU",{style:"currency",currency:cur,currencyDisplay:"narrowSymbol",maximumFractionDigits:f,minimumFractionDigits:f}).format(v);}catch(e){return cur+" "+v;}
   return cur!=="AUD"&&s.charAt(0)==="$"?cur.slice(0,2)+s:s;}
@@ -579,7 +631,7 @@ function drawPicker(){
   $("pDest").innerHTML=o+"</optgroup>"+au+"</optgroup>";
   $("pChips").innerHTML=["tokyo","bali","auckland","singapore","bangkok","nadi","goldcoast","sydney"].map(function(id){var x=dest(id);return '<button type="button" class="wchip" data-dest="'+id+'" aria-pressed="'+(id===d[0])+'">'+E(cityOf(x))+"</button>";}).join("");
 }
-function setDest(id){S.dest=dest(id)[0];saveDest();drawPicker();render();}
+function setDest(id){S.dest=dest(id)[0];saveDest();applyMood();drawPicker();render();}
 $("pDest").addEventListener("change",function(){setDest(this.value);});
 document.addEventListener("click",function(e){var b=e.target.closest("[data-dest]");if(b)setDest(b.getAttribute("data-dest"));});
 if("serviceWorker" in navigator)navigator.serviceWorker.register("sw.js").catch(function(){});
