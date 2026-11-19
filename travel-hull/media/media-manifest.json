@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-18",
+ "updated": "2026-11-19",
  "licence": "Pexels licence: free for commercial use, no credit needed",
  "hero_types": [
   "plane",
@@ -429,6 +429,27 @@
    "poster_square": {
     "file": "trip-caravan-square-poster.jpg",
     "bytes": 48944
+   }
+  },
+  "plane2": {
+   "source": "Pexels 36248432 airplane landing against clear blue sky (seen from the ground)",
+   "alt_of": "plane",
+   "hero": false,
+   "video": {
+    "file": "trip-plane2.mp4",
+    "bytes": 381302
+   },
+   "video_square": {
+    "file": "trip-plane2-square.mp4",
+    "bytes": 220008
+   },
+   "poster": {
+    "file": "trip-plane2-poster.jpg",
+    "bytes": 10721
+   },
+   "poster_square": {
+    "file": "trip-plane2-square-poster.jpg",
+    "bytes": 6947
    }
   }
  },

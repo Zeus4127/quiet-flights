@@ -487,8 +487,9 @@ footer p{margin:10px 0 0;max-width:420px}
 .addday{margin-top:10px}
 @media(max-width:560px){.it{grid-template-columns:54px 1fr}.it .ed{grid-column:2}.hop{margin-left:66px}}
 .tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.tg{margin-top:14px}.tg>b{display:block;font:700 12px var(--hf);letter-spacing:.1em;text-transform:uppercase;color:var(--mut);margin-bottom:8px}
 @media(max-width:560px){.tiles{grid-template-columns:1fr 1fr}}
-.tile{min-height:76px;border-radius:14px;border:1.5px solid var(--line);background:#fff;font:600 14.5px var(--hf);color:var(--ink);padding:10px}
+.tile{min-height:60px;border-radius:14px;border:1.5px solid var(--line);background:#fff;font:600 14.5px var(--hf);color:var(--ink);padding:10px}
 .tile[aria-pressed=true]{background:var(--deep);border-color:var(--deep);color:#fff}
 .frm label{display:block;margin-top:12px}.frm label span{display:block;font:700 12px var(--hf);letter-spacing:.08em;text-transform:uppercase;color:var(--mut);margin-bottom:5px}
 .frm input,.frm select,.frm textarea{width:100%;min-height:50px;border:1.5px solid var(--line);border-radius:12px;padding:10px 12px;font:500 16px var(--bf);background:#fff;color:var(--ink)}
@@ -520,6 +521,7 @@ footer p{margin:10px 0 0;max-width:420px}
 <main class="pg"><div class="wrap">
 <div class="tbar"><button type="button" class="lbtn" id="bAdd">+ Add to my plan</button><button type="button" class="lbtn alt" id="bPaste">Paste a booking email</button><button type="button" class="lbtn alt" id="bOff">Save for offline</button><button type="button" class="lbtn alt" id="bPrint">Print or save as PDF</button><span class="st" id="offSt"></span></div>
 <div id="days"></div>
+<div class="panel" id="best"></div>
 <div class="g2"><div class="panel" id="ideas"></div><div class="panel" id="deals2"></div></div>
 <dialog id="dlg" class="gd"><div class="gd-h"><div class="row"><span id="dProg"></span><button type="button" class="x" data-x aria-label="Close">×</button></div><div class="gd-bar"><i id="dBar"></i></div></div><div class="gd-b frm" id="dBody"></div><div class="gd-f" id="dFoot"></div></dialog>
 </div></main>
@@ -533,16 +535,34 @@ footer p{margin:10px 0 0;max-width:420px}
 var $=function(id){return document.getElementById(id);};
 function E(s){return String(s==null?"":s).replace(/[&<>"']/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c];});}
 var MONTHS=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],MFULL=["January","February","March","April","May","June","July","August","September","October","November","December"],DAYS=["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
-var DEST=[["tokyo","Tokyo","Japan","JP",35.6812,139.7671,"JPY"],["bali","Bali (Seminyak)","Indonesia","ID",-8.6913,115.1683,"IDR"],["auckland","Auckland","New Zealand","NZ",-36.8485,174.7633,"NZD"],
-["singapore","Singapore","Singapore","SG",1.2897,103.8501,"SGD"],["bangkok","Bangkok","Thailand","TH",13.7563,100.5018,"THB"],["nadi","Fiji (Nadi)","Fiji","FJ",-17.7765,177.4356,"FJD"],
-["queenstown","Queenstown","New Zealand","NZ",-45.0312,168.6626,"NZD"],["phuket","Phuket (Patong)","Thailand","TH",7.8961,98.2961,"THB"],["london","London","United Kingdom","GB",51.5074,-0.1278,"GBP"],
-["paris","Paris","France","FR",48.8566,2.3522,"EUR"],["rome","Rome","Italy","IT",41.9028,12.4964,"EUR"],["la","Los Angeles","USA","US",34.0522,-118.2437,"USD"],["honolulu","Honolulu","USA","US",21.2793,-157.8292,"USD"],
-["nyc","New York","USA","US",40.758,-73.9855,"USD"],["hanoi","Hanoi","Vietnam","VN",21.0285,105.8542,"VND"],["seoul","Seoul","South Korea","KR",37.5665,126.978,"KRW"],["hongkong","Hong Kong","Hong Kong","HK",22.2819,114.1582,"HKD"],
-["kl","Kuala Lumpur","Malaysia","MY",3.1478,101.6953,"MYR"],["dubai","Dubai","UAE","AE",25.1972,55.2744,"AED"],
-["goldcoast","Gold Coast","Australia","AU",-28.0027,153.431,"AUD",1],["sydney","Sydney","Australia","AU",-33.8688,151.2093,"AUD",1],["melbourne","Melbourne","Australia","AU",-37.8136,144.9631,"AUD",1],
-["brisbane","Brisbane","Australia","AU",-27.4698,153.0251,"AUD",1],["cairns","Cairns","Australia","AU",-16.9203,145.771,"AUD",1],["perth","Perth","Australia","AU",-31.9523,115.8613,"AUD",1],
-["adelaide","Adelaide","Australia","AU",-34.9285,138.6007,"AUD",1],["hobart","Hobart","Australia","AU",-42.8821,147.3272,"AUD",1],["darwin","Darwin","Australia","AU",-12.4634,130.8456,"AUD",1],
-["alice","Alice Springs","Australia","AU",-23.698,133.8807,"AUD",1],["broome","Broome","Australia","AU",-17.9614,122.2359,"AUD",1]];
+var DEST=[["goldcoast","Gold Coast","Australia","AU",-28.0027,153.431,"AUD",1,"QLD"],["sunshinecoast","Sunshine Coast (Mooloolaba)","Australia","AU",-26.6806,153.1182,"AUD",1,"QLD"],["noosa","Noosa","Australia","AU",-26.3925,153.0905,"AUD",1,"QLD"],["brisbane","Brisbane","Australia","AU",-27.4698,153.0251,"AUD",1,"QLD"],["cairns","Cairns","Australia","AU",-16.9203,145.771,"AUD",1,"QLD"],["portdouglas","Port Douglas","Australia","AU",-16.4836,145.4653,"AUD",1,"QLD"],["whitsundays","Whitsundays (Airlie Beach)","Australia","AU",-20.2683,148.7177,"AUD",1,"QLD"],["townsville","Townsville","Australia","AU",-19.259,146.8169,"AUD",1,"QLD"],["byron","Byron Bay","Australia","AU",-28.6474,153.602,"AUD",1,"NSW"],["sydney","Sydney","Australia","AU",-33.8688,151.2093,"AUD",1,"NSW"],["bluemountains","Blue Mountains (Katoomba)","Australia","AU",-33.7124,150.3119,"AUD",1,"NSW"],["huntervalley","Hunter Valley","Australia","AU",-32.7853,151.2955,"AUD",1,"NSW"],["portstephens","Port Stephens","Australia","AU",-32.7187,152.1067,"AUD",1,"NSW"],["canberra","Canberra","Australia","AU",-35.2809,149.13,"AUD",1,"ACT"],["melbourne","Melbourne","Australia","AU",-37.8136,144.9631,"AUD",1,"VIC"],["greatoceanroad","Great Ocean Road (Lorne)","Australia","AU",-38.5418,143.9748,"AUD",1,"VIC"],["phillipisland","Phillip Island","Australia","AU",-38.4833,145.2333,"AUD",1,"VIC"],["hobart","Hobart","Australia","AU",-42.8821,147.3272,"AUD",1,"TAS"],["launceston","Launceston","Australia","AU",-41.4332,147.1441,"AUD",1,"TAS"],["adelaide","Adelaide","Australia","AU",-34.9285,138.6007,"AUD",1,"SA"],["perth","Perth","Australia","AU",-31.9523,115.8613,"AUD",1,"WA"],["margaretriver","Margaret River","Australia","AU",-33.9536,115.0739,"AUD",1,"WA"],["broome","Broome","Australia","AU",-17.9614,122.2359,"AUD",1,"WA"],["darwin","Darwin","Australia","AU",-12.4634,130.8456,"AUD",1,"NT"],["alice","Alice Springs","Australia","AU",-23.698,133.8807,"AUD",1,"NT"],["uluru","Uluru (Yulara)","Australia","AU",-25.2406,130.9889,"AUD",1,"NT"],["bali","Bali (Seminyak)","Indonesia","ID",-8.6913,115.1683,"IDR",0,"Asia"],["ubud","Bali (Ubud)","Indonesia","ID",-8.5069,115.2625,"IDR",0,"Asia"],["phuket","Phuket (Patong)","Thailand","TH",7.8961,98.2961,"THB",0,"Asia"],["bangkok","Bangkok","Thailand","TH",13.7563,100.5018,"THB",0,"Asia"],["chiangmai","Chiang Mai","Thailand","TH",18.7883,98.9853,"THB",0,"Asia"],["kohsamui","Koh Samui","Thailand","TH",9.512,100.0136,"THB",0,"Asia"],["singapore","Singapore","Singapore","SG",1.2897,103.8501,"SGD",0,"Asia"],["kl","Kuala Lumpur","Malaysia","MY",3.1478,101.6953,"MYR",0,"Asia"],["hanoi","Hanoi","Vietnam","VN",21.0285,105.8542,"VND",0,"Asia"],["hcmc","Ho Chi Minh City","Vietnam","VN",10.7769,106.7009,"VND",0,"Asia"],["hoian","Hoi An","Vietnam","VN",15.8801,108.338,"VND",0,"Asia"],["tokyo","Tokyo","Japan","JP",35.6812,139.7671,"JPY",0,"Asia"],["osaka","Osaka","Japan","JP",34.6937,135.5023,"JPY",0,"Asia"],["kyoto","Kyoto","Japan","JP",35.0116,135.7681,"JPY",0,"Asia"],["niseko","Niseko","Japan","JP",42.8048,140.6874,"JPY",0,"Asia"],["seoul","Seoul","South Korea","KR",37.5665,126.978,"KRW",0,"Asia"],["hongkong","Hong Kong","Hong Kong","HK",22.2819,114.1582,"HKD",0,"Asia"],["dubai","Dubai","UAE","AE",25.1972,55.2744,"AED",0,"Middle East"],["nadi","Fiji (Nadi)","Fiji","FJ",-17.7765,177.4356,"FJD",0,"Pacific"],["portvila","Vanuatu (Port Vila)","Vanuatu","VU",-17.7334,168.3273,"VUV",0,"Pacific"],["noumea","New Caledonia (Noumea)","New Caledonia","NC",-22.2758,166.458,"XPF",0,"Pacific"],["rarotonga","Cook Islands (Rarotonga)","Cook Islands","CK",-21.2075,-159.7754,"NZD",0,"Pacific"],["auckland","Auckland","New Zealand","NZ",-36.8485,174.7633,"NZD",0,"New Zealand"],["queenstown","Queenstown","New Zealand","NZ",-45.0312,168.6626,"NZD",0,"New Zealand"],["rotorua","Rotorua","New Zealand","NZ",-38.1368,176.2497,"NZD",0,"New Zealand"],["christchurch","Christchurch","New Zealand","NZ",-43.5321,172.6362,"NZD",0,"New Zealand"],["wellington","Wellington","New Zealand","NZ",-41.2865,174.7762,"NZD",0,"New Zealand"],["honolulu","Honolulu (Waikiki)","USA","US",21.2793,-157.8292,"USD",0,"Americas"],["la","Los Angeles","USA","US",34.0522,-118.2437,"USD",0,"Americas"],["lasvegas","Las Vegas","USA","US",36.1147,-115.1728,"USD",0,"Americas"],["nyc","New York","USA","US",40.758,-73.9855,"USD",0,"Americas"],["london","London","United Kingdom","GB",51.5074,-0.1278,"GBP",0,"Europe"],["paris","Paris","France","FR",48.8566,2.3522,"EUR",0,"Europe"],["rome","Rome","Italy","IT",41.9028,12.4964,"EUR",0,"Europe"],["barcelona","Barcelona","Spain","ES",41.3874,2.1686,"EUR",0,"Europe"],["athens","Athens","Greece","GR",37.9838,23.7275,"EUR",0,"Europe"]];
+var LOCAL = {
+  ft: { goldcoast: "com.au/gold-coast", sunshinecoast: "com.au/sunshine-coast", noosa: "com.au/sunshine-coast/noosa", brisbane: "com.au/brisbane", cairns: "com.au/cairns",
+    portdouglas: "com.au/cairns/port-douglas", whitsundays: "com.au/airlie-beach", townsville: "com.au/townsville", byron: "com.au/northern-new-south-wales/byron-bay",
+    sydney: "com.au/sydney", bluemountains: "com.au/blue-mountains", canberra: "com.au/canberra", melbourne: "com.au/melbourne", hobart: "com.au/hobart",
+    adelaide: "com.au/adelaide", perth: "com.au/perth", broome: "com.au/broome", darwin: "com.au/darwin", auckland: "co.nz/auckland", queenstown: "co.nz/queenstown", london: "co.uk/london" },
+  gr: { goldcoast: ["gold-coast"], brisbane: ["brisbane"], cairns: ["cairns"], townsville: ["townsville"], sydney: ["sydney"], canberra: ["canberra"], melbourne: ["melbourne"],
+    hobart: ["hobart"], adelaide: ["adelaide"], perth: ["perth"], darwin: ["darwin"], huntervalley: ["newcastle", "Newcastle, the nearest city"],
+    portstephens: ["newcastle", "Newcastle, the nearest city"], greatoceanroad: ["geelong", "Geelong, the nearest city"] },
+  eo: { goldcoast: "gold-coast", sunshinecoast: "sunshine-coast", noosa: "noosa", brisbane: "brisbane", cairns: "cairns", portdouglas: "port-douglas", whitsundays: "whitsundays",
+    townsville: "townsville", byron: "byron-bay", sydney: "sydney", bluemountains: "blue-mountains", huntervalley: "hunter-valley", portstephens: "port-stephens", canberra: "canberra",
+    melbourne: "melbourne", greatoceanroad: "great-ocean-road", phillipisland: "phillip-island", hobart: "hobart", launceston: "launceston", adelaide: "adelaide", perth: "perth",
+    margaretriver: "margaret-river", broome: "broome", darwin: "darwin", alice: "alice-springs" }
+};
+function localDeals(d) {
+  var id = d[0], city = d[1].replace(/ \(.*/, ""), here = city + (d[7] ? " " + (d[8] || "Australia") : " " + d[2]), out = [], q = encodeURIComponent;
+  if (LOCAL.ft[id]) out.push({ cat: "food", title: "50% off dinner", site: "First Table", what: "Book the first table of the night at a listed restaurant and the food bill is half price. Small booking fee.", save: "50% off the food bill", url: "https://www.firsttable." + LOCAL.ft[id] });
+  out.push({ cat: "food", title: "Best-rated restaurants near you", site: "Google Maps", what: "Restaurants in " + city + " with their star ratings and reviews, nearest first.", save: "See ratings before you book", url: "https://www.google.com/maps/search/" + q("best restaurants in " + here) });
+  if (LOCAL.gr[id]) out.push({ cat: "vouchers", title: "Local vouchers: food, activities, spas, cinema", site: "Groupon" + (LOCAL.gr[id][1] ? " (" + LOCAL.gr[id][1] + ")" : ""), what: "Hundreds of local vouchers you buy ahead and show at the door.", save: "Often 20% to 70% off, shown on each voucher", url: "https://www.groupon.com.au/local/" + LOCAL.gr[id][0] });
+  if (LOCAL.eo[id]) out.push({ cat: "activities", title: "Attractions, tours and theme parks", site: "Experience Oz", what: "Bookable tickets and tours for " + city + ", often cheaper online than at the gate.", save: "Online prices, shown on each ticket", url: "https://www.experienceoz.com.au/en/" + LOCAL.eo[id] });
+  if (d[7]) out.push({ cat: "activities", title: "Experiences and adventures", site: "RedBalloon", what: "Experiences in and around " + city + ": flights, cruises, adventures, food and more.", save: "Sale prices, shown on each experience", url: "https://www.redballoon.com.au/search?q=" + q(city) });
+  out.push({ cat: "activities", title: "Tours, day trips and tickets", site: "GetYourGuide", what: "Tours and tickets for " + city + ", with prices, reviews and free cancellation on many.", save: "Compare tours on one page", url: "https://www.getyourguide.com/s/?q=" + q(city) });
+  out.push({ cat: "best", title: "Best-rated things to do", site: "Tripadvisor", what: "The top-rated attractions in " + city + ", ranked by travellers' reviews.", save: "Know what's worth it before you go", url: "https://www.tripadvisor.com.au/Search?q=" + q("things to do " + city) });
+  out.push({ cat: "movies", title: "Movie session times today", site: "Google", what: "What's showing at the cinemas in " + city + ", with session times and booking links.", save: "Every cinema's times on one page", url: "https://www.google.com/search?q=" + q("movie times " + here) });
+  out.push({ cat: "movies", title: "Cinemas near you", site: "Google Maps", what: "Every cinema in " + city + " on a map, with ratings and opening hours.", save: "Find the nearest one", url: "https://www.google.com/maps/search/" + q("cinemas in " + here) });
+  if (d[7]) out.push({ cat: "shows", title: "Discount show and event tickets", site: "Lasttix", what: "Last-minute and discounted tickets to shows, comedy and concerts in Australia. Not movies.", save: "Discounted tickets, shown on each event", url: "https://www.lasttix.com.au/" });
+  return out;
+}
 function dest(id){for(var i=0;i<DEST.length;i++)if(DEST[i][0]===id)return DEST[i];return DEST[0];}
 function cityOf(d){return d[1].replace(/ \(.*/,"");}
 var S={dest:"tokyo",leave:"",nights:7};
@@ -563,7 +583,45 @@ document.addEventListener("click",function(e){var b=e.target.closest("[data-dest
 if("serviceWorker" in navigator)navigator.serviceWorker.register("sw.js").catch(function(){});
 </script>
 <script>
-var TYPES=[["flight","Flight"],["stay","Place to stay"],["move","Transfer or ride"],["do","Activity or tour"],["eat","Food booking"],["daytrip","Day trip"],["night","Night out"],["other","Something else"]];
+var TGROUPS=[["Getting there and around",[["flight","Flight"],["train","Train"],["bus","Bus or coach"],["ferry","Ferry or boat"],["cruise","Cruise"],["carhire","Car hire"],["move","Transfer, taxi or ride"],["drive","Drive"]]],
+ ["Where you sleep",[["stay","Hotel"],["house","Apartment or house"],["camp","Camping or caravan park"],["resort","Resort"]]],
+ ["Things to do",[["tour","Tour"],["themepark","Theme park"],["do","Activity"],["museum","Museum or gallery"],["show","Show or concert"],["movie","Movie"],["sport","Sport or game"],["beach","Beach or swim"],["hike","Walk or hike"],["spa","Spa or massage"],["shop","Shopping"],["daytrip","Day trip"]]],
+ ["Food and nights out",[["eat","Restaurant booking"],["cafe","Café or brunch"],["foodtour","Food or wine tour"],["night","Night out"]]],
+ ["Everything else",[["meet","Meeting or work"],["health","Doctor or appointment"],["free","Free time"],["note","Reminder or note"],["other","Something else"]]]];
+var TYPES=[];TGROUPS.forEach(function(g){g[1].forEach(function(t){TYPES.push(t);});});
+var EXTRA={
+ flight:[["from","From","Airport, like BNE"],["to","To","Airport, like DPS"],["seat","Seat or terminal","Seat 23A, Terminal 1"],["bags","Bags","1 checked bag, 7 kg carry-on"]],
+ train:[["from","From","Station"],["to","To","Station"],["seat","Carriage and seat","Car 5, seat 12"]],
+ bus:[["from","From","Stop or station"],["to","To","Stop or station"],["seat","Seat","Seat 14"]],
+ ferry:[["from","From","Wharf or port"],["to","To","Wharf or port"]],
+ cruise:[["from","Leaves from","Port"],["until","Back on","Date"],["seat","Cabin","Cabin 8123"]],
+ carhire:[["until","Return by","Date and time"],["to","Drop-off address","Same as pick-up?"],["seat","Car and extras","Small car, child seat"]],
+ move:[["from","Pick-up from","Hotel or airport"],["to","Drop-off at","Address"],["phone","Driver or company phone","+61 ..."]],
+ drive:[["from","From","Town"],["to","To","Town"],["seat","Stops on the way","Fuel, lunch, lookout"]],
+ stay:[["until","Check-out","Date"],["seat","Room","Room type or number"],["phone","Phone","Front desk"]],
+ house:[["until","Check-out","Date"],["seat","Key or door code","Keep it here, not in a message"],["phone","Host phone","+61 ..."]],
+ camp:[["until","Leave on","Date"],["seat","Site number","Site 24, powered"],["phone","Park phone","Office"]],
+ resort:[["until","Check-out","Date"],["seat","Room and what's included","Breakfast, airport transfer"],["phone","Phone","Front desk"]],
+ tour:[["seat","Meeting point","Where you meet the guide"],["until","How long","4 hours"],["phone","Operator phone","+61 ..."]],
+ themepark:[["seat","Tickets","2 adults, 1 child"],["until","Open until","5 pm"]],
+ do:[["seat","Tickets or people","2 people"],["until","How long","2 hours"]],
+ museum:[["seat","Tickets","2 adults"],["until","Open until","5 pm"]],
+ show:[["seat","Seats","Row F, seats 10 and 11"],["until","Doors open","7 pm"]],
+ movie:[["seat","Seats and screen","Cinema 4, row H"],["until","Film","Name of the movie"]],
+ sport:[["seat","Seats","Bay 32"],["until","Starts","7:30 pm"]],
+ beach:[["seat","Bring","Towel, sunscreen, snacks"]],
+ hike:[["until","How long","3 hours return"],["seat","Bring","Water, hat, phone charged"]],
+ spa:[["seat","Treatment","60-minute massage"],["phone","Phone","To change the time"]],
+ shop:[["seat","Looking for","Gifts, clothes"]],
+ daytrip:[["seat","Getting there","Car, tour or bus"],["until","Back by","6 pm"]],
+ eat:[["seat","People","4 people"],["phone","Phone","To change the booking"]],
+ cafe:[["seat","People","2 people"]],
+ foodtour:[["seat","Meeting point","Where you meet"],["until","How long","3 hours"]],
+ night:[["seat","Who's coming","Names"],["until","Home by","Midnight"]],
+ meet:[["seat","With","Name"],["phone","Phone","+61 ..."]],
+ health:[["seat","With","Doctor or clinic"],["phone","Phone","+61 ..."]],
+ free:[],note:[],other:[]
+};
 function tname(k){for(var i=0;i<TYPES.length;i++)if(TYPES[i][0]===k)return TYPES[i][1];return "Other";}
 var PLAN={};try{PLAN=JSON.parse(localStorage.getItem("th_plan")||"{}")||{};}catch(e){PLAN={};}
 function items(){return PLAN[S.dest]||(PLAN[S.dest]=[]);}
@@ -591,24 +649,25 @@ function render(){
   ideas(d);deals2(d);
 }
 function row(x){
-  return '<div class="it"><div class="tm">'+(x.time?E(x.time):"–")+"<small>"+E(tname(x.type))+"</small></div><div><b>"+E(x.title)+"</b>"+(x.addr?'<div class="ad">'+E(x.addr)+"</div>":"")+(x.ref?'<div class="rf">Booking: '+E(x.ref)+"</div>":"")+(x.note?'<div class="rf">'+E(x.note)+"</div>":"")+
+  return '<div class="it"><div class="tm">'+(x.time?E(x.time):"–")+"<small>"+E(tname(x.type))+"</small></div><div><b>"+E(x.title)+"</b>"+(x.addr?'<div class="ad">'+E(x.addr)+"</div>":"")+(x.ref?'<div class="rf">Booking: '+E(x.ref)+"</div>":"")+(EXTRA[x.type]||[]).filter(function(f){return x.x&&x.x[f[0]];}).map(function(f){return '<div class="rf">'+E(f[1])+": "+E(x.x[f[0]])+"</div>";}).join("")+(x.note?'<div class="rf">'+E(x.note)+"</div>":"")+
     (x.addr?'<div class="acts"><a href="'+E(mapsTo(x.addr))+'" target="_blank" rel="noopener">Directions ↗</a><button type="button" data-show="'+x.id+'">Show to a driver</button></div>':"")+
     '</div><div class="ed"><button type="button" data-edit="'+x.id+'" aria-label="Edit '+E(x.title)+'">✎</button><button type="button" data-del="'+x.id+'" aria-label="Remove '+E(x.title)+'">×</button></div></div>';
 }
 var F=null;
-function openAdd(day,pre){F={step:1,id:"",type:"",day:day||"",time:"",title:"",addr:"",ref:"",note:""};if(pre){for(var k in pre)F[k]=pre[k];}drawAdd();var g=$("dlg");if(!g.open)g.showModal?g.showModal():g.setAttribute("open","");}
-function keep(){["title","day","time","addr","ref","note"].forEach(function(k){var el=$("f_"+k);if(el)F[k]=el.value.trim();});}
+function openAdd(day,pre){F={step:1,id:"",type:"",day:day||"",time:"",title:"",addr:"",ref:"",note:"",x:{}};if(pre){for(var k in pre)F[k]=pre[k];}drawAdd();var g=$("dlg");if(!g.open)g.showModal?g.showModal():g.setAttribute("open","");}
+function keep(){["title","day","time","addr","ref","note"].forEach(function(k){var el=$("f_"+k);if(el)F[k]=el.value.trim();});F.x=F.x||{};(EXTRA[F.type]||[]).forEach(function(x){var el=$("f_x_"+x[0]);if(el)F.x[x[0]]=el.value.trim();});}
 function drawAdd(){
   var dates=tripDates();$("dBar").style.width=(F.step/3*100)+"%";
   if(F.step===1){$("dProg").textContent="Step 1 of 3 · What is it?";
-    $("dBody").innerHTML="<h2>What are you adding?</h2><p>Pick one. You can change it later.</p><div class=\"tiles\">"+TYPES.map(function(t){return '<button type="button" class="tile" data-type="'+t[0]+'" aria-pressed="'+(F.type===t[0])+'">'+t[1]+"</button>";}).join("")+"</div>";
+    $("dBody").innerHTML="<h2>What are you adding?</h2><p>Pick one. You can change it later.</p>"+TGROUPS.map(function(g){return '<div class="tg"><b>'+g[0]+'</b><div class="tiles">'+g[1].map(function(t){return '<button type="button" class="tile" data-type="'+t[0]+'" aria-pressed="'+(F.type===t[0])+'">'+t[1]+"</button>";}).join("")+"</div></div>";}).join("");
     $("dFoot").innerHTML='<button type="button" data-x>Cancel</button>';return;}
   if(F.step===2){$("dProg").textContent="Step 2 of 3 · The details";
     var hint={flight:"Flight number, like QF 123",stay:"Hotel or place name",move:"Taxi, train, bus or pickup",do:"Tour or activity name",eat:"Restaurant name",daytrip:"Where you are going for the day",night:"Bar, show or event",other:"What is it?"}[F.type]||"";
     $("dBody").innerHTML="<h2>"+E(tname(F.type))+'</h2><label><span>Name</span><input id="f_title" value="'+E(F.title)+'" placeholder="'+E(hint)+'"></label><div class="two"><label><span>Day</span><select id="f_day"><option value="">No date yet</option>'+
       dates.map(function(x,i){return '<option value="'+x+'"'+(x===F.day?" selected":"")+">Day "+(i+1)+" · "+nice(x)+"</option>";}).join("")+(F.day&&dates.indexOf(F.day)<0?'<option value="'+F.day+'" selected>'+nice(F.day)+"</option>":"")+'</select></label><label><span>Time</span><input id="f_time" type="time" value="'+E(F.time)+'"></label></div>'+
       '<label><span>Address</span><input id="f_addr" value="'+E(F.addr)+'" placeholder="Street and town, so you can show a driver"></label><label><span>Booking number (optional)</span><input id="f_ref" value="'+E(F.ref)+'" autocomplete="off"></label>'+
-      '<label><span>Note (optional)</span><input id="f_note" value="'+E(F.note)+'" placeholder="Check-in from 2 pm, gate code, seat"></label><p style="font-size:13px">Everything stays on this device. Nothing is uploaded.</p>';
+      (EXTRA[F.type]||[]).map(function(x){return '<label><span>'+E(x[1])+' (optional)</span><input id="f_x_'+x[0]+'" value="'+E((F.x||{})[x[0]]||"")+'" placeholder="'+E(x[2])+'" autocomplete="off"></label>';}).join("")+
+      '<label><span>Note (optional)</span><input id="f_note" value="'+E(F.note)+'" placeholder="Anything else to remember"></label><p style="font-size:13px">Everything stays on this device. Nothing is uploaded.</p>';
     $("dFoot").innerHTML='<button type="button" data-back>Back</button><button type="button" class="main" data-save>Save to my plan</button>';return;}
   $("dProg").textContent="Step 3 of 3 · Saved";
   $("dBody").innerHTML='<div class="ready"><div class="big">✓</div><h2>Saved to your plan</h2><p>'+E(F.title)+(F.day?" · "+nice(F.day):"")+(F.time?" at "+E(F.time):"")+".</p></div>";
@@ -641,31 +700,28 @@ var PASTE=[];
 function openPaste(){$("dProg").textContent="Paste a booking";$("dBar").style.width="50%";
   $("dBody").innerHTML='<h2>Paste a booking email</h2><p>Copy the text of a confirmation email and paste it here. We pick out the dates, flight, hotel, address and booking number, and you check them before anything is saved. The text is read on this device only.</p><label><span>Email text</span><textarea id="pText" placeholder="Paste here"></textarea></label><div id="pOut"></div>';
   $("dFoot").innerHTML='<button type="button" data-x>Cancel</button><button type="button" class="main" data-read>Read it</button>';var g=$("dlg");if(!g.open)g.showModal?g.showModal():g.setAttribute("open","");}
-var IDEAS={},ideaRun=0;
+var PLC={},bestTab="fun";
+function places(d,cb){if(PLC[d[0]]!==undefined)return cb(PLC[d[0]]);PLC[d[0]]=null;getJSON("places/"+d[0]+".json",15000).then(function(j){PLC[d[0]]=j;cb(j);},function(){PLC[d[0]]=false;cb(false);});}
+var GLAB={fun:"Theme parks and fun",sights:"Top sights",culture:"Museums and shows",nature:"Beaches and nature"};
 function ideas(d){
-  var box=$("ideas"),city=cityOf(d),me=++ideaRun;
-  function draw(list){box.style.display="";box.innerHTML="<h2>Day trips from "+E(city)+"</h2><p class=\"sub\">Well-known places 20 to 120 km away. Add one to a day, then fill in how you'll get there.</p>"+list.slice(0,7).map(function(p,i){
-    return '<div class="idea"><div><b>'+E(p.name)+"</b><span>"+E(p.what)+" · about "+Math.round(p.km)+' km away</span></div><button type="button" class="mini" data-idea="'+i+'">Add</button></div>';}).join("")+'<div class="src">Places: Wikidata. Distances are straight-line.</div>';}
-  if(IDEAS[d[0]]){if(IDEAS[d[0]].length)draw(IDEAS[d[0]]);else box.style.display="none";return;}
-  box.style.display="none";
-  var q="SELECT ?item ?itemLabel ?typeLabel ?dist WHERE { SERVICE wikibase:around { ?item wdt:P625 ?loc . bd:serviceParam wikibase:center 'Point("+d[5].toFixed(4)+" "+d[4].toFixed(4)+")'^^geo:wktLiteral . bd:serviceParam wikibase:radius '120' . bd:serviceParam wikibase:distance ?dist . } "+
-    "?item wdt:P31 ?type . VALUES ?type { wd:Q46169 wd:Q34038 wd:Q40080 wd:Q23413 wd:Q570116 wd:Q839954 wd:Q9259 wd:Q23442 wd:Q35509 wd:Q8502 } FILTER(?dist > 20) ?article schema:about ?item ; schema:isPartOf <https://en.wikipedia.org/> . ?item wikibase:sitelinks ?sl . SERVICE wikibase:label { bd:serviceParam wikibase:language 'en'. } } ORDER BY DESC(?sl) LIMIT 30";
-  getJSON("https://query.wikidata.org/sparql?format=json&query="+encodeURIComponent(q),20000).then(function(j){
-    var seen={},out=[];(j.results.bindings||[]).forEach(function(b){var n=b.itemLabel&&b.itemLabel.value;if(!n||/^Q\d+$/.test(n)||seen[n])return;seen[n]=1;var ty=(b.typeLabel&&b.typeLabel.value)||"place";out.push({name:n,what:ty.charAt(0).toUpperCase()+ty.slice(1),km:+b.dist.value});});
-    IDEAS[d[0]]=out;if(me===ideaRun&&out.length)draw(out);
-  },function(){});
+  var city=cityOf(d);$("best").innerHTML='<div class="gone">Loading the best of '+E(city)+"…</div>";$("ideas").style.display="none";
+  places(d,function(P){
+    if(S.dest!==d[0])return;
+    if(!P||!P.groups){$("best").innerHTML="<h2>The best of "+E(city)+"</h2><div class=\"gone\">The list for "+E(city)+" isn't ready yet.</div>";return;}
+    var g=P.groups[bestTab]&&P.groups[bestTab].items.length?bestTab:Object.keys(P.groups).filter(function(k){return P.groups[k].items.length;})[0]||"fun",list=(P.groups[g]||{items:[]}).items;
+    $("best").innerHTML="<h2>The best of "+E(city)+"</h2><p class=\"sub\">Ranked by how many people read about each place in the last 60 days. Tap Add to put one in your plan.</p>"+
+      '<div class="chips-row" style="display:flex;gap:8px;overflow-x:auto;margin-bottom:8px">'+Object.keys(GLAB).filter(function(k){return P.groups[k]&&P.groups[k].items.length;}).map(function(k){return '<button type="button" class="wchip" style="background:'+(k===g?"var(--deep)":"#fff")+";color:"+(k===g?"#fff":"var(--ink)")+';border-color:var(--line)" data-btab="'+k+'">'+GLAB[k]+" "+P.groups[k].items.length+"</button>";}).join("")+"</div>"+
+      list.map(function(p,i){return '<div class="idea"><div><b>'+(i+1)+". "+E(p.name)+"</b><span>"+E(p.what)+" · "+p.km+' km away</span></div><button type="button" class="mini" data-best="'+g+":"+i+'">Add</button></div>';}).join("")+
+      '<div class="src">Places: Wikipedia, built '+E(P.baked)+'. Opening hours and prices change: check before you go.</div>';
+    var far=(P.groups.nature?P.groups.nature.items:[]).filter(function(p){return p.km>=15;}).concat((P.groups.fun?P.groups.fun.items:[]).filter(function(p){return p.km>=15;})).sort(function(a,b){return b.views-a.views;});
+    if(far.length){$("ideas").style.display="";$("ideas").innerHTML="<h2>Day trips from "+E(city)+"</h2><p class=\"sub\">Popular places 15 km or more away.</p>"+far.slice(0,8).map(function(p,i){return '<div class="idea"><div><b>'+E(p.name)+"</b><span>"+E(p.what)+" · "+p.km+' km away</span></div><button type="button" class="mini" data-dayt="'+i+'">Add</button></div>';}).join("");IDEAS[d[0]]=far;}
+  });
 }
-var FT={sydney:"com.au/sydney",melbourne:"com.au/melbourne",brisbane:"com.au/brisbane",goldcoast:"com.au/gold-coast",perth:"com.au/perth",adelaide:"com.au/adelaide",cairns:"com.au/cairns",hobart:"com.au/hobart",darwin:"com.au/darwin",auckland:"co.nz/auckland",queenstown:"co.nz/queenstown",london:"co.uk/london"};
-var GR={sydney:1,melbourne:1,brisbane:1,goldcoast:"gold-coast",perth:1,adelaide:1,cairns:1,hobart:1,darwin:1};
+var IDEAS={};
 function deals2(d){
-  var city=cityOf(d),h="<h2>Deals in "+E(city)+" that work today</h2><p class=\"sub\">Each one opens the deal site on "+E(city)+", with live offers you can book there.</p>",n=0;
-  if(FT[d[0]]){n++;h+='<div class="idea"><div><b>50% off dinner</b><span>First Table: half off the food bill for the first table of the night</span></div><a class="mini" href="https://www.firsttable.'+FT[d[0]]+'" target="_blank" rel="noopener">See tables ↗</a></div>';}
-  if(GR[d[0]]){n++;h+='<div class="idea"><div><b>Vouchers: food, activities, cinema</b><span>Groupon: local vouchers for '+E(city)+'</span></div><a class="mini" href="https://www.groupon.com.au/local/'+(GR[d[0]]===1?d[0]:GR[d[0]])+'" target="_blank" rel="noopener">See vouchers ↗</a></div>';}
-  if(d[7]){n++;h+='<div class="idea"><div><b>Cheap show and event tickets</b><span>Lasttix: discounted tickets around Australia</span></div><a class="mini" href="https://www.lasttix.com.au/" target="_blank" rel="noopener">See tickets ↗</a></div>';
-    n++;h+='<div class="idea"><div><b>Cinema offers</b><span>Event Cinemas: current promotions</span></div><a class="mini" href="https://www.eventcinemas.com.au/Promotions" target="_blank" rel="noopener">See offers ↗</a></div>';}
-  h+='<div class="idea"><div><b>Tours and tickets</b><span>GetYourGuide: bookable tours and passes</span></div><a class="mini" href="https://www.getyourguide.com/s/?q='+encodeURIComponent(city)+'" target="_blank" rel="noopener">See tours ↗</a></div>';
-  h+='<div class="src">We checked these pages open on 19 Nov 2026. We don\'t earn from them. Offers change daily and are run by each site.</div>';
-  $("deals2").innerHTML=h;
+  var city=cityOf(d),L=localDeals(d),CAT={food:"Food",vouchers:"Vouchers",activities:"Activities and tours",best:"Best rated",movies:"Movies",shows:"Shows"};
+  $("deals2").innerHTML="<h2>Deals and bookings in "+E(city)+"</h2><p class=\"sub\">Each one opens on "+E(city)+" only. We checked each page opens on 19 Nov 2026 and we don't earn from them.</p>"+
+    L.map(function(x){return '<div class="idea"><div><b>'+E(x.title)+"</b><span>"+E(CAT[x.cat]||"")+" · "+E(x.site)+" · "+E(x.save)+'</span></div><a class="mini" href="'+E(x.url)+'" target="_blank" rel="noopener">Open ↗</a></div>';}).join("");
 }
 document.addEventListener("click",function(e){
   var b=e.target.closest("button");if(!b)return;var g=$("dlg");
@@ -674,7 +730,7 @@ document.addEventListener("click",function(e){
   else if(b.hasAttribute("data-type")){F.type=b.getAttribute("data-type");F.step=2;drawAdd();setTimeout(function(){var t=$("f_title");if(t)t.focus();},30);}
   else if(b.hasAttribute("data-back")){keep();F.step=1;drawAdd();}
   else if(b.hasAttribute("data-save")){keep();if(!F.title){$("f_title").focus();$("f_title").style.borderColor="#B3261E";return;}
-    var L=items(),o={id:F.id||("i"+Date.now().toString(36)),type:F.type||"other",day:F.day,time:F.time,title:F.title,addr:F.addr,ref:F.ref,note:F.note},i=-1;L.forEach(function(x,k){if(x.id===o.id)i=k;});
+    var L=items(),o={id:F.id||("i"+Date.now().toString(36)),type:F.type||"other",day:F.day,time:F.time,title:F.title,addr:F.addr,ref:F.ref,note:F.note,x:F.x||{}},i=-1;L.forEach(function(x,k){if(x.id===o.id)i=k;});
     if(i>=0)L[i]=o;else L.push(o);if(!savePlan()){alert("This device has no room to save. Free some space and try again.");return;}F.step=3;drawAdd();render();}
   else if(b.hasAttribute("data-again")){openAdd(F.day);}
   else if(b.hasAttribute("data-x")){g.close();}
@@ -684,7 +740,9 @@ document.addEventListener("click",function(e){
   else if(b.id==="bPaste")openPaste();
   else if(b.hasAttribute("data-read")){PASTE=readBooking($("pText").value);$("pOut").innerHTML=($("pText").value.trim()?"<p style=\"margin-top:14px\"><b>We found this. Check it, then add it.</b></p>"+PASTE.map(function(x,i){return '<div class="found"><b>'+E(tname(x.type))+": "+E(x.title)+"</b><div>"+(x.day?nice(x.day):"No date found")+(x.time?" at "+E(x.time):"")+(x.addr?" · "+E(x.addr):"")+(x.ref?" · booking "+E(x.ref):"")+(x.note?" · "+E(x.note):"")+'</div><button type="button" class="mini" style="margin-top:8px" data-take="'+i+'">Check and add</button></div>';}).join(""):"<p>Paste the email text first.</p>");}
   else if(b.hasAttribute("data-take")){var p=PASTE[+b.getAttribute("data-take")];openAdd(p.day,p);F.step=2;drawAdd();}
-  else if(b.hasAttribute("data-idea")){var p2=(IDEAS[S.dest]||[])[+b.getAttribute("data-idea")];if(p2){openAdd("",{type:"daytrip",title:"Day trip: "+p2.name,addr:p2.name+", "+dest(S.dest)[2],note:"About "+Math.round(p2.km)+" km from "+cityOf(dest(S.dest))});F.step=2;drawAdd();}}
+  else if(b.hasAttribute("data-btab")){bestTab=b.getAttribute("data-btab");ideas(dest(S.dest));}
+  else if(b.hasAttribute("data-best")){var bp=b.getAttribute("data-best").split(":"),P2=PLC[S.dest],p3=P2&&P2.groups[bp[0]]&&P2.groups[bp[0]].items[+bp[1]];if(p3){openAdd("",{type:bp[0]==="fun"?"themepark":bp[0]==="culture"?"museum":bp[0]==="nature"?"beach":"do",title:p3.name,addr:p3.name+", "+cityOf(dest(S.dest))+", "+dest(S.dest)[2],note:p3.what});F.step=2;drawAdd();}}
+  else if(b.hasAttribute("data-dayt")){var p2=(IDEAS[S.dest]||[])[+b.getAttribute("data-dayt")];if(p2){openAdd("",{type:"daytrip",title:"Day trip: "+p2.name,addr:p2.name+", "+dest(S.dest)[2],note:"About "+Math.round(p2.km)+" km from "+cityOf(dest(S.dest))});F.step=2;drawAdd();}}
   else if(b.id==="bPrint")window.print();
   else if(b.id==="bOff")saveOffline();
 });

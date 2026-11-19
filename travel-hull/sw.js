@@ -1,4 +1,4 @@
-const PAGES=["./","index.html","trip.html","weather.html","money.html","fonts/sora.woff2","fonts/inter.woff2"];const BUILD="2026-11-19-0920";
+const PAGES=["./","index.html","trip.html","weather.html","money.html","fonts/sora.woff2","fonts/inter.woff2"];const BUILD="2026-11-19-1150";
 self.addEventListener("install",function(e){e.waitUntil(caches.open("th-pages").then(function(c){return c.addAll(PAGES);}).then(function(){return self.skipWaiting();}));});
 self.addEventListener("activate",function(e){e.waitUntil(self.clients.claim());});
 self.addEventListener("fetch",function(e){var u=new URL(e.request.url);
