@@ -451,6 +451,7 @@ footer p{margin:10px 0 0;max-width:420px}
 .pick .chips-row::-webkit-scrollbar{display:none}
 .pg{padding:32px 0 70px}
 .panel{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:22px;box-shadow:var(--shadow);margin-bottom:16px;min-width:0}
+.scroll{overflow-x:auto;max-width:100%;-webkit-overflow-scrolling:touch}
 .panel h2{font-size:22px}
 .panel .sub{color:var(--mut);font-size:15px;margin:6px 0 16px}
 .panel .src{font-size:12.5px;color:var(--mut);margin-top:12px}
@@ -482,12 +483,32 @@ table.wt td.spread{font-weight:700}
 .hints{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
 .hint{padding:8px 14px;border-radius:999px;background:var(--foam);color:var(--sea);font-weight:600;font-size:14px}
 details.more{margin-top:12px}details.more summary{cursor:pointer;font-weight:600;min-height:44px;display:flex;align-items:center;color:var(--sea2)}
+.hours{overflow:hidden}.hours .scroll{width:100%;max-width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch}.hours svg{display:block;max-width:none}
+.dcards{display:grid;grid-template-columns:repeat(auto-fill,minmax(118px,1fr));gap:10px;margin:14px 0 6px}
+.dcard{background:var(--sand);border-radius:16px;padding:12px 12px 10px;text-align:center}
+.dcard .ic{font-size:30px;line-height:1.2}.dcard b{display:block;font:700 15px var(--hf)}.dcard .t{font:700 20px var(--hf);margin-top:4px}
+.dcard .r{display:inline-block;margin-top:6px;padding:2px 10px;border-radius:999px;background:#E3F3FF;color:#0B5566;font-weight:700;font-size:13px}
+.dcard .r.wet{background:#0B5566;color:#fff}.dcard small{display:block;color:var(--mut);font-size:12.5px;margin-top:4px}
+.mapbox{position:relative;border-radius:16px;overflow:hidden;background:var(--sand);width:100%;height:clamp(320px,62vw,540px)}
+.mapbox iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.maptabs{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}
+.maptabs button{min-height:40px;padding:0 16px;border-radius:999px;border:1px solid var(--line);background:#fff;font-weight:600;cursor:pointer}
+.maptabs button[aria-pressed=true]{background:var(--sea);color:#fff;border-color:var(--sea)}
+.apps{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:10px;margin-top:6px}
+.wapp{display:flex;flex-direction:column;gap:4px;padding:14px 16px;border-radius:16px;border:1px solid var(--line);background:#fff;color:var(--ink);text-decoration:none;min-width:0}
+.wapp:hover{border-color:var(--sea);box-shadow:var(--shadow)}
+.wapp b{font:700 16px var(--hf)}.wapp span{font-size:13.5px;color:var(--mut)}
+.wapp .rt{font-weight:700;color:#8A5F00;font-size:13px}
+.wapp.off{background:var(--deep);border-color:var(--deep);color:#fff}.wapp.off span{color:#C9DDE0}.wapp.off .rt{color:#F4B740}
+.wapp .tr{margin-top:6px;align-self:flex-start;font-weight:700;font-size:13.5px;color:var(--sea);text-decoration:underline}
+.wapp.off .tr{color:#F4B740}
+.apph{font:700 12px var(--hf);letter-spacing:.1em;text-transform:uppercase;color:var(--mut);margin:16px 0 8px}
 </style>
 </head>
 <body>
 <header class="top"><div class="wrap">
   <a class="logo" href="index.html" aria-label="Travel Hull home"><span class="mark"><svg class="ico" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M15.5 8.5l-2 5-5 2 2-5z"/></svg></span><span>Travel Hull<small>EVERY TRIP · STEP BY STEP</small></span></a>
-  <nav class="nav" aria-label="Sections"><a href="index.html#plan">Steps</a><a href="trip.html">My plan</a><a href="index.html#deals">Deals</a><a href="../app/#seats">Flights</a><a href="weather.html" class="on">Weather</a><a href="money.html">Money</a><a href="index.html#faq">Questions</a></nav>
+  <nav class="nav" aria-label="Sections"><a href="index.html#plan">Steps</a><a href="trip.html">My plan</a><a href="tools.html">Tools</a><a href="index.html#deals">Deals</a><a href="../app/#seats">Flights</a><a href="weather.html" class="on">Weather</a><a href="money.html">Money</a><a href="index.html#faq">Questions</a></nav>
   <a class="btn gold" href="index.html#get">Get the app</a>
 </div></header>
 <section class="pg-h"><div class="wrap">
@@ -498,14 +519,17 @@ details.more{margin-top:12px}details.more summary{cursor:pointer;font-weight:600
 </div></section>
 <main class="pg"><div class="wrap">
 <div class="panel" id="wNow"></div>
+<div class="panel hours" id="wHours"></div>
+<div class="panel" id="wApps"></div>
 <div class="panel" id="wTrip"></div>
 <div class="panel" id="wNext"></div>
+<div class="panel" id="wMap"></div>
 <div class="g2"><div class="panel" id="wAgree"></div><div class="panel" id="wYear"></div></div>
 <div class="panel" id="wOff"></div>
 </div></main>
 <footer><div class="wrap">
   <div><a class="logo" href="index.html"><span class="mark"><svg class="ico" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M15.5 8.5l-2 5-5 2 2-5z"/></svg></span>Travel Hull</a><p>A free travel app for every kind of trip.</p></div>
-  <nav aria-label="Footer"><a href="index.html#plan">Steps</a><a href="trip.html">My plan</a><a href="index.html#deals">Deals</a><a href="weather.html">Weather</a><a href="money.html">Money</a><a href="index.html#faq">Questions</a></nav>
+  <nav aria-label="Footer"><a href="index.html#plan">Steps</a><a href="trip.html">My plan</a><a href="tools.html">Tools</a><a href="index.html#deals">Deals</a><a href="weather.html">Weather</a><a href="money.html">Money</a><a href="index.html#faq">Questions</a></nav>
 </div></footer>
 <script>window.FAIR={"NZ":[["Flat white",5,6.5],["Meat pie",6,9],["Pint of beer",10,14],["City bus",2.5,4]],"FJ":[["Local meal",10,20],["Coffee",5,8],["Fiji Bitter (bar)",6,10],["Short taxi ride",5,10],["Local bus",1,3]],"JP":[["Ramen or set meal",900,1500],["Coffee",400,650],["Water (convenience store)",100,160],["Beer (izakaya)",500,800],["Taxi flag fall (Tokyo)",500,500],["Train or metro ride",170,330]],"KR":[["Local meal",9000,14000],["Coffee",4500,6500],["Water (shop)",1000,1500],["Beer (bar)",5000,8000],["Taxi flag fall (Seoul)",4800,4800],["Subway ride",1550,2000]],"CN":[["Noodle or rice meal",15,40],["Coffee",20,38],["Water (shop)",2,4],["Beer (restaurant)",10,30],["Taxi flag fall",13,14],["Metro ride",3,7]],"HK":[["Cha chaan teng meal",50,85],["Coffee",35,50],["Water (7-Eleven)",8,12],["Beer (bar)",55,85],["Taxi flag fall",29,29],["MTR ride",5,16]],"MO":[["Local meal",50,85],["Coffee",30,45],["Taxi flag fall",21,21]],"TW":[["Beef noodle soup",150,260],["Coffee",60,150],["Water (shop)",20,30],["Beer (shop)",40,70],["Taxi flag fall (Taipei)",85,85],["MRT ride",20,65]],"TH":[["Street food dish",50,90],["Coffee",50,90],["Water (7-Eleven)",10,15],["Beer (bar)",80,150],["Taxi flag fall (meter)",35,35],["Short tuk-tuk ride (agree first)",100,200],["BTS or MRT ride",17,65]],"VN":[["Bowl of pho",40000,70000],["Vietnamese coffee",25000,50000],["Water (shop)",8000,15000],["Beer (bottle)",20000,40000],["Short Grab bike ride",15000,40000],["Taxi flag fall",12000,20000]],"ID":[["Warung meal (nasi goreng)",20000,45000],["Café coffee",25000,45000],["Water 1.5 L (shop)",6000,10000],["Large Bintang",35000,60000],["Short Gojek/Grab bike ride",10000,25000]],"MY":[["Hawker meal",6,14],["Coffee",8,15],["Water (shop)",2,3],["Beer (bar)",15,28],["Short Grab ride",8,15],["LRT ride",1.5,5]],"SG":[["Hawker meal",4,8],["Kopi (hawker)",1.5,2.5],["Water (shop)",1.5,2.5],["Beer (bar)",12,18],["Taxi flag fall",4.4,4.8],["MRT ride",1.1,2.5]],"PH":[["Local meal",100,220],["Coffee",110,180],["Water (shop)",25,40],["San Miguel beer",60,120],["Taxi flag fall",45,45],["Jeepney ride",13,15]],"IN":[["Thali meal",100,300],["Chai",10,30],["Bottled water 1 L (never above the printed MRP)",20,20],["Beer (bar)",150,350],["Short auto-rickshaw ride",50,150],["Metro ride",10,60]],"KH":[["Local meal",2,5],["Coffee",1.5,3],["Draft beer",0.75,2.5],["Short tuk-tuk ride (PassApp/Grab)",1.5,3]],"AE":[["Shawarma",10,20],["Coffee",15,25],["Water (shop)",1,3],["Beer (licensed bar)",40,65],["Taxi flag fall",12,12],["Metro ride",3,8]],"QA":[["Local meal",20,40],["Coffee",15,25],["Water (shop)",1,3],["Metro ride",2,6]],"TR":[["Simit (bread ring)",20,35],["Döner",200,400],["Tea",20,40],["Water (shop)",15,25],["Beer (bar)",150,260]],"GR":[["Gyros pita",3.5,5],["Freddo espresso",2.5,4],["Water 0.5 L (kiosk)",0.5,0.6],["Beer (taverna)",4,6],["Athens metro ticket",1.2,2]],"IT":[["Pizza margherita",6,10],["Espresso at the bar",1.2,1.6],["Water (shop)",0.5,1.5],["Beer (bar)",5,7],["Metro or bus ticket",1.5,2.2]],"FR":[["Croissant",1.2,1.7],["Espresso at the bar",2,3],["Jambon-beurre sandwich",5,7],["Beer (demi)",5,8],["Metro ticket (Paris)",2.5,2.5]],"ES":[["Menú del día (lunch)",12,17],["Café con leche",1.5,2.5],["Caña (small beer)",2,4],["Water (shop)",0.5,1],["Metro ticket",1.5,2.6]],"PT":[["Pastel de nata",1.2,1.6],["Bica (espresso)",0.8,1.3],["Prato do dia (lunch)",9,14],["Beer (imperial)",1.5,3],["Lisbon metro ticket",1.85,2]],"DE":[["Döner",6,9],["Coffee",3,4.5],["Beer 0.5 L (bar)",4,6],["Water (supermarket, plus deposit)",0.5,1],["Public transport ticket",3,4]],"NL":[["Fries",4,6],["Coffee",3,4.5],["Beer (bar)",4,6.5],["Tram or metro ride",3,5]],"AT":[["Wiener schnitzel",15,23],["Coffee",3.5,5],["Beer (bar)",4.5,6],["Vienna transport ticket",2.4,3]],"CH":[["Lunch menu",20,30],["Coffee",4.5,6.5],["Beer (bar)",7,10],["Tram or bus ticket",2.8,4.6]],"GB":[["Meal deal (supermarket)",4,5.5],["Coffee",3,4.2],["Pint of beer",5.5,8],["Tube or bus fare (contactless)",1.75,3.9]],"IE":[["Pint of beer",6,8],["Coffee",3.5,4.5],["Dublin bus fare",2,2.6]],"US":[["Coffee",4,6.5],["Burger meal (plus tip)",12,20],["Beer at a bar (plus tip)",7,11],["Water (shop)",2,3],["Subway or bus fare",2.5,2.9]],"CA":[["Coffee",3,5],["Pub meal",18,28],["Beer (bar)",7,10],["Transit fare",3,3.5]],"MX":[["Street taco (each)",15,30],["Coffee",40,70],["Water (shop)",15,25],["Beer (bar)",40,80],["Mexico City metro",5,5],["Short Uber ride",60,130]],"BR":[["Prato feito (lunch plate)",20,38],["Coffee",6,10],["Water (shop)",3,5],["Beer (bar)",8,16],["Metro ride",5,6],["Short Uber ride",15,30]],"CL":[["Completo (hot dog)",2000,3500],["Coffee",2500,3800],["Beer (bar)",3000,5500],["Santiago metro",800,900],["Short Uber ride",4000,7500]],"PE":[["Menú (set lunch)",12,22],["Coffee",8,12],["Water (shop)",2,3],["Beer (bar)",10,16],["Short taxi (agree first or use an app)",8,15]],"ZA":[["Restaurant meal",100,190],["Coffee",30,42],["Beer (bar)",35,55],["Water (shop)",10,16],["Short Uber ride",50,100]],"EG":[["Koshari",50,110],["Tea",10,25],["Water (shop)",10,15],["Short Uber ride",50,110]],"AR":[],"VU":[["Local meal",800,1500],["Coffee",350,600],["Water (shop)",150,300],["Beer (bar)",500,800],["Short taxi (agree first)",500,1000]],"CK":[["Café meal",18,30],["Coffee",5,6.5],["Water (shop)",3,5],["Beer (bar)",8,12]],"NC":[["Snack meal",1500,2500],["Coffee",300,550],["Water (shop)",150,300],["Beer (bar)",700,1100]],"LK":[["Rice and curry (local)",500,1200],["Tea",100,250],["Water 1.5 L (shop)",130,200],["Beer (bar)",800,1500],["Short tuk-tuk ride (app)",300,700]],"MV":[["Local-island meal",8,15],["Coffee",3,6],["Water (shop)",1,2],["Resort cocktail",15,25]],"NP":[["Dal bhat",300,700],["Tea",50,150],["Water 1 L (shop)",30,60],["Beer (bar)",500,900],["Short taxi (agree first)",300,700]]};</script>
 <script>
@@ -562,7 +586,11 @@ if("serviceWorker" in navigator)navigator.serviceWorker.register("sw.js").catch(
 </script>
 <script>
 var SKY={0:"Clear",1:"Mostly clear",2:"Partly cloudy",3:"Cloudy",45:"Fog",48:"Fog",51:"Light drizzle",53:"Drizzle",55:"Heavy drizzle",56:"Freezing drizzle",57:"Freezing drizzle",61:"Light rain",63:"Rain",65:"Heavy rain",66:"Freezing rain",67:"Freezing rain",71:"Light snow",73:"Snow",75:"Heavy snow",77:"Snow grains",80:"Showers",81:"Showers",82:"Heavy showers",85:"Snow showers",86:"Snow showers",95:"Thunderstorm",96:"Thunderstorm, hail",99:"Thunderstorm, hail"};
-var OFFICIAL={AU:["Bureau of Meteorology","https://www.bom.gov.au/"],NZ:["MetService","https://www.metservice.com/"],JP:["Japan Meteorological Agency","https://www.jma.go.jp/jma/indexe.html"],ID:["BMKG","https://www.bmkg.go.id/"],SG:["Meteorological Service Singapore","https://www.weather.gov.sg/"],TH:["Thai Meteorological Department","https://www.tmd.go.th/en"],FJ:["Fiji Meteorological Service","https://www.met.gov.fj/"],GB:["Met Office","https://www.metoffice.gov.uk/"],FR:["Météo-France","https://meteofrance.com/"],IT:["Aeronautica Militare weather service","https://www.meteoam.it/"],US:["National Weather Service","https://www.weather.gov/"],VN:["National Centre for Hydro-Meteorological Forecasting","https://nchmf.gov.vn/"],KR:["Korea Meteorological Administration","https://www.kma.go.kr/neng/index.do"],HK:["Hong Kong Observatory","https://www.hko.gov.hk/en/"],MY:["MetMalaysia","https://www.met.gov.my/"],AE:["National Center of Meteorology","https://www.ncm.gov.ae/"]};
+var NOT_EN={ID:"Indonesian",FR:"French",IT:"Italian",MY:"Malay",AE:"Arabic",ES:"Spanish",GR:"Greek",DE:"German",PT:"Portuguese",NL:"Dutch"};
+var EUROPE=["FR","IT","ES","GR","DE","PT","NL","AT","CH","HR","IE","BE","CZ"];
+function TR(u){return "https://translate.google.com/translate?sl=auto&tl=en&u="+encodeURIComponent(u);}
+var OFFICIAL={AU:["Bureau of Meteorology","https://www.bom.gov.au/"],NZ:["MetService","https://www.metservice.com/"],JP:["Japan Meteorological Agency","https://www.jma.go.jp/jma/indexe.html"],ID:["BMKG","https://www.bmkg.go.id/"],SG:["Meteorological Service Singapore","https://www.weather.gov.sg/"],TH:["Thai Meteorological Department","https://www.tmd.go.th/en"],FJ:["Fiji Meteorological Service","https://www.met.gov.fj/"],GB:["Met Office","https://www.metoffice.gov.uk/"],FR:["Météo-France","https://meteofrance.com/"],IT:["Aeronautica Militare weather service","https://www.meteoam.it/"],US:["National Weather Service","https://www.weather.gov/"],VN:["National Centre for Hydro-Meteorological Forecasting","https://www.nchmf.gov.vn/KttvsiteE/en-US/2/index.html"],KR:["Korea Meteorological Administration","https://www.kma.go.kr/neng/index.do"],HK:["Hong Kong Observatory","https://www.hko.gov.hk/en/"],MY:["MetMalaysia","https://www.met.gov.my/"],AE:["National Center of Meteorology","https://www.ncm.gov.ae/"]};
+function ICON(c,night){if(c==null)return "";if(c<=1)return night?"🌙":"☀️";if(c===2)return night?"☁️":"⛅";if(c===3)return "☁️";if(c===45||c===48)return "🌫️";if(c>=95)return "⛈️";if((c>=71&&c<=77)||c===85||c===86)return "❄️";if(c>=51&&c<=67||c>=80)return "🌧️";return "☁️";}
 var MODELS=[["ecmwf_ifs025","European (ECMWF)"],["gfs_seamless","US (GFS)"],["icon_seamless","German (ICON)"],["bom_access_global","Australian (BOM)"]];
 function dkey(x){return x.getFullYear()+"-"+("0"+(x.getMonth()+1)).slice(-2)+"-"+("0"+x.getDate()).slice(-2);}
 function pdate(s){var p=s.split("-");return new Date(+p[0],p[1]-1,+p[2]);}
@@ -572,15 +600,16 @@ function hints(hi,lo,rainDays,n,uv){var h=[];if(n&&rainDays/n>=0.34)h.push("Pack
 var run=0;
 function render(){
   var d=dest(S.dest),city=cityOf(d),me=++run,ll="latitude="+d[4].toFixed(3)+"&longitude="+d[5].toFixed(3)+"&timezone=auto";
-  ["wNow","wTrip","wNext","wAgree","wYear","wOff"].forEach(function(id){$(id).style.display="";$(id).innerHTML='<div class="gone">Loading the weather for '+E(city)+"…</div>";});
+  ["wNow","wHours","wApps","wTrip","wNext","wMap","wAgree","wYear","wOff"].forEach(function(id){$(id).style.display="";$(id).innerHTML='<div class="gone">Loading the weather for '+E(city)+"…</div>";});
   var off=OFFICIAL[d[3]];
   $("wOff").innerHTML="<h2>The official forecast</h2><p class=\"sub\">For warnings, cyclones, snow and fire danger, check the country's own weather service. It's free.</p>"+(off?'<a class="lbtn" href="'+off[1]+'" target="_blank" rel="noopener">'+E(off[0])+" ↗</a>":"")+
     '<a class="lbtn alt" href="https://www.google.com/search?q='+encodeURIComponent("weather "+city+" "+d[2])+'" target="_blank" rel="noopener">Weather on Google ↗</a><a class="lbtn alt" href="index.html#plan">Back to your trip</a>';
-  var fc=getJSON("https://api.open-meteo.com/v1/forecast?"+ll+"&forecast_days=16&current=temperature_2m,apparent_temperature,weather_code,wind_speed_10m,relative_humidity_2m&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max,precipitation_sum,wind_speed_10m_max,uv_index_max,sunrise,sunset");
+  var fc=getJSON("https://api.open-meteo.com/v1/forecast?"+ll+"&forecast_days=16&current=temperature_2m,apparent_temperature,weather_code,wind_speed_10m,relative_humidity_2m&hourly=temperature_2m,precipitation_probability,weather_code,wind_speed_10m,is_day&forecast_hours=48&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max,precipitation_sum,wind_speed_10m_max,uv_index_max,sunrise,sunset");
   fc.then(function(j){if(me!==run)return;
     var keep=j.daily.time.length;while(keep>1&&(j.daily.temperature_2m_max[keep-1]==null||j.daily.temperature_2m_min[keep-1]==null))keep--;
     Object.keys(j.daily).forEach(function(k){j.daily[k]=j.daily[k].slice(0,keep);});
-    drawNow(j,d);drawNext(j,d);drawTrip(j,d);agree(j,d,me,ll);},function(){if(me!==run)return;$("wNow").innerHTML='<div class="gone">The forecast service is not answering right now. Use the official forecast below, or try again in a minute.</div>';$("wNext").style.display="none";$("wAgree").style.display="none";drawTrip(null,d);});
+    drawNow(j,d);drawHours(j,d);drawNext(j,d);drawTrip(j,d);agree(j,d,me,ll);},function(){if(me!==run)return;$("wNow").innerHTML='<div class="gone">The forecast service is not answering right now. Use the official forecast below, or try again in a minute.</div>';$("wNext").style.display="none";$("wHours").style.display="none";$("wAgree").style.display="none";drawTrip(null,d);});
+  drawMap(d);drawApps(d);
   getJSON("https://archive-api.open-meteo.com/v1/archive?"+ll+"&start_date=2025-01-01&end_date=2025-12-31&daily=temperature_2m_max,temperature_2m_min,precipitation_sum").then(function(j){if(me===run)drawYear(j,d);},function(){if(me===run)$("wYear").style.display="none";});
 }
 function drawNow(j,d){
@@ -590,18 +619,68 @@ function drawNow(j,d){
     "<div><b>"+Math.round(D.temperature_2m_max[0])+"° / "+Math.round(D.temperature_2m_min[0])+"°</b><span>today's high / low</span></div><div><b>"+(D.precipitation_probability_max[0]!=null?D.precipitation_probability_max[0]+"%":"–")+"</b><span>chance of rain today</span></div><div><b>"+E(D.sunrise[0].slice(11,16))+"</b><span>sunrise</span></div><div><b>"+E(D.sunset[0].slice(11,16))+"</b><span>sunset</span></div></div></div>"+
     '<div class="src">Forecast: <a href="https://open-meteo.com/" target="_blank" rel="noopener">Open-Meteo</a>, which blends the national weather services\' models.</div>';
 }
+function drawHours(j,d){
+  var H0=j.hourly;if(!H0||!H0.time||!H0.time.length){$("wHours").style.display="none";return;}
+  var n=H0.time.length,step=26,W=n*step+20,Hh=250,top=62,bot=150,T=H0.temperature_2m,hi=Math.max.apply(null,T),lo=Math.min.apply(null,T);
+  function x(i){return 10+i*step+step/2;}function y(v){return bot-(v-lo)/((hi-lo)||1)*(bot-top);}
+  var pts=T.map(function(v,i){return [x(i),y(v)];}),path="M"+pts[0][0]+","+pts[0][1];
+  for(var i=1;i<pts.length;i++){var p0=pts[i-1],p1=pts[i],mx=(p0[0]+p1[0])/2;path+=" C"+mx+","+p0[1]+" "+mx+","+p1[1]+" "+p1[0]+","+p1[1];}
+  var area=path+" L"+pts[pts.length-1][0]+","+bot+" L"+pts[0][0]+","+bot+" Z",g="";
+  H0.time.forEach(function(t,i){var hr=+t.slice(11,13),px=x(i),p=H0.precipitation_probability[i]||0,night=H0.is_day&&H0.is_day[i]===0;
+    if(hr===0&&i>0)g+='<line x1="'+(px-step/2)+'" y1="40" x2="'+(px-step/2)+'" y2="'+(Hh-6)+'" stroke="#D6E2E4" stroke-dasharray="3 4"/><text x="'+(px-step/2+4)+'" y="50" font-size="11.5" font-weight="700" fill="#0B5566">'+DAYS[pdate(t.slice(0,10)).getDay()]+"</text>";
+    g+='<rect x="'+(px-8)+'" y="'+(212-p*0.42).toFixed(1)+'" width="16" height="'+Math.max(1,p*0.42).toFixed(1)+'" rx="3" fill="'+(p>=50?"#0B5566":"#8FD0FF")+'"><title>'+t.slice(11,16)+": "+p+"% chance of rain</title></rect>";
+    if(i%3===0){g+='<text x="'+px+'" y="26" text-anchor="middle" font-size="18">'+ICON(H0.weather_code[i],night)+"</text>"+
+      '<text x="'+px+'" y="'+(pts[i][1]-9).toFixed(1)+'" text-anchor="middle" font-size="12.5" font-weight="700" fill="#0F2A31">'+Math.round(T[i])+"°</text>"+
+      '<circle cx="'+px+'" cy="'+pts[i][1].toFixed(1)+'" r="3.5" fill="#fff" stroke="#E08A00" stroke-width="2"/>'+
+      '<text x="'+px+'" y="232" text-anchor="middle" font-size="11.5" font-weight="600" fill="#0F2A31">'+(i===0?"Now":hr+":00")+"</text>"+
+      '<text x="'+px+'" y="246" text-anchor="middle" font-size="10.5" fill="#56696F">'+Math.round(H0.wind_speed_10m[i])+" km/h</text>";}});
+  var wetH=H0.precipitation_probability.filter(function(p){return (p||0)>=50;}).length,firstWet=H0.precipitation_probability.findIndex(function(p){return (p||0)>=50;});
+  $("wHours").innerHTML="<h2>The next 48 hours</h2><p class=\"sub\">"+(firstWet<0?"<b>No rain likely</b> for the next two days.":firstWet===0?"<b>Rain is likely now</b>, for about "+wetH+" of the next 48 hours.":"<b>Rain likely from "+H0.time[firstWet].slice(11,16)+" "+dlabel(H0.time[firstWet].slice(0,10))+"</b>, about "+wetH+" hours in all.")+
+    " Between "+Math.round(lo)+"° and "+Math.round(hi)+"°.</p>"+
+    '<div class="scroll"><svg viewBox="0 0 '+W+" "+Hh+'" width="'+W+'" height="'+Hh+'" style="width:'+W+'px;min-width:'+W+'px;height:'+Hh+'px" role="img" aria-label="Temperature and chance of rain for each hour"><defs><linearGradient id="tg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F4B740" stop-opacity=".45"/><stop offset="1" stop-color="#F4B740" stop-opacity="0"/></linearGradient></defs>'+
+    '<path d="'+area+'" fill="url(#tg)"/><path d="'+path+'" fill="none" stroke="#E08A00" stroke-width="3" stroke-linecap="round"/>'+g+"</svg></div>"+
+    '<div class="key"><span><i style="background:#E08A00"></i>Temperature (°C)</span><span><i style="background:#8FD0FF"></i>Chance of rain</span><span><i style="background:#0B5566"></i>50% or more</span></div><div class="src">Hour by hour, local time. Source: Open-Meteo. Swipe sideways for more.</div>';
+}
+var MAPL="rain";
+function drawMap(d){
+  var L=[["rain","Rain and storms"],["wind","Wind"],["temp","Temperature"],["clouds","Clouds"]];
+  function src(){return "https://embed.windy.com/embed2.html?lat="+d[4].toFixed(3)+"&lon="+d[5].toFixed(3)+"&detailLat="+d[4].toFixed(3)+"&detailLon="+d[5].toFixed(3)+"&zoom=8&level=surface&overlay="+MAPL+"&product=ecmwf&menu=&message=true&marker=true&calendar=now&pressure=&type=map&location=coordinates&detail=&metricWind=km%2Fh&metricTemp=%C2%B0C&radarRange=-1";}
+  $("wMap").innerHTML="<h2>Live weather map</h2><p class=\"sub\">Watch rain, storms and wind move in around "+E(cityOf(d))+". Pinch or drag to look around. Needs a signal.</p>"+
+    '<div class="maptabs" role="group" aria-label="Map layer">'+L.map(function(l){return '<button type="button" data-map="'+l[0]+'" aria-pressed="'+(l[0]===MAPL)+'">'+l[1]+"</button>";}).join("")+"</div>"+
+    (navigator.onLine===false?'<div class="gone">The map needs a signal. Everything else on this page still works.</div>':'<div class="mapbox"><iframe title="Live weather map for '+E(cityOf(d))+'" loading="lazy" src="'+src()+'"></iframe></div>')+
+    '<div class="src">Map: <a href="https://www.windy.com/'+d[4].toFixed(3)+"/"+d[5].toFixed(3)+"?"+d[4].toFixed(3)+","+d[5].toFixed(3)+',9" target="_blank" rel="noopener">Windy.com</a> (free). Open it full size for radar, waves and more.</div>';
+  [].forEach.call($("wMap").querySelectorAll("[data-map]"),function(b){b.onclick=function(){MAPL=b.getAttribute("data-map");drawMap(d);};});
+}
+function drawApps(d){
+  var city=cityOf(d),la=d[4].toFixed(3),lo=d[5].toFixed(3),off=OFFICIAL[d[3]],cc=d[3],ne=NOT_EN[cc],o="";
+  function card(cls,name,why,rt,url,tr){return '<a class="wapp'+cls+'" href="'+url+'" target="_blank" rel="noopener"><b>'+E(name)+" ↗</b><span>"+E(why)+"</span>"+(rt?'<span class="rt">'+rt+" on Google Play</span>":"")+"</a>"+
+    (tr?'<a class="wapp'+cls+'" href="'+TR(url)+'" target="_blank" rel="noopener"><b>'+E(name)+" in English ↗</b><span>The same site, translated from "+E(ne)+" by Google Translate.</span></a>":"");}
+  o+='<div class="apph">Official for '+E(d[2])+"</div><div class=\"apps\">";
+  if(off)o+=card(" off",off[0],"The country's own forecasts and warnings: storms, cyclones, heat, floods."+(ne?" Written in "+ne+".":""),cc==="AU"?"4.4★":cc==="NZ"?"2.6★":"",off[1],!!ne);
+  if(EUROPE.indexOf(cc)>=0)o+=card(" off","Meteoalarm","Official weather warnings from every European weather service, in English.","","https://www.meteoalarm.org/en/",false);
+  if(cc==="AU"){o+=card("","WillyWeather","Beaches, tides, swell and UV for "+city+".","4.6★","https://www.willyweather.com.au/",false)+card("","Weatherzone","Detailed Australian forecasts and rain radar.","4.6★","https://www.weatherzone.com.au/",false);}
+  o+="</div><div class=\"apph\">Best-rated weather apps, opened at "+E(city)+'</div><div class="apps">'+
+    card("","Yr","A clear 9-day forecast for this exact spot, hour by hour. Free, no ads.","4.3★","https://www.yr.no/en/forecast/daily-table/"+la+","+lo,false)+
+    card("","Windy","Hour-by-hour forecast plus live maps of wind, rain, storms and waves.","4.7★","https://www.windy.com/"+la+"/"+lo+"?"+la+","+lo+",9",false)+
+    card("","RainViewer","Live rain radar: is it raining right now, and where is it heading?","4.4★","https://www.rainviewer.com/map.html?loc="+la+","+lo+",8&layer=radar",false)+
+    card("","Ventusky","Beautiful animated weather maps: rain, temperature and wind.","4.3★","https://www.ventusky.com/?p="+la+";"+lo+";8",false)+
+    card("","Google weather","A quick look at today and the week, in one search.","","https://www.google.com/search?q="+encodeURIComponent("weather "+city+" "+d[2]),false)+"</div>";
+  $("wApps").innerHTML="<h2>Your weather apps, ready for "+E(city)+"</h2><p class=\"sub\">One tap opens each one already on "+E(city)+". Sites in another language open in English too.</p>"+o+
+    '<div class="src">Ratings read from the Australian Google Play Store on 19 Nov 2026. These are other companies\' apps and websites; Travel Hull is not part of them.</div>';
+}
 function drawNext(j,d){
-  var D=j.daily,n=D.time.length,W=760,H=270,step=W/n,top=30,bot=170,hi=Math.max.apply(null,D.temperature_2m_max),lo=Math.min.apply(null,D.temperature_2m_min),trip=tripDays();
+  var D=j.daily,n=D.time.length,W=760,H=290,step=W/n,top=58,bot=190,hi=Math.max.apply(null,D.temperature_2m_max),lo=Math.min.apply(null,D.temperature_2m_min),trip=tripDays();
   function y(v){return bot-(v-lo)/((hi-lo)||1)*(bot-top);}
   var g=D.time.map(function(t,i){var x=i*step+step/2,a=y(D.temperature_2m_max[i]),b=y(D.temperature_2m_min[i]),p=D.precipitation_probability_max[i]||0,on=trip.indexOf(t)>=0,x0=pdate(t);
     return (on?'<rect x="'+(i*step+2)+'" y="6" width="'+(step-4)+'" height="'+(H-10)+'" rx="8" fill="#FFF3D6"/>':"")+
       '<rect x="'+(x-8)+'" y="'+a.toFixed(1)+'" width="16" height="'+Math.max(6,b-a).toFixed(1)+'" rx="8" fill="#137A8A"><title>'+dlabel(t)+": "+Math.round(D.temperature_2m_max[i])+"° / "+Math.round(D.temperature_2m_min[i])+"°, "+p+"% chance of rain</title></rect>"+
       '<text x="'+x+'" y="'+(a-6).toFixed(1)+'" text-anchor="middle" font-size="12.5" font-weight="700" fill="#0F2A31">'+Math.round(D.temperature_2m_max[i])+"°</text>"+
       '<text x="'+x+'" y="'+(Math.max(b,a+6)+15).toFixed(1)+'" text-anchor="middle" font-size="12" fill="#56696F">'+Math.round(D.temperature_2m_min[i])+"°</text>"+
-      '<rect x="'+(x-10)+'" y="'+(232-p*0.26).toFixed(1)+'" width="20" height="'+Math.max(1,p*0.26).toFixed(1)+'" rx="3" fill="#8FD0FF"/>'+
-      '<text x="'+x+'" y="'+(228-p*0.26).toFixed(1)+'" text-anchor="middle" font-size="11.5" font-weight="600" fill="#0B5566">'+(p>=10?p+"%":"")+"</text>"+
-      '<text x="'+x+'" y="248" text-anchor="middle" font-size="12" font-weight="'+(on?"800":"600")+'" fill="#0F2A31">'+DAYS[x0.getDay()]+"</text>"+
-      '<text x="'+x+'" y="263" text-anchor="middle" font-size="11.5" fill="#56696F">'+x0.getDate()+"</text>";}).join("");
+      '<text x="'+x+'" y="26" text-anchor="middle" font-size="20">'+ICON(D.weather_code[i])+"</text>"+
+      '<rect x="'+(x-10)+'" y="'+(252-p*0.26).toFixed(1)+'" width="20" height="'+Math.max(1,p*0.26).toFixed(1)+'" rx="3" fill="#8FD0FF"/>'+
+      '<text x="'+x+'" y="'+(248-p*0.26).toFixed(1)+'" text-anchor="middle" font-size="11.5" font-weight="600" fill="#0B5566">'+(p>=10?p+"%":"")+"</text>"+
+      '<text x="'+x+'" y="268" text-anchor="middle" font-size="12" font-weight="'+(on?"800":"600")+'" fill="#0F2A31">'+DAYS[x0.getDay()]+"</text>"+
+      '<text x="'+x+'" y="283" text-anchor="middle" font-size="11.5" fill="#56696F">'+x0.getDate()+"</text>";}).join("");
   var wet=D.precipitation_probability_max.filter(function(p){return p>=50;}).length;
   $("wNext").innerHTML="<h2>The next "+n+" days in "+E(cityOf(d))+"</h2><p class=\"sub\"><b>"+wet+" of "+n+"</b> days have a 50% or higher chance of rain. Highs from "+Math.round(Math.min.apply(null,D.temperature_2m_max))+"° to "+Math.round(hi)+"°.</p>"+
     '<div class="scroll"><svg viewBox="0 0 '+W+" "+H+'" style="min-width:640px" role="img" aria-label="Daily high and low, and chance of rain">'+g+"</svg></div>"+
@@ -617,7 +696,9 @@ function drawTrip(j,d){
   if(idx.length){
     var his=idx.map(function(i){return D.temperature_2m_max[i];}),los=idx.map(function(i){return D.temperature_2m_min[i];}),wet=idx.filter(function(i){return (D.precipitation_probability_max[i]||0)>=50;}).length,uv=Math.max.apply(null,idx.map(function(i){return D.uv_index_max[i]||0;}));
     box.innerHTML="<h2>Your trip: "+dlabel(trip[0])+" to "+dlabel(trip[trip.length-1])+"</h2><p class=\"sub\">The forecast covers <b>"+idx.length+" of your "+trip.length+" days</b> so far. Highs "+Math.round(Math.min.apply(null,his))+"° to "+Math.round(Math.max.apply(null,his))+"°, lows down to "+Math.round(Math.min.apply(null,los))+"°, and "+wet+" day"+(wet===1?"":"s")+" likely wet.</p>"+
-      '<div class="scroll"><table class="wt"><tr><th>Day</th><th>Sky</th><th>High / low</th><th>Rain chance</th><th>Wind</th><th>UV</th></tr>'+idx.map(function(i){return "<tr class=\"trip\"><td><b>"+dlabel(D.time[i])+"</b></td><td>"+E(SKY[D.weather_code[i]]||"")+"</td><td>"+Math.round(D.temperature_2m_max[i])+"° / "+Math.round(D.temperature_2m_min[i])+"°</td><td>"+(D.precipitation_probability_max[i]||0)+"%</td><td>"+Math.round(D.wind_speed_10m_max[i])+" km/h</td><td>"+(D.uv_index_max[i]!=null?D.uv_index_max[i].toFixed(0):"–")+"</td></tr>";}).join("")+"</table></div>"+
+      '<div class="dcards">'+idx.map(function(i){var p=D.precipitation_probability_max[i];return '<div class="dcard"><div class="ic">'+ICON(D.weather_code[i])+"</div><b>"+dlabel(D.time[i])+'</b><div class="t">'+Math.round(D.temperature_2m_max[i])+"° <span style=\"color:#56696F;font-weight:500\">"+Math.round(D.temperature_2m_min[i])+"°</span></div>"+
+        (p!=null?'<span class="r'+(p>=50?" wet":"")+'">'+p+"% rain</span>":"")+"<small>"+E(SKY[D.weather_code[i]]||"")+" · UV "+(D.uv_index_max[i]!=null?D.uv_index_max[i].toFixed(0):"–")+"</small></div>";}).join("")+"</div>"+
+      '<details class="more"><summary>See the trip days as a table</summary><div class="scroll"><table class="wt"><tr><th>Day</th><th>Sky</th><th>High / low</th><th>Rain chance</th><th>Wind</th><th>UV</th></tr>'+idx.map(function(i){return "<tr class=\"trip\"><td><b>"+dlabel(D.time[i])+"</b></td><td>"+E(SKY[D.weather_code[i]]||"")+"</td><td>"+Math.round(D.temperature_2m_max[i])+"° / "+Math.round(D.temperature_2m_min[i])+"°</td><td>"+(D.precipitation_probability_max[i]||0)+"%</td><td>"+Math.round(D.wind_speed_10m_max[i])+" km/h</td><td>"+(D.uv_index_max[i]!=null?D.uv_index_max[i].toFixed(0):"–")+"</td></tr>";}).join("")+"</table></div></details>"+
       hints(Math.max.apply(null,his),Math.min.apply(null,los),wet,idx.length,uv);
     return;
   }

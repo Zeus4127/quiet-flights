@@ -451,6 +451,7 @@ footer p{margin:10px 0 0;max-width:420px}
 .pick .chips-row::-webkit-scrollbar{display:none}
 .pg{padding:32px 0 70px}
 .panel{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:22px;box-shadow:var(--shadow);margin-bottom:16px;min-width:0}
+.scroll{overflow-x:auto;max-width:100%;-webkit-overflow-scrolling:touch}
 .panel h2{font-size:22px}
 .panel .sub{color:var(--mut);font-size:15px;margin:6px 0 16px}
 .panel .src{font-size:12.5px;color:var(--mut);margin-top:12px}
@@ -496,12 +497,20 @@ table.pt td.aud{font-weight:700;color:var(--sea)}
 .stp{display:flex;align-items:center;gap:8px;font-size:14.5px}
 .stp button{width:44px;height:44px;border-radius:12px;border:1.5px solid var(--line);background:#fff;font:700 20px var(--hf);color:var(--sea)}
 .stp b{min-width:22px;text-align:center;font:700 17px var(--hf)}
+.htabs{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0 4px}
+.htabs button{min-height:40px;padding:0 16px;border-radius:999px;border:1px solid var(--line);background:#fff;font-weight:600;cursor:pointer}
+.htabs button[aria-pressed=true]{background:var(--sea);color:#fff;border-color:var(--sea)}
+.hstats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:12px 0}
+.hstats div{background:var(--sand);border-radius:12px;padding:10px 12px}.hstats b{display:block;font:700 18px var(--hf)}.hstats span{font-size:12.5px;color:var(--mut)}
+@media(max-width:560px){.hstats{grid-template-columns:1fr 1fr}}
+.verdict{display:inline-block;margin-top:4px;padding:6px 14px;border-radius:999px;font-weight:700}
+.verdict.good{background:#DDF5EA;color:#0E6B47}.verdict.ok{background:#FFF3D6;color:#7A5200}.verdict.bad{background:#FDE3DF;color:#9B2C1F}
 </style>
 </head>
 <body>
 <header class="top"><div class="wrap">
   <a class="logo" href="index.html" aria-label="Travel Hull home"><span class="mark"><svg class="ico" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M15.5 8.5l-2 5-5 2 2-5z"/></svg></span><span>Travel Hull<small>EVERY TRIP · STEP BY STEP</small></span></a>
-  <nav class="nav" aria-label="Sections"><a href="index.html#plan">Steps</a><a href="trip.html">My plan</a><a href="index.html#deals">Deals</a><a href="../app/#seats">Flights</a><a href="weather.html">Weather</a><a href="money.html" class="on">Money</a><a href="index.html#faq">Questions</a></nav>
+  <nav class="nav" aria-label="Sections"><a href="index.html#plan">Steps</a><a href="trip.html">My plan</a><a href="tools.html">Tools</a><a href="index.html#deals">Deals</a><a href="../app/#seats">Flights</a><a href="weather.html">Weather</a><a href="money.html" class="on">Money</a><a href="index.html#faq">Questions</a></nav>
   <a class="btn gold" href="index.html#get">Get the app</a>
 </div></header>
 <section class="pg-h"><div class="wrap">
@@ -512,6 +521,7 @@ table.pt td.aud{font-weight:700;color:var(--sea)}
 </div></section>
 <main class="pg"><div class="wrap">
 <div class="panel" id="mRate"></div>
+<div class="panel" id="mHist"></div>
 <div class="g2"><div class="panel" id="mFair"></div><div class="panel" id="mWays"></div></div>
 <div class="panel" id="mPlaces"></div>
 <div class="g2"><div class="panel" id="mMove"></div><div class="panel" id="mFood"></div></div>
@@ -520,7 +530,7 @@ table.pt td.aud{font-weight:700;color:var(--sea)}
 </div></main>
 <footer><div class="wrap">
   <div><a class="logo" href="index.html"><span class="mark"><svg class="ico" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M15.5 8.5l-2 5-5 2 2-5z"/></svg></span>Travel Hull</a><p>A free travel app for every kind of trip.</p></div>
-  <nav aria-label="Footer"><a href="index.html#plan">Steps</a><a href="trip.html">My plan</a><a href="index.html#deals">Deals</a><a href="weather.html">Weather</a><a href="money.html">Money</a><a href="index.html#faq">Questions</a></nav>
+  <nav aria-label="Footer"><a href="index.html#plan">Steps</a><a href="trip.html">My plan</a><a href="tools.html">Tools</a><a href="index.html#deals">Deals</a><a href="weather.html">Weather</a><a href="money.html">Money</a><a href="index.html#faq">Questions</a></nav>
 </div></footer>
 <script>window.FAIR={"NZ":[["Flat white",5,6.5],["Meat pie",6,9],["Pint of beer",10,14],["City bus",2.5,4]],"FJ":[["Local meal",10,20],["Coffee",5,8],["Fiji Bitter (bar)",6,10],["Short taxi ride",5,10],["Local bus",1,3]],"JP":[["Ramen or set meal",900,1500],["Coffee",400,650],["Water (convenience store)",100,160],["Beer (izakaya)",500,800],["Taxi flag fall (Tokyo)",500,500],["Train or metro ride",170,330]],"KR":[["Local meal",9000,14000],["Coffee",4500,6500],["Water (shop)",1000,1500],["Beer (bar)",5000,8000],["Taxi flag fall (Seoul)",4800,4800],["Subway ride",1550,2000]],"CN":[["Noodle or rice meal",15,40],["Coffee",20,38],["Water (shop)",2,4],["Beer (restaurant)",10,30],["Taxi flag fall",13,14],["Metro ride",3,7]],"HK":[["Cha chaan teng meal",50,85],["Coffee",35,50],["Water (7-Eleven)",8,12],["Beer (bar)",55,85],["Taxi flag fall",29,29],["MTR ride",5,16]],"MO":[["Local meal",50,85],["Coffee",30,45],["Taxi flag fall",21,21]],"TW":[["Beef noodle soup",150,260],["Coffee",60,150],["Water (shop)",20,30],["Beer (shop)",40,70],["Taxi flag fall (Taipei)",85,85],["MRT ride",20,65]],"TH":[["Street food dish",50,90],["Coffee",50,90],["Water (7-Eleven)",10,15],["Beer (bar)",80,150],["Taxi flag fall (meter)",35,35],["Short tuk-tuk ride (agree first)",100,200],["BTS or MRT ride",17,65]],"VN":[["Bowl of pho",40000,70000],["Vietnamese coffee",25000,50000],["Water (shop)",8000,15000],["Beer (bottle)",20000,40000],["Short Grab bike ride",15000,40000],["Taxi flag fall",12000,20000]],"ID":[["Warung meal (nasi goreng)",20000,45000],["Café coffee",25000,45000],["Water 1.5 L (shop)",6000,10000],["Large Bintang",35000,60000],["Short Gojek/Grab bike ride",10000,25000]],"MY":[["Hawker meal",6,14],["Coffee",8,15],["Water (shop)",2,3],["Beer (bar)",15,28],["Short Grab ride",8,15],["LRT ride",1.5,5]],"SG":[["Hawker meal",4,8],["Kopi (hawker)",1.5,2.5],["Water (shop)",1.5,2.5],["Beer (bar)",12,18],["Taxi flag fall",4.4,4.8],["MRT ride",1.1,2.5]],"PH":[["Local meal",100,220],["Coffee",110,180],["Water (shop)",25,40],["San Miguel beer",60,120],["Taxi flag fall",45,45],["Jeepney ride",13,15]],"IN":[["Thali meal",100,300],["Chai",10,30],["Bottled water 1 L (never above the printed MRP)",20,20],["Beer (bar)",150,350],["Short auto-rickshaw ride",50,150],["Metro ride",10,60]],"KH":[["Local meal",2,5],["Coffee",1.5,3],["Draft beer",0.75,2.5],["Short tuk-tuk ride (PassApp/Grab)",1.5,3]],"AE":[["Shawarma",10,20],["Coffee",15,25],["Water (shop)",1,3],["Beer (licensed bar)",40,65],["Taxi flag fall",12,12],["Metro ride",3,8]],"QA":[["Local meal",20,40],["Coffee",15,25],["Water (shop)",1,3],["Metro ride",2,6]],"TR":[["Simit (bread ring)",20,35],["Döner",200,400],["Tea",20,40],["Water (shop)",15,25],["Beer (bar)",150,260]],"GR":[["Gyros pita",3.5,5],["Freddo espresso",2.5,4],["Water 0.5 L (kiosk)",0.5,0.6],["Beer (taverna)",4,6],["Athens metro ticket",1.2,2]],"IT":[["Pizza margherita",6,10],["Espresso at the bar",1.2,1.6],["Water (shop)",0.5,1.5],["Beer (bar)",5,7],["Metro or bus ticket",1.5,2.2]],"FR":[["Croissant",1.2,1.7],["Espresso at the bar",2,3],["Jambon-beurre sandwich",5,7],["Beer (demi)",5,8],["Metro ticket (Paris)",2.5,2.5]],"ES":[["Menú del día (lunch)",12,17],["Café con leche",1.5,2.5],["Caña (small beer)",2,4],["Water (shop)",0.5,1],["Metro ticket",1.5,2.6]],"PT":[["Pastel de nata",1.2,1.6],["Bica (espresso)",0.8,1.3],["Prato do dia (lunch)",9,14],["Beer (imperial)",1.5,3],["Lisbon metro ticket",1.85,2]],"DE":[["Döner",6,9],["Coffee",3,4.5],["Beer 0.5 L (bar)",4,6],["Water (supermarket, plus deposit)",0.5,1],["Public transport ticket",3,4]],"NL":[["Fries",4,6],["Coffee",3,4.5],["Beer (bar)",4,6.5],["Tram or metro ride",3,5]],"AT":[["Wiener schnitzel",15,23],["Coffee",3.5,5],["Beer (bar)",4.5,6],["Vienna transport ticket",2.4,3]],"CH":[["Lunch menu",20,30],["Coffee",4.5,6.5],["Beer (bar)",7,10],["Tram or bus ticket",2.8,4.6]],"GB":[["Meal deal (supermarket)",4,5.5],["Coffee",3,4.2],["Pint of beer",5.5,8],["Tube or bus fare (contactless)",1.75,3.9]],"IE":[["Pint of beer",6,8],["Coffee",3.5,4.5],["Dublin bus fare",2,2.6]],"US":[["Coffee",4,6.5],["Burger meal (plus tip)",12,20],["Beer at a bar (plus tip)",7,11],["Water (shop)",2,3],["Subway or bus fare",2.5,2.9]],"CA":[["Coffee",3,5],["Pub meal",18,28],["Beer (bar)",7,10],["Transit fare",3,3.5]],"MX":[["Street taco (each)",15,30],["Coffee",40,70],["Water (shop)",15,25],["Beer (bar)",40,80],["Mexico City metro",5,5],["Short Uber ride",60,130]],"BR":[["Prato feito (lunch plate)",20,38],["Coffee",6,10],["Water (shop)",3,5],["Beer (bar)",8,16],["Metro ride",5,6],["Short Uber ride",15,30]],"CL":[["Completo (hot dog)",2000,3500],["Coffee",2500,3800],["Beer (bar)",3000,5500],["Santiago metro",800,900],["Short Uber ride",4000,7500]],"PE":[["Menú (set lunch)",12,22],["Coffee",8,12],["Water (shop)",2,3],["Beer (bar)",10,16],["Short taxi (agree first or use an app)",8,15]],"ZA":[["Restaurant meal",100,190],["Coffee",30,42],["Beer (bar)",35,55],["Water (shop)",10,16],["Short Uber ride",50,100]],"EG":[["Koshari",50,110],["Tea",10,25],["Water (shop)",10,15],["Short Uber ride",50,110]],"AR":[],"VU":[["Local meal",800,1500],["Coffee",350,600],["Water (shop)",150,300],["Beer (bar)",500,800],["Short taxi (agree first)",500,1000]],"CK":[["Café meal",18,30],["Coffee",5,6.5],["Water (shop)",3,5],["Beer (bar)",8,12]],"NC":[["Snack meal",1500,2500],["Coffee",300,550],["Water (shop)",150,300],["Beer (bar)",700,1100]],"LK":[["Rice and curry (local)",500,1200],["Tea",100,250],["Water 1.5 L (shop)",130,200],["Beer (bar)",800,1500],["Short tuk-tuk ride (app)",300,700]],"MV":[["Local-island meal",8,15],["Coffee",3,6],["Water (shop)",1,2],["Resort cocktail",15,25]],"NP":[["Dal bhat",300,700],["Tea",50,150],["Water 1 L (shop)",30,60],["Beer (bar)",500,900],["Short taxi (agree first)",300,700]]};</script>
 <script>
@@ -579,6 +589,45 @@ if("serviceWorker" in navigator)navigator.serviceWorker.register("sw.js").catch(
 var FAIRD=window.FAIR||{},RATES=null,RTIME="",amt=500,offer="",per={meals:3,coffees:2,rides:4};
 try{var c0=JSON.parse(localStorage.getItem("th_rates")||"null");if(c0&&c0.rates&&Date.now()-c0.at<12*36e5){RATES=c0.rates;RTIME=c0.time;}}catch(e){}
 var MOVE=/taxi|bus|train|metro|subway|mrt|tram|ferry|tuk|grab|ride|bts|skytrain|transfer|fuel|petrol|bike|scooter|flag/i,FOOD=/meal|coffee|flat white|beer|water|pie|noodle|ramen|soup|rice|pizza|wine|pint|breakfast|lunch|dinner|street|sandwich|cha chaan|warung|pho|curry|kebab|burger|juice|tea|cocktail|food/i;
+var ECB="AUD BRL CAD CHF CNY CZK DKK EUR GBP HKD HUF IDR ILS INR ISK JPY KRW MXN MYR NOK NZD PHP PLN RON SEK SGD THB TRY USD ZAR".split(" "),HR="1y",HSEQ=0;
+function hist(d){
+  var cur=d[6],box=$("mHist");
+  if(ECB.indexOf(cur)<0){box.innerHTML="<h2>How the rate has moved</h2><p class=\"sub\">There's no free daily history for the "+E(cur)+" that we can show. Compare today's rate above with what you're offered instead.</p>";return;}
+  var days={"3m":92,"1y":366,"5y":1827}[HR],from=new Date(Date.now()-days*864e5).toISOString().slice(0,10),key="th_hist_"+cur+"_"+HR,me=++HSEQ,c=null;
+  try{c=JSON.parse(localStorage.getItem(key)||"null");}catch(e){}
+  function tabs(){return '<div class="htabs" role="group" aria-label="Time span">'+[["3m","3 months"],["1y","1 year"],["5y","5 years"]].map(function(t){return '<button type="button" data-hr="'+t[0]+'" aria-pressed="'+(t[0]===HR)+'">'+t[1]+"</button>";}).join("")+"</div>";}
+  function draw(pts,when){
+    if(me!==HSEQ)return;
+    var v=pts.map(function(p){return p[1];}),n=v.length,mx=Math.max.apply(null,v),mn=Math.min.apply(null,v),avg=v.reduce(function(a,b){return a+b;},0)/n,now=rate(d)||v[n-1],
+      W=innerWidth<600?380:760,H=innerWidth<600?240:260,L=8,R=8,T=20,B=innerWidth<600?196:210,dp=now<10?3:now<1000?2:0;
+    function x(i){return L+i/(n-1)*(W-L-R);}function y(val){return B-(val-mn)/((mx-mn)||1)*(B-T);}
+    var line=pts.map(function(p,i){return (i?"L":"M")+x(i).toFixed(1)+","+y(p[1]).toFixed(1);}).join(" "),area=line+" L"+x(n-1).toFixed(1)+","+B+" L"+x(0)+","+B+" Z";
+    var ticks="",lastM="";pts.forEach(function(p,i){var m=p[0].slice(0,7);if(m!==lastM&&(HR!=="5y"||p[0].slice(5,7)==="01")){lastM=m;var lab=HR==="5y"?p[0].slice(0,4):MONTHS[+p[0].slice(5,7)-1];ticks+='<line x1="'+x(i).toFixed(1)+'" y1="'+T+'" x2="'+x(i).toFixed(1)+'" y2="'+B+'" stroke="#E4ECEE"/><text x="'+(x(i)+4).toFixed(1)+'" y="'+(B+18)+'" font-size="'+(W<500?11:12)+'" fill="#56696F">'+(W<500&&HR==="1y"&&+p[0].slice(5,7)%2?"":lab)+"</text>";}});
+    var hiI=v.indexOf(mx),loI=v.indexOf(mn),pct=(now/avg-1)*100,good=pct>=1.5,bad=pct<=-1.5;
+    box.innerHTML="<h2>Is now a good time to change money?</h2><p class=\"sub\">What A$1 bought in "+E(cur)+" each day. A higher line means your dollar goes further.</p>"+tabs()+
+      '<span class="verdict '+(good?"good":bad?"bad":"ok")+'">'+(good?"Yes: your dollar buys "+pct.toFixed(1)+"% more than average":bad?"Not great: your dollar buys "+Math.abs(pct).toFixed(1)+"% less than average":"About average: within "+Math.max(0.1,Math.abs(pct)).toFixed(1)+"% of usual")+"</span>"+
+      '<div class="hstats"><div><b>'+money(now,cur,dp)+"</b><span>today, per A$1</span></div><div><b>"+money(avg,cur,dp)+"</b><span>average</span></div><div><b>"+money(mx,cur,dp)+"</b><span>best ("+dlab(pts[hiI][0])+")</span></div><div><b>"+money(mn,cur,dp)+"</b><span>worst ("+dlab(pts[loI][0])+")</span></div></div>"+
+      '<svg viewBox="0 0 '+W+" "+H+'" role="img" aria-label="Australian dollar to '+E(cur)+' over time"><defs><linearGradient id="hg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#137A8A" stop-opacity=".35"/><stop offset="1" stop-color="#137A8A" stop-opacity="0"/></linearGradient></defs>'+ticks+
+      '<line x1="'+L+'" y1="'+y(avg).toFixed(1)+'" x2="'+(W-R)+'" y2="'+y(avg).toFixed(1)+'" stroke="#F4B740" stroke-width="2" stroke-dasharray="6 5"/><text x="'+(W-R-4)+'" y="'+(y(avg)-6).toFixed(1)+'" text-anchor="end" font-size="12" font-weight="700" fill="#8A5F00">average</text>'+
+      '<path d="'+area+'" fill="url(#hg)"/><path d="'+line+'" fill="none" stroke="#0B5566" stroke-width="2.5" stroke-linejoin="round"/>'+
+      '<circle cx="'+x(hiI).toFixed(1)+'" cy="'+y(mx).toFixed(1)+'" r="5" fill="#0E6B47"/><circle cx="'+x(loI).toFixed(1)+'" cy="'+y(mn).toFixed(1)+'" r="5" fill="#B3261E"/><circle cx="'+x(n-1).toFixed(1)+'" cy="'+y(v[n-1]).toFixed(1)+'" r="6" fill="#F4B740" stroke="#fff" stroke-width="2"/></svg>'+
+      '<div class="key"><span><i style="background:#0B5566"></i>A$1 in '+E(cur)+'</span><span><i style="background:#F4B740"></i>Average</span><span><i style="background:#0E6B47;border-radius:50%"></i>Best day</span><span><i style="background:#B3261E;border-radius:50%"></i>Worst day</span></div>'+
+      '<div class="src">European Central Bank daily reference rates, through <a href="https://frankfurter.dev/" target="_blank" rel="noopener">Frankfurter</a>'+(when?", saved "+E(when):"")+". Rates move every day; nobody can promise where they go next.</div>";
+    [].forEach.call(box.querySelectorAll("[data-hr]"),function(b){b.onclick=function(){HR=b.getAttribute("data-hr");hist(d);};});
+  }
+  function dlab(t){var p=t.split("-");return +p[2]+" "+MONTHS[+p[1]-1]+(HR==="5y"||HR==="1y"?" "+p[0].slice(2):"");}
+  if(c&&c.pts&&c.day===new Date().toISOString().slice(0,10)){draw(c.pts,"");return;}
+  box.innerHTML="<h2>Is now a good time to change money?</h2>"+tabs()+(c&&c.pts?"":'<div class="gone">Getting the rate history…</div>');
+  if(c&&c.pts)draw(c.pts,c.day);
+  [].forEach.call(box.querySelectorAll("[data-hr]"),function(b){b.onclick=function(){HR=b.getAttribute("data-hr");hist(d);};});
+  getJSON("https://api.frankfurter.dev/v1/"+from+"..?base=AUD&symbols="+cur).then(function(j){
+    var k=Object.keys(j.rates||{}).sort(),pts=k.map(function(t){return [t,j.rates[t][cur]];}).filter(function(p){return p[1]!=null;});
+    if(HR==="5y")pts=pts.filter(function(p,i){return i%5===0||i===pts.length-1;});
+    if(pts.length<5)throw 0;
+    try{localStorage.setItem(key,JSON.stringify({day:new Date().toISOString().slice(0,10),pts:pts}));}catch(e){}
+    draw(pts,"");
+  },function(){if(me===HSEQ&&!(c&&c.pts))box.innerHTML="<h2>Is now a good time to change money?</h2><div class=\"gone\">The rate history isn't answering right now. Today's rate above still works.</div>";});
+}
 function rate(d){return RATES&&RATES[d[6]]?RATES[d[6]]:null;}
 function aud(v,d){var r=rate(d);return r?v/r:null;}
 function rows(d,re,not){return (FAIRD[d[3]]||[]).filter(function(x){return re?re.test(x[0])&&!(not&&not.test(x[0])):true;});}
@@ -590,10 +639,10 @@ function priceTable(list,d){
 }
 function render(){
   var d=dest(S.dest),city=cityOf(d),home=!!d[7],r=rate(d),all=FAIRD[d[3]]||[];
-  var ids=["mRate","mFair","mWays","mPlaces","mMove","mFood","mBudget","mTips"];ids.forEach(function(i){$(i).style.display="";});
+  var ids=["mRate","mHist","mFair","mWays","mPlaces","mMove","mFood","mBudget","mTips"];ids.forEach(function(i){$(i).style.display="";});
   if(home){
     $("mRate").innerHTML="<h2>"+E(city)+" uses Australian dollars</h2><p class=\"sub\">No money to change and no card fees for paying in another currency. Your everyday card works as it does at home.</p><a class=\"lbtn\" href=\"index.html#deals\">See deals for "+E(city)+"</a><a class=\"lbtn alt\" href=\"weather.html\">Weather in "+E(city)+"</a>";
-    ["mFair","mWays","mPlaces","mMove","mFood","mBudget"].forEach(function(i){$(i).style.display="none";});
+    ["mHist","mFair","mWays","mPlaces","mMove","mFood","mBudget"].forEach(function(i){$(i).style.display="none";});
     $("mTips").innerHTML="<h2>Good to know</h2><p class=\"sub\">The price guide covers 45 countries overseas. Pick an overseas place above to see exchange rates, where to change money and what things cost.</p>";
     return;
   }
@@ -604,6 +653,7 @@ function render(){
   if(r){$("cL").value=(amt*r).toFixed(r>50?0:2);
     $("cA").oninput=function(){var v=parseFloat(this.value)||0;amt=v;$("cL").value=(v*r).toFixed(r>50?0:2);fair();budget();};
     $("cL").oninput=function(){var v=parseFloat(this.value)||0;amt=v/r;$("cA").value=amt.toFixed(2);fair();budget();};}
+  hist(d);
   $("mFair").innerHTML="<h2>Is the rate you're offered fair?</h2><p class=\"sub\">Type the rate on the board, or the one your bank or card quotes. We work out what it really costs you.</p>"+
     '<div class="calc"><label><span>They give me, per A$1</span><input id="fO" inputmode="decimal" placeholder="'+(r?(r*0.95).toFixed(r>50?0:3):"")+'" value="'+E(offer)+'" aria-label="Rate offered per Australian dollar"></label><label><span>Plus a fee of (A$)</span><input id="fF" inputmode="decimal" value="0" aria-label="Fee in Australian dollars"></label></div><div id="fV"></div>';
   $("fO").oninput=function(){offer=this.value;fair();};$("fF").oninput=fair;fair();
