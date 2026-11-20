@@ -490,6 +490,27 @@ a.ktile:hover{border-color:var(--sea);box-shadow:var(--shadow)}
 .wcard .fig b{font-weight:700}
 .wcard a{font-weight:600;color:var(--sea);font-size:13.5px;align-self:flex-start}
 .forgot{display:flex;flex-wrap:wrap;gap:8px}
+.mk{background:linear-gradient(160deg,#FFF6DA 0%,#E4F6F1 55%,#DCEFFF 100%);border-radius:24px;padding:20px 16px;margin:0 0 18px;border:1px solid var(--line)}
+.mk h3{font:800 24px var(--hf);margin:0 0 2px;color:var(--deep)}.mk>p{margin:0 0 14px;color:var(--mut);font-size:14.5px}
+.mk h4{font:700 13px var(--hf);letter-spacing:.08em;text-transform:uppercase;color:var(--sea);margin:14px 0 8px}
+.who{display:flex;gap:8px;overflow-x:auto;padding-bottom:4px;-webkit-overflow-scrolling:touch}
+.who button{flex:none;min-height:44px;padding:0 14px;border-radius:999px;border:1.5px solid rgba(7,46,56,.12);background:#fff;font:600 14px var(--hf);color:var(--ink);cursor:pointer;white-space:nowrap}
+.who button[aria-pressed=true]{background:var(--deep);color:#fff;border-color:var(--deep)}
+.achips{display:grid;grid-template-columns:repeat(auto-fill,minmax(104px,1fr));gap:8px;margin:0}
+.achip{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;min-height:92px;padding:10px 6px;border-radius:18px;border:2px solid transparent;font:700 13.5px/1.2 var(--hf);color:var(--deep);cursor:pointer;text-align:center;transition:transform .15s}
+.achip i{font-style:normal;font-size:30px;line-height:1}
+.achip:nth-child(5n+1){background:#FFE8A3}.achip:nth-child(5n+2){background:#CDEFE8}.achip:nth-child(5n+3){background:#D6ECFF}.achip:nth-child(5n+4){background:#DDF3C8}.achip:nth-child(5n){background:#FFDDBF}
+.achip:active{transform:scale(.96)}
+.achip[aria-pressed=true]{border-color:var(--deep);box-shadow:0 4px 14px rgba(7,46,56,.18)}
+.achip[aria-pressed=true]::after{content:"✓";position:absolute;top:6px;right:8px;width:22px;height:22px;border-radius:50%;background:var(--deep);color:#fff;font-size:13px;line-height:22px}
+.mk .sum{margin-top:14px;font:600 14.5px var(--hf);color:var(--deep)}
+@media(max-width:400px){.achips{grid-template-columns:repeat(3,1fr)}}
+.abox{background:#fff;border:1px solid var(--line);border-radius:20px;padding:18px;margin:0 0 14px}
+.abox h3{font:700 20px var(--hf);margin:0 0 4px}.abox>p{color:var(--mut);margin:0 0 12px;font-size:14.5px}
+.agrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px}
+.agrid .ktile b{font-size:15.5px}.aair{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:6px 0 10px}
+.aair select{min-height:40px;border-radius:10px;border:1.5px solid var(--line);padding:0 10px;font:600 14px var(--hf);background:#fff;color:var(--ink)}
+.ahow{margin:8px 0 0;padding-left:20px;font-size:14px;color:var(--ink)}.ahow li{margin:3px 0}
 .fchip{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 14px;border-radius:999px;background:#fff;border:1px solid var(--line);font-weight:600;font-size:14.5px;cursor:pointer;color:var(--ink);text-align:left}
 .fchip i{flex:none;width:18px;height:18px;border-radius:5px;border:2px solid var(--sea)}
 .fchip[aria-pressed=true]{background:var(--foam);border-color:var(--sea)}
@@ -527,7 +548,8 @@ html,body{overflow-x:clip}
       <label class="field"><span>Going to</span><select id="fDest" aria-label="Going to"></select></label>
       <label class="field"><span>Leaving</span><input type="date" id="fLeave" aria-label="Leaving date"></label>
       <label class="field"><span>Nights</span><select id="fNights" aria-label="Nights away"></select></label>
-      <label class="field kind"><span>Kind of trip</span><select id="fStyle" aria-label="Kind of trip"></select></label>
+      <label class="field kind" hidden><span>Who's going</span><select id="fStyle" aria-label="Who's going"></select></label>
+      <label class="field kind" hidden><span>What you'll do</span><select id="fAct" aria-label="What you'll do"></select></label>
       <button class="btn gold" type="submit">Build my plan <svg class="ico" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
     </form>
     <div class="hero-foot"><span id="clipCap"></span><button type="button" class="pause" id="pause" aria-pressed="false">Pause video</button></div>
@@ -551,6 +573,7 @@ html,body{overflow-x:clip}
 <section class="sec foryou" id="foryou"><div class="wrap">
   <div class="sec-h"><div class="kick">Made for this trip</div><h2 id="fyTitle">Your trip, <em>sorted.</em></h2><p id="fySub"></p></div>
   <div class="nowcard" id="nowCard"></div>
+  <div id="actWrap"><div class="mk"><h3 id="actH"></h3><p id="actSub"></p><h4>Who's going</h4><div class="who" id="whoChips"></div><h4>What you'll do <small style="text-transform:none;letter-spacing:0;color:var(--mut)">(tap all that fit)</small></h4><div class="achips" id="actChips"></div><div class="sum" id="actSum"></div></div><div id="actBody"></div></div>
   <div id="knowWrap"><div class="fy-h" id="knowH"></div><div class="know" id="knowTiles"></div></div>
   <div class="fy-h" id="watchH"></div><div class="watch" id="watchList"></div>
   <div class="fy-h" id="forgotH"></div><div class="forgot" id="forgotList"></div>
@@ -1473,6 +1496,7 @@ try{var s0=JSON.parse(localStorage.getItem("rr_ways")||"{}")||{};
   if(typeof s0.dest==="string")S.dest=s0.dest;
   if(typeof s0.style==="string")S.style=s0.style;
   if(Array.isArray(s0.likes))S.likes=s0.likes.filter(function(x){return typeof x==="string";});
+  if(Array.isArray(s0.acts))S.acts=s0.acts.filter(function(x){return typeof x==="string";});if(Array.isArray(s0.autoLikes))S.autoLikes=s0.autoLikes;if(typeof s0.air==="string")S.air=s0.air;
   if([1,2,5,10].indexOf(s0.eatKm)>=0)S.eatKm=s0.eatKm;
   if(s0.rem&&Array.isArray(s0.rem.steps))S.rem={steps:s0.rem.steps.filter(function(x){return x>=1&&x<=5;}),before:[0,1,3,7].indexOf(s0.rem.before)>=0?s0.rem.before:1,hour:[7,8,12,18].indexOf(s0.rem.hour)>=0?s0.rem.hour:8};
 }catch(e){}
@@ -1527,25 +1551,28 @@ function moves(d){
   out.push(["🚌","Bus, train and tram",dir+"transit","Live timetables to anywhere in "+city]);
   out.push(["🚕","Taxi",maps+encodeURIComponent("taxi "+place),"Taxi ranks and companies"]);
   (RIDE[d[3]]||[]).forEach(function(r){out.push(["📱",r,RIDEURL[r]||"https://www.google.com/search?q="+encodeURIComponent(r+" app "+d[2]),"Ride app that works in "+d[2]]);});
-  out.push(["✈️","Airport to town",maps+encodeURIComponent("airport shuttle "+place),"Shuttles, buses and transfers"]);
+  var wid=QFJ.way(S.cur).id,own=/^(caravan|campervan|motorbike|outback|cycling|hiking|road)$/.test(wid);
+  if(wid==="plane"||wid==="mixed"||!d[7])out.push(["✈️","Airport to town",maps+encodeURIComponent("airport shuttle "+place),"Shuttles, buses and transfers"]);
   out.push(["🚆","Intercity and ferries","https://www.rome2rio.com/s/"+encodeURIComponent(city),"Every way between towns, with prices (Rome2Rio)"]);
-  out.push(["🚗","Car hire",maps+encodeURIComponent("car rental "+place),"Rental desks around "+city]);
-  out.push(["🚲","Bikes and scooters",maps+encodeURIComponent("bike hire "+place),"Hire a bike or e-scooter"]);
+  if(!own||!d[7])out.push(["🚗","Car hire",maps+encodeURIComponent("car rental "+place),"Rental desks around "+city]);
+  if(S.style!=="disability_mobility")out.push(["🚲","Bikes and scooters",maps+encodeURIComponent("bike hire "+place),"Hire a bike or e-scooter"]);
   out.push(["🚶","Walk it",dir+"walking","Walking routes from where you are"]);
   return out;
 }
 function highlights(d){   
   var P=PLACES[d[0]];if(!P||!P.groups)return [];var all=[];
   Object.keys(P.groups).forEach(function(g){(P.groups[g].items||[]).forEach(function(it){if(it.km<=40)all.push([it,P.groups[g].label]);});});
-  all.sort(function(a,b){return (b[0].views||0)-(a[0].views||0);});return all.slice(0,8);
+  var pref={};S.acts.forEach(function(a){if(ACTGROUP[a])pref[ACTGROUP[a]]=1;});
+  Object.keys(P.groups).forEach(function(g){(P.groups[g].items||[]).forEach(function(it){for(var i=0;i<all.length;i++)if(all[i][0]===it)all[i][2]=pref[g]?1:0;});});
+  all.sort(function(a,b){return ((b[2]||0)-(a[2]||0))||((b[0].views||0)-(a[0].views||0));});return all.slice(0,8);
 }
 function stepExtras(s,d){
   var city=d[1].replace(/ \(.*/,""),h="",lab=s.tools.map(function(t){return t.label||t.id||"";}).join(" ")+" "+s.title;
-  if(/car hire|transfer|way|drive|arriv|around|bike hire/i.test(lab)||s.tools.some(function(t){return t.id==="way"||t.id==="arrive";}))
+  if(!/before you go|wrong|book smart/i.test(s.title)&&(/land|arriv|there|drive|road|stop|station|port|around/i.test(s.title)||/car hire|transfer|bike hire/i.test(lab)))
     h+='<div class="gx"><h3>Getting around '+E(city)+'</h3><p>Every way to get there and around, for this exact place.</p><div class="mv">'+moves(d).map(function(m){
       return '<a href="'+E(m[2])+'" target="_blank" rel="noopener"><i aria-hidden="true">'+m[0]+"</i><b>"+E(m[1])+"</b><span>"+E(m[3])+"</span></a>";}).join("")+"</div></div>";
   var hl=highlights(d);if(hl.length){var o=(s.n*3)%hl.length;hl=hl.slice(o).concat(hl.slice(0,o)).slice(0,5);
-    h+='<div class="gx"><h3>Something to look forward to</h3><p>Real places near '+E(city)+', the ones people read about most.</p><div class="lf">'+hl.map(function(x){var it=x[0];
+    h+='<div class="gx"><h3>'+(S.acts.length?"Your "+E(ACTS[S.acts[0]].n.toLowerCase())+" trip: something to look forward to":"Something to look forward to")+'</h3><p>Real places near '+E(city)+', the ones people read about most.</p><div class="lf">'+hl.map(function(x){var it=x[0];
       return '<a href="'+E(it.wiki||("https://www.google.com/maps/search/?api=1&query="+encodeURIComponent(it.name+" "+city)))+'" target="_blank" rel="noopener"><b>'+E(it.name)+"</b><span>"+E(it.what||x[1])+"</span><em>"+(it.km<1?"In town":Math.round(it.km)+" km away")+"</em></a>";}).join("")+"</div></div>";}
   return h;
 }
@@ -1601,7 +1628,7 @@ function drawGuide(){
     var a=action(t,d);if(!a)return "";var on=!!tk[s.n+"."+k],ext=a[1].charAt(0)!=="#";
     return '<div class="gt'+(on?" done":"")+'"><button type="button" class="tk" data-tick="'+s.n+"."+k+'" aria-pressed="'+on+'" aria-label="'+(on?"Done: ":"Mark done: ")+E(t.label)+'">'+(on?"✓":"")+"</button><div><b>"+E(t.label)+"</b><span>"+E(a[2])+"</span></div>"+
       (ext?(/^(weather|money)\.html$/.test(a[1])?'<a href="'+E(a[1])+'">'+E(a[0])+" →</a>":'<a href="'+E(a[1])+'" target="_blank" rel="noopener">'+E(a[0])+" ↗</a>"):'<button type="button" class="go2" data-gjump="'+E(a[1])+'">'+E(a[0])+"</button>")+"</div>";
-  }).join("")+stepExtras(s,d);
+  }).join("")+actSteps(s,d)+stepExtras(s,d);
   $("gdFoot").innerHTML=(G.n>1?'<button type="button" data-gstep="'+(G.n-1)+'">Back</button>':"")+'<button type="button" class="main" data-gstep="'+(G.n+1)+'">'+(G.n<6?"Done, next step →":"Finish: am I ready?")+"</button>";
 }
 var DEST=[["goldcoast","Gold Coast","Australia","AU",-28.0027,153.431,"AUD",1,"QLD"],["sunshinecoast","Sunshine Coast (Mooloolaba)","Australia","AU",-26.6806,153.1182,"AUD",1,"QLD"],["noosa","Noosa","Australia","AU",-26.3925,153.0905,"AUD",1,"QLD"],["brisbane","Brisbane","Australia","AU",-27.4698,153.0251,"AUD",1,"QLD"],["cairns","Cairns","Australia","AU",-16.9203,145.771,"AUD",1,"QLD"],["portdouglas","Port Douglas","Australia","AU",-16.4836,145.4653,"AUD",1,"QLD"],["whitsundays","Whitsundays (Airlie Beach)","Australia","AU",-20.2683,148.7177,"AUD",1,"QLD"],["townsville","Townsville","Australia","AU",-19.259,146.8169,"AUD",1,"QLD"],["byron","Byron Bay","Australia","AU",-28.6474,153.602,"AUD",1,"NSW"],["sydney","Sydney","Australia","AU",-33.8688,151.2093,"AUD",1,"NSW"],["bluemountains","Blue Mountains (Katoomba)","Australia","AU",-33.7124,150.3119,"AUD",1,"NSW"],["huntervalley","Hunter Valley","Australia","AU",-32.7853,151.2955,"AUD",1,"NSW"],["portstephens","Port Stephens","Australia","AU",-32.7187,152.1067,"AUD",1,"NSW"],["canberra","Canberra","Australia","AU",-35.2809,149.13,"AUD",1,"ACT"],["melbourne","Melbourne","Australia","AU",-37.8136,144.9631,"AUD",1,"VIC"],["greatoceanroad","Great Ocean Road (Lorne)","Australia","AU",-38.5418,143.9748,"AUD",1,"VIC"],["phillipisland","Phillip Island","Australia","AU",-38.4833,145.2333,"AUD",1,"VIC"],["hobart","Hobart","Australia","AU",-42.8821,147.3272,"AUD",1,"TAS"],["launceston","Launceston","Australia","AU",-41.4332,147.1441,"AUD",1,"TAS"],["adelaide","Adelaide","Australia","AU",-34.9285,138.6007,"AUD",1,"SA"],["perth","Perth","Australia","AU",-31.9523,115.8613,"AUD",1,"WA"],["margaretriver","Margaret River","Australia","AU",-33.9536,115.0739,"AUD",1,"WA"],["broome","Broome","Australia","AU",-17.9614,122.2359,"AUD",1,"WA"],["darwin","Darwin","Australia","AU",-12.4634,130.8456,"AUD",1,"NT"],["alice","Alice Springs","Australia","AU",-23.698,133.8807,"AUD",1,"NT"],["uluru","Uluru (Yulara)","Australia","AU",-25.2406,130.9889,"AUD",1,"NT"],["bali","Bali (Seminyak)","Indonesia","ID",-8.6913,115.1683,"IDR",0,"Asia"],["ubud","Bali (Ubud)","Indonesia","ID",-8.5069,115.2625,"IDR",0,"Asia"],["phuket","Phuket (Patong)","Thailand","TH",7.8961,98.2961,"THB",0,"Asia"],["bangkok","Bangkok","Thailand","TH",13.7563,100.5018,"THB",0,"Asia"],["chiangmai","Chiang Mai","Thailand","TH",18.7883,98.9853,"THB",0,"Asia"],["kohsamui","Koh Samui","Thailand","TH",9.512,100.0136,"THB",0,"Asia"],["singapore","Singapore","Singapore","SG",1.2897,103.8501,"SGD",0,"Asia"],["kl","Kuala Lumpur","Malaysia","MY",3.1478,101.6953,"MYR",0,"Asia"],["hanoi","Hanoi","Vietnam","VN",21.0285,105.8542,"VND",0,"Asia"],["hcmc","Ho Chi Minh City","Vietnam","VN",10.7769,106.7009,"VND",0,"Asia"],["hoian","Hoi An","Vietnam","VN",15.8801,108.338,"VND",0,"Asia"],["tokyo","Tokyo","Japan","JP",35.6812,139.7671,"JPY",0,"Asia"],["osaka","Osaka","Japan","JP",34.6937,135.5023,"JPY",0,"Asia"],["kyoto","Kyoto","Japan","JP",35.0116,135.7681,"JPY",0,"Asia"],["niseko","Niseko","Japan","JP",42.8048,140.6874,"JPY",0,"Asia"],["seoul","Seoul","South Korea","KR",37.5665,126.978,"KRW",0,"Asia"],["hongkong","Hong Kong","Hong Kong","HK",22.2819,114.1582,"HKD",0,"Asia"],["dubai","Dubai","UAE","AE",25.1972,55.2744,"AED",0,"Middle East"],["nadi","Fiji (Nadi)","Fiji","FJ",-17.7765,177.4356,"FJD",0,"Pacific"],["portvila","Vanuatu (Port Vila)","Vanuatu","VU",-17.7334,168.3273,"VUV",0,"Pacific"],["noumea","New Caledonia (Noumea)","New Caledonia","NC",-22.2758,166.458,"XPF",0,"Pacific"],["rarotonga","Cook Islands (Rarotonga)","Cook Islands","CK",-21.2075,-159.7754,"NZD",0,"Pacific"],["auckland","Auckland","New Zealand","NZ",-36.8485,174.7633,"NZD",0,"New Zealand"],["queenstown","Queenstown","New Zealand","NZ",-45.0312,168.6626,"NZD",0,"New Zealand"],["rotorua","Rotorua","New Zealand","NZ",-38.1368,176.2497,"NZD",0,"New Zealand"],["christchurch","Christchurch","New Zealand","NZ",-43.5321,172.6362,"NZD",0,"New Zealand"],["wellington","Wellington","New Zealand","NZ",-41.2865,174.7762,"NZD",0,"New Zealand"],["honolulu","Honolulu (Waikiki)","USA","US",21.2793,-157.8292,"USD",0,"Americas"],["la","Los Angeles","USA","US",34.0522,-118.2437,"USD",0,"Americas"],["lasvegas","Las Vegas","USA","US",36.1147,-115.1728,"USD",0,"Americas"],["nyc","New York","USA","US",40.758,-73.9855,"USD",0,"Americas"],["london","London","United Kingdom","GB",51.5074,-0.1278,"GBP",0,"Europe"],["paris","Paris","France","FR",48.8566,2.3522,"EUR",0,"Europe"],["rome","Rome","Italy","IT",41.9028,12.4964,"EUR",0,"Europe"],["barcelona","Barcelona","Spain","ES",41.3874,2.1686,"EUR",0,"Europe"],["athens","Athens","Greece","GR",37.9838,23.7275,"EUR",0,"Europe"]];window.MOOD={"cairns":"reef","portdouglas":"reef","whitsundays":"reef","townsville":"reef","nadi":"reef","rarotonga":"reef","noumea":"reef","portvila":"reef","goldcoast":"beach","sunshinecoast":"beach","noosa":"beach","byron":"beach","bali":"beach","phuket":"beach","kohsamui":"beach","honolulu":"beach","broome":"beach","portstephens":"beach","ubud":"rainforest","hoian":"rainforest","chiangmai":"rainforest","bluemountains":"rainforest","hanoi":"rainforest","uluru":"outback","alice":"outback","darwin":"outback","queenstown":"alpine","niseko":"alpine","hobart":"alpine","launceston":"alpine","rotorua":"alpine","christchurch":"alpine","sydney":"city","melbourne":"city","brisbane":"city","canberra":"city","adelaide":"city","perth":"city","tokyo":"city","osaka":"city","kyoto":"city","singapore":"city","bangkok":"city","kl":"city","hcmc":"city","seoul":"city","hongkong":"city","dubai":"city","auckland":"city","wellington":"city","la":"city","lasvegas":"city","nyc":"city","london":"city","paris":"city","rome":"city","barcelona":"city","athens":"city","huntervalley":"wine","margaretriver":"wine","greatoceanroad":"wine","phillipisland":"wine"};window.HEROPH={"place":["bali","byron","cairns","goldcoast","hobart","nadi","noosa","phuket","queenstown","sunshinecoast","tokyo","whitsundays"],"mood":["alpine","beach","city","outback","rainforest","reef","wine"]};
@@ -1871,15 +1898,181 @@ function drawForYou(){
   tile("Weather","See "+city+" now","48 hours, 16 days and your trip days.","weather.html");
   $("knowH").textContent="Know before you go: "+(home?city:d[2]);$("knowTiles").innerHTML=T.join("");
   var probs=W.p.slice(0,ST?3:4).map(function(p){return [w.name,p];}).concat(ST?ST.p.slice(0,3).map(function(p){return [ST.n,p];}):[]);
+  S.acts.forEach(function(a){var X=AD.styles[ACTSTYLE[a]];if(X&&ACTSTYLE[a]!==S.style)probs=probs.concat(X.p.filter(keep).slice(0,2).map(function(p){return [ACTS[a].n,p];}));});
   $("watchH").textContent="Watch out on a "+trip+(ST?" ("+ST.n.toLowerCase()+")":"");
   $("watchList").innerHTML=probs.map(function(x){var p=x[1];return '<article class="wcard"><div class="from">'+E(x[0])+"</div><h4>"+E(p[0])+"</h4><p>"+E(p[1])+"</p>"+(p[2]?'<div class="fig"><b>The numbers:</b> '+E(p[2])+"</div>":"")+(p[3]?'<a href="'+E(p[3])+'" target="_blank" rel="noopener">Where this comes from ↗</a>':"")+"</article>";}).join("");
-  var tk=tickF(),fg=W.f.concat(ST?ST.f:[]).filter(function(x,i,a){return a.indexOf(x)===i;}).slice(0,12);
+  var tk=tickF(),fg=W.f.concat(ST?ST.f:[]).concat([].concat.apply([],S.acts.map(function(a){var X=AD.styles[ACTSTYLE[a]];return X&&ACTSTYLE[a]!==S.style?X.f.filter(keep).slice(0,3):[];}))).filter(function(x,i,a){return a.indexOf(x)===i;}).slice(0,16);
   $("forgotH").textContent=fg.length?"What people forget. Tap each one when it's done.":"";
   $("forgotList").innerHTML=fg.map(function(x){return '<button type="button" class="fchip" data-forgot="'+E(x)+'" aria-pressed="'+(!!tk[x])+'"><i></i><span>'+E(x)+"</span></button>";}).join("");
   $("fySrc").innerHTML="Researched "+E(AD.baked||"")+" from official and published sources; each card links to where its numbers come from. Safety levels: Department of Foreign Affairs and Trade's Smartraveller website, <a href=\"https://www.smartraveller.gov.au\" target=\"_blank\" rel=\"noopener\">www.smartraveller.gov.au</a>. Always check the official page before you rely on it.";
 }
+var ACTS={
+ fishing:{n:"Fishing",ic:"🎣",lead:"Licence, tides, charters, tackle shops and getting your rods there in one piece.",bag:"fishing",gearname:"rods and tackle",lic:"fishing",licn:"fishing licence",licnote:"Most states need a recreational fishing licence. Buy it online in minutes.",
+  cond:[["Tides","Tide times","Official tide predictions (Bureau of Meteorology).","AU","@tides_au"],["Weather on the water","Wind and swell","Hour by hour, so you know if the boat goes out.","","weather.html"]],
+  find:[["Charters","fishing charter","Half-day and full-day trips, gear included."],["Tackle and bait","bait and tackle shop","Local bait, and what's biting this week."],["Boat ramps","boat ramp","Ramps and launch spots."]],
+  home:"fishing gear",gear:["Licence (on your phone and printed)","Rods in a hard tube","Reel and spare line","Tackle box (no knives in carry-on)","Polarised sunglasses","Hat and long-sleeve shirt","Esky and ice packs","Pliers and measuring ruler"]},
+ surfing:{n:"Surfing",ic:"🏄",lead:"Swell, safe beaches, surf schools and the board bag rules for your airline.",bag:"surf",gearname:"your surfboard",
+  cond:[["Swell","Surf forecast","Swell, wind and tide for the coming week.","","@surf_forecast"],["Beach safety","Patrolled beaches","Swim and surf between the flags. Beachsafe (Surf Life Saving Australia).","AU","https://beachsafe.org.au/"]],
+  find:[["Surf schools","surf school","Lessons and board hire."],["Board hire","surfboard hire","Hire instead of flying with a board."],["Surf shops","surf shop","Wax, leashes and ding repair."]],
+  home:"surfboards and wetsuits",gear:["Board bag with padding","Leash and spare leash","Wax and wax comb","Wetsuit or rash vest","Fin key and spare fins","Reef-safe sunscreen","Ding repair kit"]},
+ snow:{n:"Snow",ic:"🎿",lead:"Snow reports, chains, lift passes and getting skis or a board on the plane.",bag:"snow",gearname:"skis or a snowboard",
+  cond:[["Snow report","Snow and lifts today","Snow depth, lifts open and road conditions.","","@snow_report_au"],["Driving up","Snow chains","Some alpine roads need chains in the car in winter. Check the resort page.","AU",""]],
+  find:[["Hire","ski and snowboard hire","Hire skis, boards, boots and clothes."],["Lessons","ski school","Lessons for first-timers and kids."]],
+  home:"skis, boots and boards",gear:["Thermal top and pants","Waterproof jacket and pants","Gloves and a spare pair","Beanie and neck warmer","Goggles","Sunscreen and lip balm (sun on snow burns)","Ski socks","Lift pass on your phone"]},
+ diving:{n:"Diving and snorkelling",ic:"🤿",lead:"Dive shops, conditions, your gear on the plane, and the gap you need before flying home.",bag:"dive",gearname:"dive gear",
+  cond:[["Before you fly home","Leave a gap after diving","Divers Alert Network: at least 12 hours after one dive, 18 hours after several dives or days.","",""],["Weather on the water","Wind and swell","Calm days mean better visibility.","","weather.html"]],
+  find:[["Dive shops","dive centre","Dives, courses and gear hire."],["Snorkel tours","snorkel tour","Boat trips to the best reefs."]],
+  home:"wetsuits and dive gear",gear:["Dive certification card (and photo of it)","Logbook or app","Mask and snorkel","Fins","Wetsuit or rash vest","Reef-safe sunscreen","Seasickness tablets","Dry bag"]},
+ hunting:{n:"Hunting",ic:"🦌",lead:"Licences and permits, firearms on planes, and bringing gear home clean.",bag:"firearms",gearname:"firearms",lic:"hunting",licn:"game licence",licnote:"Your home state's firearms licence may not cover other states. Check permits before you go.",
+  cond:[["Firearms and borders","Taking firearms in or out of Australia","Australian Border Force rules and permits.","OS","@firearms_import_au"]],
+  find:[["Gun shops","gun shop","Ammunition, which airlines often won't carry."],["Hunting guides","hunting guide","Guided hunts and private land access."]],
+  home:"hunting gear, boots and trophies",gear:["Firearms licence and permits","Lockable hard case","Ammunition rules for your airline","Blaze orange vest and hat","Boots (cleaned of soil)","Knife (checked bag only)","First-aid kit","GPS or offline maps"]},
+ golf:{n:"Golf",ic:"⛳",lead:"Courses, tee times, club hire and getting your clubs there.",bag:"golf",gearname:"golf clubs",
+  find:[["Courses","golf course","Public courses and tee times."],["Club hire","golf club hire","Hire a set instead of flying with yours."],["Driving ranges","driving range","Warm up before your round."]],
+  gear:["Clubs in a hard or padded travel bag","Shoes","Balls and tees","Glove","Hat and sunscreen","Course booking confirmations"]},
+ hiking:{n:"Hiking",ic:"🥾",lead:"Trails, weather, park passes and what to carry.",
+  cond:[["Weather","Mountain weather","Check the day before and the morning of.","","weather.html"]],
+  find:[["Trails","hiking trails","Walks near you, with length and difficulty."],["National parks","national park","Park passes and track closures."],["Outdoor shops","outdoor gear shop","Gas, maps and forgotten gear."]],
+  home:"hiking boots and tents",gear:["Broken-in boots","Rain jacket","Water (2 L or more per person)","Snacks","First-aid kit","Offline map and power bank","Hat and sunscreen","Tell someone your route"]},
+ cycling:{n:"Cycling and mountain biking",ic:"🚵",lead:"Trails, bike hire and getting your bike on the plane.",bag:"bike",gearname:"your bike",
+  find:[["Bike trails","mountain bike trails","Trails and parks near you."],["Bike hire","bike hire","Hire road, mountain or e-bikes."],["Bike shops","bike shop","Repairs and spare tubes."]],
+  home:"bikes and tyres",gear:["Bike box or bag","Helmet","Pedals and multi-tool","Spare tubes and pump","Lights","Padded shorts","Lock"]},
+ camping:{n:"Camping and 4WD",ic:"🏕️",lead:"Campsites, park bookings, fuel and what to bring.",
+  find:[["Campsites","campground","Bookable sites, many fill up in school holidays."],["Fuel","petrol station","Fill up before long gaps."],["4WD tracks","4WD track","Tracks near you, check if open."]],
+  home:"tents and camping gear",gear:["Tent, pegs and mallet","Sleeping bag and mat","Head torch","Stove and gas","Water containers","Recovery gear (4WD)","Toilet paper and trowel","Rubbish bags"]},
+ boating:{n:"Boating and kayaking",ic:"🛶",lead:"Boat and kayak hire, ramps and conditions.",
+  cond:[["Weather on the water","Wind and swell","Wind matters most on the water.","","weather.html"],["Tides","Tide times","Official tide predictions (Bureau of Meteorology).","AU","@tides_au"]],
+  find:[["Hire","boat hire","Boats, kayaks and paddleboards."],["Ramps","boat ramp","Ramps and launch spots."]],
+  gear:["Life jacket for everyone","Dry bag","Hat and sunscreen","Water","Phone in a waterproof pouch"]},
+ themeparks:{n:"Theme parks",ic:"🎢",lead:"Parks, tickets and the quietest days to go.",
+  find:[["Parks","theme park","Rides, water parks and wildlife parks."],["Tickets","theme park tickets","Multi-park passes are often cheaper."]],
+  gear:["Tickets on your phone","Sunscreen and hats","Refillable water bottles","Swimmers and towel (water parks)","Power bank"]},
+ foodwine:{n:"Food and wine",ic:"🍷",lead:"Wineries, markets and the best places to eat.",
+  find:[["Wineries","winery cellar door","Tastings and tours."],["Markets","farmers market","Local produce and street food."],["Food tours","food tour","Eat like a local."]],
+  gear:["Designated driver or tour booked","Esky for bottles","Bottle protectors for your bag"]},
+ events:{n:"Festivals and events",ic:"🎤",lead:"What's on, tickets and getting home after.",
+  find:[["What's on","events this week","Concerts, festivals and sport."],["Tickets","tickets","Buy from the official seller only."]],
+  gear:["Tickets on your phone","Power bank","Earplugs","Clear bag if the venue needs one","Plan for getting home late"]},
+ beach:{n:"Beach and relax",ic:"🏖️",lead:"The best beaches, safe swimming and slow days.",
+  cond:[["Beach safety","Patrolled beaches","Swim between the flags. Beachsafe (Surf Life Saving Australia).","AU","https://beachsafe.org.au/"],["UV and weather","Sun and wind today","UV is strong even on cloudy days.","","weather.html"]],
+  find:[["Beaches","best beaches","Beaches near you."],["Beach clubs","beach club","Day beds, food and drinks."]],
+  gear:["Swimmers (two pairs)","Reef-safe sunscreen SPF 50","Hat and sunglasses","Beach towel","Rash vest","Water bottle","Book or e-reader"]},
+ wildlife:{n:"Wildlife and nature",ic:"🐨",lead:"Sanctuaries, tours and the best times to see animals.",
+  find:[["Sanctuaries","wildlife sanctuary","Animals up close, often with keeper talks."],["Tours","wildlife tour","Whales, penguins, birds and more."],["National parks","national park","Walks with the best chance of seeing animals."]],
+  gear:["Binoculars","Camera with zoom","Insect repellent","Quiet shoes","Rain jacket"]},
+ adventure:{n:"Adventure and thrills",ic:"🪂",lead:"Skydives, bungy, rafting, ziplines and more.",
+  find:[["Skydiving","skydiving","Tandem jumps, no experience needed."],["Rafting","white water rafting","Half-day and full-day trips."],["Ziplines","zipline","Tree-top courses and ziplines."],["Bungy and more","adventure activities","Bungy, canyoning, jet boats."]],
+  gear:["Check your insurance covers adventure sports","Closed shoes","Clothes you don't mind getting wet","GoPro or phone strap"]},
+ history:{n:"History and sights",ic:"🏛️",lead:"Museums, old towns, tours and the big sights.",
+  find:[["Museums","museum","Museums and galleries."],["Walking tours","walking tour","Free and paid walking tours."],["Sights","tourist attractions","The famous ones, and the quiet ones."]],
+  gear:["Comfy walking shoes","Tickets on your phone (book timed entry ahead)","Shoulders and knees covered for temples and churches","Water bottle"]},
+ nightlife:{n:"Nightlife",ic:"🍸",lead:"Bars, live music and getting home safe.",
+  find:[["Bars","cocktail bar","Bars and rooftop bars."],["Live music","live music","Gigs and music bars tonight."],["Late food","late night food","Food after midnight."]],
+  gear:["ID (passport or licence)","Ride app set up","Power bank","Save your stay's address offline"]},
+ shopping:{n:"Shopping",ic:"🛍️",lead:"Markets, malls, outlets and tax refunds.",
+  find:[["Markets","market","Street markets and night markets."],["Malls","shopping centre","Shops and food courts."],["Outlets","outlet shopping","Brand outlets for less."]],
+  gear:["Empty space in your bag","Spare foldable bag","Check your bag weight limit","Keep receipts for tax refunds (TRS in Australia)"]},
+ wellness:{n:"Spa and wellness",ic:"🧖",lead:"Spas, hot springs, yoga and slow mornings.",
+  find:[["Spas","day spa","Massages and treatments."],["Hot springs","hot springs","Natural hot pools."],["Yoga","yoga class","Drop-in classes."]],
+  gear:["Swimmers","Comfy clothes","Book treatments ahead","Water bottle"]},
+ photo:{n:"Photography",ic:"📸",lead:"Lookouts, sunrise spots and the best light.",
+  cond:[["Light","Sunrise and sunset","Times for golden hour.","","weather.html"]],
+  find:[["Lookouts","lookout","Viewpoints near you."],["Photo spots","best photo spots","Where locals shoot."]],
+  gear:["Spare batteries and cards","Power bank","Lens cloth","Small tripod","Drone rules checked (many parks ban drones)"]}
+};
+var WHOIC={family_young_kids:"👨‍👩‍👧",couples_honeymoon:"💑",solo:"🎒",seniors:"🧓",group_friends:"🙌",school_leavers:"🎓",disability_mobility:"♿",pet:"🐶",business:"💼",budget:"💸",luxury:"✨",volunteering:"🤝",medical_dental:"🩺",working_holiday:"🧳"};
+var ACTSTYLE={snow:"ski_snow",beach:"beach_island",themeparks:"theme_parks",events:"festival_event",diving:"diving_snorkelling",history:"city_break"};
+var ACTLIKE={fishing:["view"],surfing:["beach"],beach:["beach","cafe"],diving:["beach"],hiking:["park","view"],wildlife:["park","kids"],camping:["park"],themeparks:["kids"],foodwine:["cafe","restaurant","bar","market"],
+  history:["museum","history"],nightlife:["bar"],shopping:["market"],photo:["view"],events:["bar"],wellness:["cafe"],golf:["park"],cycling:["park"],adventure:["park","view"],boating:["beach"],snow:["view"]};
+var ACTGROUP={beach:"nature",surfing:"nature",diving:"nature",hiking:"nature",wildlife:"fun",camping:"nature",themeparks:"fun",history:"culture",events:"culture",photo:"sights",adventure:"nature",fishing:"nature",boating:"nature",foodwine:"culture",nightlife:"culture"};
+var ACTDATA={checked:"20 Nov 2026",
+ air:{
+  QF:{name:"Qantas",url:"https://qantas.com/travel/airlines/sporting-equipment/global/en",fishing:"Rods up to 277 cm, not strapped to a suitcase. Counts as an extra piece; excess may apply.",surf:"Take the fins off or tape them. Check the page for size and weight.",golf:"A golf bag counts as checked baggage and skips the size limit.",bike:"Must be in a bike box (sold at most Australian terminals). Your own box: max 140 x 30 x 80 cm."},
+  VA:{name:"Virgin Australia",url:"https://www.virginaustralia.com/au/en/travel-info/baggage/oversized-fragile-items",fishing:"Counts as one checked piece within your allowance. 32 kg max.",surf:"Needs a padded cover, especially around the fins. Take fins off if you can.",snow:"One piece within your allowance. Overweight fee if heavy.",golf:"Counts as one checked piece.",bike:"Only in a hard or soft bike box. Boxes are sold at check-in."},
+  JQ:{name:"Jetstar",url:"https://jetstar.com/au/en/flights/baggage/oversized-baggage",surf:"Goes as checked baggage if packed properly. Length limits depend on the plane.",snow:"Goes as checked baggage if packed properly."},
+  ZL:{name:"Rex",url:"https://www.rex.com.au/FlightInfo/BaggageAllowance.aspx",fishing:"Counts toward your checked weight (15 kg Saver, 23 kg Flex). Extra weight $9.90 per kg.",surf:"Max 2 m long, counts toward checked weight. Longer boards go by freight.",snow:"Skis count as checked baggage and skip the size limit.",golf:"Free within your normal checked weight.",bike:"One bike each. A box is best; otherwise turn the bars, take off the pedals and front wheel.",firearms:"Restricted. See Rex's special requirements before you book."},
+  NZ:{name:"Air New Zealand",url:"https://www.airnewzealand.com/oversized-items",fishing:"Rods up to 2.2 m may be accepted.",surf:"Under 2 m and 23 kg counts as a standard bag.",snow:"Skis with boots and poles, or a board with boots, count as one item.",golf:"Golf bag with clubs and one pair of shoes counts as one item.",bike:"Needs a bag or box (box NZ$35 at NZ airports). Bars turned, pedals off."},
+  SQ:{name:"Singapore Airlines",url:"https://www.singaporeair.com/en_UK/np/travel-info/baggage/non-standard-baggage",fishing:"In a protective bag or hard case. Counts toward your allowance.",surf:"In a protective bag or hard case. Normal excess fees if over.",golf:"In a protective bag or hard case. No battery golf trolleys.",bike:"Hard case, cardboard box or padded case. Bars parallel, pedals off, tyres let down.",dive:"Accepted if packed. Tanks must be empty with valves open."},
+  EK:{name:"Emirates",url:"https://www.emirates.com/au/english/before-you-fly/baggage/unusual-baggage-and-special-allowances/",surf:"Counts in your allowance. Fins off or padded, board in a padded bag.",snow:"Skis count as checked baggage within your allowance.",golf:"Checked baggage within your allowance.",bike:"Checked within your allowance. May need 24 hours' notice.",dive:"Gear accepted. Air tanks must be empty.",firearms:"Checked bag only. Emirates must approve it at least 3 days before. Unloaded; ammo max 5 kg."},
+  QR:{name:"Qatar Airways",url:"https://www.qatarairways.com/en-au/baggage/sports-baggage.html",surf:"Max 300 cm (length + width + height), fins off. Bigger goes as cargo.",golf:"Checked or cargo; a hard case is best.",bike:"Strong cardboard box or bike case.",dive:"Scuba bag checked; keep the regulator and dive computer in your carry-on.",firearms:"Sporting guns as checked baggage with approval first."},
+  CX:{name:"Cathay Pacific",url:"https://www.cathaypacific.com/cx/en_AU/baggage/sports-equipment.html",fishing:"Counts as sports gear in your allowance. Max one item 203 cm.",surf:"Counts as sports gear in your allowance. Max one item 203 cm.",snow:"Counts as sports gear in your allowance.",golf:"Counts as sports gear in your allowance.",bike:"One piece in a hard case or box. Some routes ask for 72 hours' notice.",firearms:"Limited (one case, max two rifles), permits needed. Contact Cathay first."},
+  NH:{name:"ANA",url:"https://www.ana.co.jp/en/jp/guide/boarding-procedures/baggage/international/bicycle/",surf:"Checked baggage; free within your fare's allowance.",snow:"Checked. Loose skis, poles, boards and boots each count as separate items.",bike:"Checked; free within your allowance."},
+  UA:{name:"United",url:"https://united.com/en/gb/fly/baggage/sports-equipment.html",golf:"One golf bag has no oversize fee; overweight fees may apply.",dive:"One dive bag as a checked bag. Tanks empty.",firearms:"In checked bags only, locked and declared at check-in."}
+ },
+ fishing:{
+  NSW:{u:"https://www.dpi.nsw.gov.au/fishing/recreational/recreational-fishing-fee",v:"NSW fishing licence",n:"Needed for fishing in NSW, fresh and salt water. Buy it from Service NSW in minutes."},
+  VIC:{u:"https://www.vfa.vic.gov.au/recreational-fishing/fishing-licence",v:"Victorian fishing licence",n:"Needed for most fishing in Victoria. Buy it online."},
+  QLD:{u:"https://www.qld.gov.au/recreation/activities/boating-fishing/rec-fishing/rules",v:"No general licence in QLD",n:"Some stocked dams need a permit (SIPS). Size and bag limits still apply."},
+  WA:{u:"https://www.dpird.wa.gov.au/individuals/recreational-fishing/get-a-recreational-fishing-licence/",v:"WA fishing licence",n:"Needed for some fishing, like from a boat or for rock lobster. Check which you need."},
+  SA:{u:"https://www.pir.sa.gov.au/fishing",v:"No general licence in SA",n:"Some reservoirs need a permit. Size and bag limits still apply."},
+  TAS:{u:"https://fishing.tas.gov.au/",v:"Tasmanian fishing licence",n:"Needed for inland fishing and some sea fishing, like rock lobster and abalone."},
+  NT:{u:"https://nt.gov.au/marine/recreational-fishing",v:"No general licence in the NT",n:"Fishing on Aboriginal land and some waters needs a permit."},
+  ACT:{u:"https://www.act.gov.au/environment/animals-and-plants/animals/wildlife-management/fish/recreational-fishing-in-the-act",v:"No licence in ACT waters",n:"Cross into NSW waters and you need a NSW licence."},
+  NZ:{u:"https://fishandgame.org.nz/freshwater-fishing-in-new-zealand/fishing-licences-and-regulations/standard-licence-options/",v:"NZ freshwater licence",n:"Needed for freshwater fishing like trout (Fish & Game). Sea fishing needs no licence."}
+ },
+ hunting:{
+  NSW:{u:"https://www.dpi.nsw.gov.au/hunting/rules-and-regulations",v:"NSW hunting rules",n:"Licences and permits for hunting in NSW."},
+  VIC:{u:"https://www.gma.vic.gov.au/licencing/apply-for-a-game-licence",v:"Victorian game licence",n:"Apply through the Game Management Authority."},
+  TAS:{u:"https://nre.tas.gov.au/wildlife-management/recreational-hunting-licences",v:"Tasmanian hunting licence",n:"Recreational hunting licences and seasons."},
+  NZ:{u:"https://www.doc.govt.nz/parks-and-recreation/things-to-do/hunting/permits-and-licences/",v:"NZ hunting permit (DOC)",n:"Permit for public conservation land. Game birds also need a Fish & Game licence."}
+ },
+ firearms_import_au:"https://www.abf.gov.au/importing-exporting-and-manufacturing/prohibited-goods/firearms",
+ biosec:"https://www.agriculture.gov.au/biosecurity-trade/travelling/to-australia/returning",
+ tides_au:"https://www.bom.gov.au/australia/tides/",
+ surf_forecast:"https://www.surf-forecast.com/",
+ snow_report_au:"https://www.snow-forecast.com/"
+};
+var AUSTATE={goldcoast:"QLD",sunshinecoast:"QLD",noosa:"QLD",brisbane:"QLD",cairns:"QLD",portdouglas:"QLD",whitsundays:"QLD",townsville:"QLD",byron:"NSW",sydney:"NSW",bluemountains:"NSW",huntervalley:"NSW",portstephens:"NSW",
+  canberra:"ACT",melbourne:"VIC",greatoceanroad:"VIC",phillipisland:"VIC",hobart:"TAS",launceston:"TAS",adelaide:"SA",perth:"WA",margaretriver:"WA",broome:"WA",darwin:"NT",alice:"NT",uluru:"NT"};
+if(!Array.isArray(S.acts))S.acts=[];S.acts=S.acts.filter(function(a){return ACTS[a];});
+function maps(q){return "https://www.google.com/maps/search/?api=1&query="+encodeURIComponent(q);}
+function actTiles(k,d){
+  var A=ACTS[k],city=d[1].replace(/ \(.*/,""),place=city+(d[7]?" Australia":" "+d[2]),st=AUSTATE[d[0]],home=!!d[7],out=[];
+  function t(lab,val,note,href){out.push([lab,val,note,href]);}
+  if(A.lic){var L=(ACTDATA[A.lic]||{})[st||d[3]];
+    if(L)t("Licence",L.v,L.n,L.u);else t("Licence",A.licn.charAt(0).toUpperCase()+A.licn.slice(1)+" rules in "+(st||d[2]),"Rules and permits differ by place. Check before you go.",maps(A.licn+" "+place));}
+  (A.cond||[]).forEach(function(c){if((c[3]==="AU"&&!home)||(c[3]==="OS"&&home))return;var u=c[4]||"";if(u.charAt(0)==="@"){u=ACTDATA[u.slice(1)];if(!u)return;}t(c[0],c[1],c[2],u?u.replace("{q}",encodeURIComponent(place)).replace("{c}",encodeURIComponent(city)):maps(c[1]+" "+place));});
+  (A.find||[]).forEach(function(f){t(f[0],f[1].charAt(0).toUpperCase()+f[1].slice(1)+" near "+city,f[2],maps(f[1]+" "+place));});
+  if(A.home&&!home)t("Coming home","Declare used "+A.home,"Australian biosecurity: clean it before you pack, and tick yes on the card.",ACTDATA.biosec);
+  return out;
+}
+function airBox(k){
+  var A=ACTS[k];if(!A.bag)return "";var ids=Object.keys(ACTDATA.air||{});if(!ids.length)return "";
+  var cur=ACTDATA.air[S.air]?S.air:ids[0],a=ACTDATA.air[cur],line=a[A.bag]||"";
+  return '<div class="ktile" style="margin-top:10px"><span>Taking '+E(A.gearname)+' on the plane</span><div class="aair"><label>Flying with <select data-air>'+ids.map(function(i){return '<option value="'+i+'"'+(i===cur?" selected":"")+">"+E(ACTDATA.air[i].name)+"</option>";}).join("")+"</select></label></div>"+
+    (line?"<b>"+E(line)+"</b>":"<b>See the airline's sports gear page.</b>")+
+    '<ol class="ahow"><li>Add it to your booking online before the day. It is often cheaper than paying at the airport.</li><li>Pack it in a hard case or padded bag with your name and phone number on it.</li><li>Check in as normal, then take it to the oversize bag counter.</li><li>When you land, collect it from the oversize belt, not the normal carousel.</li></ol>'+
+    '<small>'+E(a.name)+' rules, checked '+E(ACTDATA.checked||"")+'. Fees and limits change: <a href="'+E(a.url)+'" target="_blank" rel="noopener">open the airline page ↗</a></small></div>';
+}
+var WHO=["family_young_kids","couples_honeymoon","solo","group_friends","seniors","school_leavers","disability_mobility","pet","budget","luxury","business","working_holiday","volunteering","medical_dental"];
+function drawActs(){
+  var d=dest(S.dest),city=d[1].replace(/ \(.*/,"");
+  $("fAct").innerHTML='<option value=""></option>'+Object.keys(ACTS).map(function(k){return '<option value="'+k+'"'+(S.acts[0]===k?" selected":"")+">"+E(ACTS[k].n)+"</option>";}).join("");
+  $("actH").textContent="Make it yours";
+  $("actSub").textContent="Tell us who's going and what you'll get up to in "+city+". Everything on this page then fits your trip, and nothing else gets in the way.";
+  $("whoChips").innerHTML=WHO.filter(function(k){return AD.styles[k];}).map(function(k){return '<button type="button" data-who="'+k+'" aria-pressed="'+(S.style===k)+'">'+(WHOIC[k]||"")+" "+E(AD.styles[k].n)+"</button>";}).join("");
+  $("actChips").innerHTML=Object.keys(ACTS).map(function(k){return '<button type="button" class="achip" data-act="'+k+'" aria-pressed="'+(S.acts.indexOf(k)>=0)+'"><i aria-hidden="true">'+ACTS[k].ic+"</i>"+E(ACTS[k].n)+"</button>";}).join("");
+  $("actSum").textContent=S.acts.length?"Sorted for: "+S.acts.map(function(k){return ACTS[k].n.toLowerCase();}).join(", ")+". Scroll down for your gear, licences and places, and the run-through has your jobs on the right days.":"";
+  var plane=QFJ.way(S.cur).id==="plane"||!d[7];
+  $("actBody").innerHTML=S.acts.map(function(k){var A=ACTS[k],tk=tickF();
+    return '<div class="abox"><h3>'+A.ic+" "+E(A.n)+" in "+E(city)+"</h3><p>"+E(A.lead)+'</p><div class="agrid">'+actTiles(k,d).map(function(x){var ext=/^http/.test(x[3]);
+      return '<a class="ktile" href="'+E(x[3])+'"'+(ext?' target="_blank" rel="noopener"':"")+"><span>"+E(x[0])+"</span><b>"+E(x[1])+"</b>"+(x[2]?"<small>"+E(x[2])+"</small>":"")+"</a>";}).join("")+"</div>"+(plane?airBox(k):"")+
+      '<div class="fy-h" style="margin-top:14px;font-size:15px">Pack for '+E(A.n.toLowerCase())+'</div><div class="forgot">'+A.gear.map(function(x){return '<button type="button" class="fchip" data-forgot="'+E(x)+'" aria-pressed="'+(!!tk[x])+'"><i></i><span>'+E(x)+"</span></button>";}).join("")+"</div></div>";}).join("");
+}
+function actSteps(s,d){   
+  if(!S.acts.length)return "";var city=d[1].replace(/ \(.*/,""),title=s.title.toLowerCase(),rows=[];
+  S.acts.forEach(function(k){var A=ACTS[k],T=actTiles(k,d);
+    if(s.n===1){T.filter(function(x){return x[0]==="Licence";}).forEach(function(x){rows.push([A.ic+" "+x[1],x[2],x[3]]);});rows.push([A.ic+" Pack for "+A.n.toLowerCase(),A.gear.slice(0,4).join(", ")+"…","#actWrap"]);}
+    if(/book|plan|airport/.test(title)&&A.bag&&ACTDATA.air){var a=ACTDATA.air[S.air]||ACTDATA.air[Object.keys(ACTDATA.air)[0]];rows.push([A.ic+" Book "+A.gearname+" with "+a.name,a[A.bag]||"Add it before the day: often cheaper than at the airport.",a.url]);}
+    if(/there|stop|road|land|arriv/.test(title))T.filter(function(x){return x[0]!=="Licence"&&x[0]!=="Coming home";}).slice(0,3).forEach(function(x){rows.push([A.ic+" "+x[1],x[2],x[3]]);});
+    if(/wrong/.test(title))T.filter(function(x){return x[0]==="Coming home";}).forEach(function(x){rows.push([A.ic+" "+x[1],x[2],x[3]]);});
+  });
+  if(!rows.length)return "";
+  return '<div class="gx"><h3>For your '+E(S.acts.map(function(k){return ACTS[k].n.toLowerCase();}).join(" and "))+'</h3><div class="mv">'+rows.map(function(r){var ext=r[2].charAt(0)!=="#";
+    return '<a href="'+E(r[2])+'"'+(ext?' target="_blank" rel="noopener"':' data-close')+"><b>"+E(r[0])+"</b><span>"+E(r[1])+"</span></a>";}).join("")+"</div></div>";
+}
 function drawStyle(){$("fStyle").innerHTML='<option value="">Any kind of trip</option>'+Object.keys(AD.styles).map(function(k){return '<option value="'+k+'"'+(k===S.style?" selected":"")+">"+E(AD.styles[k].n)+"</option>";}).join("");}
-function drawAdapt(){applyMood();drawHero();drawStyle();drawForYou();}
+function drawAdapt(){applyMood();drawHero();drawStyle();drawActs();drawForYou();}
 function drawForm(){
   var f=S.favs.map(QFJ.way),rest=WAYS.filter(function(w){return f.indexOf(w)<0;});
   function opt(w){return '<option value="'+w.id+'"'+(w.id===S.cur?" selected":"")+">"+E(w.name)+"</option>";}
@@ -2013,6 +2206,14 @@ $("fWay").addEventListener("change",function(){S.cur=this.value;clipN=0;save();d
 $("fLeave").addEventListener("change",function(){S.leave=/^\d{4}-\d{2}-\d{2}$/.test(this.value)?this.value:"";save();drawAdapt();drawPlan();drawDeals();});
 $("fNights").addEventListener("change",function(){S.nights=+this.value;save();drawAdapt();drawPlan();drawDeals();});
 $("fStyle").addEventListener("change",function(){S.style=this.value;save();drawAdapt();});
+$("fAct").addEventListener("change",function(){var v=this.value;S.acts=S.acts.filter(function(a){return a!==v;});if(v)S.acts.unshift(v);save();drawAdapt();});
+function actLikes(){var want={};S.acts.forEach(function(a){(ACTLIKE[a]||[]).forEach(function(l){want[l]=1;});});
+  if(!Array.isArray(S.autoLikes))S.autoLikes=[];S.likes=S.likes.filter(function(l){return S.autoLikes.indexOf(l)<0||want[l];});
+  S.autoLikes=Object.keys(want).filter(function(l){return S.likes.indexOf(l)<0||S.autoLikes.indexOf(l)>=0;});S.autoLikes.forEach(function(l){if(S.likes.indexOf(l)<0)S.likes.push(l);});}
+document.addEventListener("click",function(e){var b=e.target.closest&&e.target.closest("[data-act]");if(b){var k=b.getAttribute("data-act"),i=S.acts.indexOf(k);if(i>=0)S.acts.splice(i,1);else S.acts.push(k);actLikes();save();drawAdapt();if(typeof drawDeals==="function")drawDeals();}
+  var wb=e.target.closest&&e.target.closest("[data-who]");if(wb){var wk=wb.getAttribute("data-who");S.style=S.style===wk?"":wk;save();drawAdapt();}
+  var c=e.target.closest&&e.target.closest("[data-close]");if(c){var g=$("guide");if(g.close)g.close();else g.removeAttribute("open");}});
+document.addEventListener("change",function(e){if(e.target.hasAttribute&&e.target.hasAttribute("data-air")){S.air=e.target.value;save();drawActs();}});
 document.addEventListener("click",function(e){var f=e.target.closest("[data-forgot]");if(f){var t=tickF(),k=f.getAttribute("data-forgot");if(t[k])delete t[k];else t[k]=1;try{localStorage.setItem("th_forgot",JSON.stringify(t));}catch(x){}f.setAttribute("aria-pressed",String(!!t[k]));return;}
   var g=e.target.closest("[data-focus]");if(g){e.preventDefault();var el=$(g.getAttribute("data-focus"));if(el){el.scrollIntoView({block:"center"});el.focus();if(el.showPicker){try{el.showPicker();}catch(x){}}}}});
 $("fDest").addEventListener("change",function(){setDest(this.value);});
